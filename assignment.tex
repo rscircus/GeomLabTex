@@ -32,8 +32,8 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 
 % custom theorems if needed
 \newtheoremstyle{mytheor}
-    {1ex}{1ex}{\normalfont}{0pt}{\scshape}{.}{1ex}
-    {{\thmname{#1 }}{\thmnumber{#2}}{\thmnote{ (#3)}}}
+{1ex}{1ex}{\normalfont}{0pt}{\scshape}{.}{1ex}
+{{\thmname{#1 }}{\thmnumber{#2}}{\thmnote{ (#3)}}}
 
 \theoremstyle{mytheor}
 \newtheorem{defi}{Definition}
@@ -41,14 +41,14 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 % my own titles
 \makeatletter
 \renewcommand{\maketitle}{
-\begin{center}
-\vspace{2ex}
-{\huge \textsc{\@title}}
-\vspace{1ex}
-\\
-\@author \hfill \@date
-\vspace{4ex}
-\end{center}
+  \begin{center}
+    \vspace{2ex}
+    {\huge \textsc{\@title}}
+    \vspace{1ex}
+    \\
+    \@author \hfill \@date
+    \vspace{4ex}
+  \end{center}
 }
 \makeatother
 %%%
@@ -69,28 +69,28 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 % code listing settings
 \usepackage{listings}
 \lstset{
-    language=Python,
-    basicstyle=\ttfamily\small,
-    aboveskip={1.0\baselineskip},
-    belowskip={1.0\baselineskip},
-    columns=fixed,
-    extendedchars=true,
-    breaklines=true,
-    tabsize=4,
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
-    frame=lines,
-    showtabs=false,
-    showspaces=false,
-    showstringspaces=false,
-    keywordstyle=\color[rgb]{0.627,0.126,0.941},
-    commentstyle=\color[rgb]{0.133,0.545,0.133},
-    stringstyle=\color[rgb]{01,0,0},
-    numbers=left,
-    numberstyle=\small,
-    stepnumber=1,
-    numbersep=10pt,
-    captionpos=t,
-    escapeinside={\%*}{*)}
+  language=Python,
+  basicstyle=\ttfamily\small,
+  aboveskip={1.0\baselineskip},
+  belowskip={1.0\baselineskip},
+  columns=fixed,
+  extendedchars=true,
+  breaklines=true,
+  tabsize=4,
+  prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+  frame=lines,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  keywordstyle=\color[rgb]{0.627,0.126,0.941},
+  commentstyle=\color[rgb]{0.133,0.545,0.133},
+  stringstyle=\color[rgb]{01,0,0},
+  numbers=left,
+  numberstyle=\small,
+  stepnumber=1,
+  numbersep=10pt,
+  captionpos=t,
+  escapeinside={\%*}{*)}
 }
 
 % No paragraph indentation
@@ -117,19 +117,19 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 Motivated by the COVID-19 disease several outlets printed two-dimensional depictions of data which usually contained multidimensional datasets. These datasets usually compromise \{\textit{infections, recoverd, death}\} rates with regard to the \textit{country} and sometimes also the evolution over \textit{time}.\\
 
 \begin{figure}[h]
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=0.9\linewidth]{covid_spread_20200223.png}
-\caption{23.02.2020}
-\label{fig:subim1}
-\end{subfigure}
-\begin{subfigure}{0.5\textwidth}
-\includegraphics[width=0.9\linewidth]
-{covid_spread_20200511.png}
-\caption{11.05.2020}
-\label{fig:subim2}
-\end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=0.9\linewidth]{covid_spread_20200223.png}
+    \caption{23.02.2020}
+    \label{fig:subim1}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=0.9\linewidth]
+    {covid_spread_20200511.png}
+    \caption{11.05.2020}
+    \label{fig:subim2}
+  \end{subfigure}
 
-\caption{Comparison of a typical scatterplot depicting the $log$ of confirmed cases as the radius.}
+  \caption{Comparison of a typical scatterplot depicting the $log$ of confirmed cases as the radius.}
 \end{figure}
 
 
@@ -144,16 +144,16 @@ To investigate the quantification of visual quality mainly Tufte in 1983 in \tex
 \subsection{Problem statement and constraints}
 
 \begin{enumerate}
-    \item Represention and visibility of scatter plots with glyphs
-    \item Represention and visibility of multi-dimensional data in nested discs
-    \item Represention and visibility of pie charts glyphs
-    \item Represention and visibility of (one?) other type of glyphs
+  \item Represention and visibility of scatter plots with glyphs
+  \item Represention and visibility of multi-dimensional data in nested discs
+  \item Represention and visibility of pie charts glyphs
+  \item Represention and visibility of (one?) other type of glyphs
 \end{enumerate}
 
 \subsection{Previous work}
 
 \begin{enumerate}
-    \item See papers in Slack Channel
+  \item See papers in Slack Channel
 \end{enumerate}
 
 \newpage
@@ -162,10 +162,10 @@ To investigate the quantification of visual quality mainly Tufte in 1983 in \tex
 \subsection{Cost functions}
 
 \begin{enumerate}
-    \item Information content covered by the data,
-    \item information content of the data in the visualization,
-    \item information capacity of a visualization,
-    \item topological information content.
+  \item Information content covered by the data,
+  \item information content of the data in the visualization,
+  \item information capacity of a visualization,
+  \item topological information content.
 \end{enumerate}
 
 
@@ -173,33 +173,33 @@ To investigate the quantification of visual quality mainly Tufte in 1983 in \tex
 \subsection{Selection of algorithms and complexity}
 
 \begin{enumerate}
-    \item Random inseration
-    \item Painter
-    \item MaxMinSumK/absolute - Sum of visible circumference/hull
-    \item MaxMinSumK/weighted - weighted such that big circles/glyphs not dominate
-    \item MaxMinSumK/relative - Sum of relative circumference/hull
-    \item MaxMinMinK/absolute - MaxMin of minimal visible circumference/hull of each circle/glyph
-    \item MaxMinMinK/relative
+  \item Random inseration
+  \item Painter
+  \item MaxMinSumK/absolute - Sum of visible circumference/hull
+  \item MaxMinSumK/weighted - weighted such that big circles/glyphs not dominate
+  \item MaxMinSumK/relative - Sum of relative circumference/hull
+  \item MaxMinMinK/absolute - MaxMin of minimal visible circumference/hull of each circle/glyph
+  \item MaxMinMinK/relative
 \end{enumerate}
 
 \begin{enumerate}
-    \item Rotation
-    \item Physics/Heuristics based approaches
+  \item Rotation
+  \item Physics/Heuristics based approaches
 \end{enumerate}
 
 \begin{figure}[htp]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/trennlinienproblem.jpg}
-\caption{Trennlinienproblem}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/trennlinienproblem.jpg}
+  \caption{Trennlinienproblem}
 \end{figure}
 
 \begin{figure}[htp]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/david_proof1.jpg}
-\caption{Beweis Trennlinienalgo 1/2}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/david_proof1.jpg}
+  \caption{Beweis Trennlinienalgo 1/2}
 \end{figure}
 
 \begin{figure}[htp]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/david_proof2.jpg}
-\caption{Beweis Trennlinienalgo 2/2}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/david_proof2.jpg}
+  \caption{Beweis Trennlinienalgo 2/2}
 \end{figure}
 
 
@@ -207,15 +207,15 @@ To investigate the quantification of visual quality mainly Tufte in 1983 in \tex
 \section{Experimental validation}
 
 \begin{figure}[htp]
-\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{assets/cost_functions.png}
+  \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{assets/cost_functions.png}
 \end{figure}
 
 \begin{figure}[htp]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/covid19_nested_discs.png}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/covid19_nested_discs.png}
 \end{figure}
 
 \begin{figure}[htp]
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/nested_discs_all.png}
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/nested_discs_all.png}
 \end{figure}
 
 \newpage
@@ -252,7 +252,7 @@ def analytic_fibonacci(n):
   p = (1 + sqrt_5) / 2;
   q = 1/p;
   return int( (p**n + q**n) / sqrt_5 + 0.5 )
- 
+
 # define range
 for i in range(1,31):
   print analytic_fibonacci(i)
@@ -267,43 +267,43 @@ In a first step, following the common depiction, we consider circles as glyph. F
 As already mentioned in the Motivation we want to maximize visibility of the data. Urribari et al define visibility as
 %
 \begin{equation} \label{eq1}
-\begin{split}
-  visiblity & = 1 - occlusion \\
-  & = f(data(set), visualization \, parameters)\\
-\end{split}
+  \begin{split}
+    visiblity & = 1 - occlusion \\
+              & = f(data(set), visualization \, parameters)\\
+  \end{split}
 \end{equation}
 %
 with $occlusion$ being defined as [Tatu et al.]:
 %
 \begin{equation}
-    occlusion = { \text{no. of data points completely occluded } \over \text{total no. of data points}}\\
+  occlusion = { \text{no. of data points completely occluded } \over \text{total no. of data points}}\\
 \end{equation}
 
 Using this simple definition it is possible to formulate two equivalent cost functions already now:
 %
 \begin{equation} \label{eq3}
-\begin{split}
+  \begin{split}
     \min\limits_{\text{vis. par.}} & \; occlusion\\
     \max\limits_{\text{vis. par.}} & \; visiblity\\
-\end{split}
+  \end{split}
 \end{equation}
 %
 We focus on visiblity for now. When using circles as glyphs, we can split the visibilty in two components:
 %
 \begin{equation} \label{eq3}
-\begin{split}
+  \begin{split}
     U_i = & \delta C_i \, \setminus \bigcup_{D} C_j\\
     A_i = & \, C_i \; \setminus \bigcup_{D} C_j\\
-\end{split}
+  \end{split}
 \end{equation}
 %
 and sum over the visible circumferences and areas
 %
 \begin{equation} \label{eq3}
-\begin{split}
+  \begin{split}
     U_{occlusion} & = \sum_i U_i\\
     A_{occlusion} & = \sum_i A_i\\
-\end{split}
+  \end{split}
 \end{equation}
 %
 which already hints toward potential cost functions.\\
