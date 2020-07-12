@@ -210,6 +210,14 @@ ALG(endl. Menge D) {
 gibt eine Stacking-Order aus, die $min_{d \in D} \phi(d, \{d\ \in D | d' > d\})$ maximiert.
 \end{theorem}
 
+\begin{proof}
+  Given an optimal Stacking-Order $s$ and output of ALG $s^*$ .
+
+  \begin{enumerate}
+    \item case: $s=s^*$. Done.
+    \item case: $s \neq s^*$. $s \neq s^*$ implies, that there is a lowest $k \in N$, such that $s(k) \neq s^*(k)$. Let $s(k) = d_k$ and $s^* = d^*_k$. Hence, $k^* = s^{-1}(s^*(k)) = s^{-1}(d^*_k)$ is the index of $d^*_k$ with respect to $s$. It follows $k<k^*$.
+  \end{enumerate}
+\end{proof}
 
 \begin{enumerate}
   \item Rotation
