@@ -108,21 +108,17 @@ Motivated by the COVID-19 disease several outlets printed two-dimensional depict
 \begin{figure}[h]
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=0.9\linewidth]{covid_spread_20200223.png}
-    \caption{23.02.2020}
-    \label{fig:subim1}
+    \caption{23.02.2020}\label{fig:covid2020Feb}
   \end{subfigure}
   \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=0.9\linewidth]
-    {covid_spread_20200511.png}
-    \caption{11.05.2020}
-    \label{fig:subim2}
+    \includegraphics[width=0.9\linewidth]{covid_spread_20200511.png}
+    \caption{11.05.2020}\label{fig:covid2020May}
   \end{subfigure}
-
   \caption{Comparison of a typical scatterplot depicting the $log$ of confirmed cases as the radius.}
+  \label{fig:covid19}
 \end{figure}
 
-
-In this lab we focus on depicting data in a meaningful way. Besides its quantitative nature this task has some qualitative properties. Similar to many solutions of problems in computational geometry, like deciding if a point is contained in a polygon or the construction of a convex hull for a set of points, the quality of the scatterplot is obvious to the human observer. Not so for a machine. While Fig. (\ref{fig:subim1}) is highly informative for a human or potential policy maker, Fig. (\ref{fig:subim2}) bears little information content. Despite this fact both figures result from the very same algorithm depicting data from the disease spread of COVID-19 during 2020 [Algo im Appendix].\\
+In this lab we focus on depicting data in a meaningful way. Besides its quantitative nature this task has some qualitative properties. Similar to many solutions of problems in computational geometry, like deciding if a point is contained in a polygon or the construction of a convex hull for a set of points, the quality of the scatterplot is obvious to the human observer. Not so for a machine. While Fig. (\ref{fig:covid2020Feb}) is highly informative for a human or potential policy maker, Fig. (\ref{fig:covid2020May}) bears little information content. Despite this fact both figures result from the very same algorithm depicting data from the disease spread of COVID-19 during 2020 [Algo im Appendix].\\
 
 To investigate the quantification of visual quality mainly Tufte in 1983 in \textit{The visual display of quantitative information graphics press"} and Miller et al in \textit{The Need For Metrics In Visual Information Analysis} provided fundamental work. Based on this, follow-up work and further considerations from visibility problems and sorting we develop a novel approach to visualize multidimensional data in a scatterplot which transports as much information content as possible.
 
