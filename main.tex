@@ -171,22 +171,22 @@ To investigate the quantification of visual quality mainly Tufte in 1983 in \tex
 
 \subsection{Optimalitaet fuer Pie Chart}
 
-Sei $ D $ eine endl. Menge und fuer $ d \in D $ und $ S \subseteq D$ die Funktion $ \phi(d, S) \mapsto \Re_{\geq 0}$ mit der Eigenschaft, dass fuer jedes $d \in D$ $S' \subseteq S => \phi(d, S') \geq \phi(d, S)$.
+Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \phi(d, S) \mapsto \Re_{\geq 0} $ with the property, that for every $d \in D$ $S' \subseteq S => \phi(d, S') \geq \phi(d, S)$.
 
-Eine Stacking-Order $\pi$ ist eine Bijektion $\pi: \{1,...,n\} \mapsto D$.
+Let the stacking-order $\pi: \{1,...,n\} \mapsto D$ be bijective.
 
 \begin{theorem}
   
-Der Algorithmus 
+The algorithm
 
 \begin{verbatim}
-ALG(endl. Menge D) {
+ALG(finite set D) {
   x := argmax_{d \in D} \phi(d, D \setminus {d})
   return [x, ALG(D \setminus {x})]
 }
 \end{verbatim}
 
-gibt eine Stacking-Order aus, die $min_{d \in D} \phi(d, \{d\ \in D | d' > d\})$ maximiert.
+returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d' > d\})$. \textbf{Roland: shouldn't it be minimizes?}
 \end{theorem}
 
 \begin{proof}
