@@ -8,7 +8,7 @@
 
 % Graphics
 \usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage[usenames,pdftex,dvipsnames]{xcolor}
 \usepackage{subcaption}
 
 % Math
@@ -20,6 +20,7 @@
 % Theorem / Proofs
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
+\newtheorem*{remark}{Remark}
 
 \usepackage{geometry}
 \geometry{left=25mm,right=25mm,%
@@ -32,6 +33,7 @@ bindingoffset=0mm, top=20mm,bottom=20mm}
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
 \newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
 \newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\inlineinfo}[2][1=]{\todo[inline,linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
 \newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
@@ -200,13 +202,26 @@ returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d'
 \unsure{Roland: shouldn't it be 'minimizes'?}
 
 \begin{proof}
-  Given an optimal Stacking-Order $s$ and output of ALG $s^*$ .
+  Given an optimal stacking-order $s$ and output of ALG $s^*$ .
 
   \begin{enumerate}
     \item case: $s=s^*$. Done.
     \item case: $s \neq s^*$. $s \neq s^*$ implies, that there is a lowest $k \in N$, such that $s(k) \neq s^*(k)$. Let $s(k) = d_k$ and $s^* = d^*_k$. Hence, $k^* = s^{-1}(s^*(k)) = s^{-1}(d^*_k)$ is the index of $d^*_k$ with respect to $s$. It follows $k<k^*$.
+
+    We modify $s$ such, that at point in time\unsure{Roland: point in 'time'? It's an order so it would be 'at position' as far as I see.}, we insert disc $d^*_k$ and shift all others towards the end. Let this new stacking-order be $s'$.
+    \inlineinfo{Roland: What end, small or large end?}
+
+    Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger. 
+
+    Now $d^*_k$ is chosen in $s'$, as well as in $s^*$ at position $k$.\unsure{Roland: Argumentiere hier mit Position. Das macht mEn mehr Sinn. Warte auf Eure Kommentare.} As $d^*_k$ was chosen by $s^*$, $d^*_k$ has to maxmize $\phi$. Therefore, it is bigger or equal to $d_k$, as $s$ and $s^*$ are identical except at position $k$.
+
   \end{enumerate}
 \end{proof}
+
+\begin{remark}
+  $\phi$ may be the visible glyph boundary, the visible glyph boundary, the visible surface or the distance of...\unsure{Roland: Proof stops.}
+\end{remark}
+
 
 \begin{enumerate}
   \item Rotation
