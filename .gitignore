@@ -285,3 +285,6 @@ TSWLatexianTemp*
 
 # Linux
 tags
+
+# IDEs
+.vscode
