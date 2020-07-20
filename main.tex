@@ -187,7 +187,7 @@ Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \ph
 Let the stacking-order $\pi: \{1,...,n\} \mapsto D$ be bijective.
 
 \begin{theorem}
-  
+
 The algorithm
 
 \begin{verbatim}
@@ -199,7 +199,6 @@ ALG(finite set D) {
 
 returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d' > d\})$.
 \end{theorem}
-\unsure{Roland: shouldn't it be 'minimizes'?}
 
 \begin{proof}
   Given an optimal stacking-order $s$ and output of ALG $s^*$ .
@@ -208,18 +207,17 @@ returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d'
     \item case: $s=s^*$. Done.
     \item case: $s \neq s^*$. $s \neq s^*$ implies, that there is a lowest $k \in N$, such that $s(k) \neq s^*(k)$. Let $s(k) = d_k$ and $s^* = d^*_k$. Hence, $k^* = s^{-1}(s^*(k)) = s^{-1}(d^*_k)$ is the index of $d^*_k$ with respect to $s$. It follows $k<k^*$.
 
-    We modify $s$ such, that at point in time\unsure{Roland: point in 'time'? It's an order so it would be 'at position' as far as I see.}, we insert disc $d^*_k$ and shift all others towards the end. Let this new stacking-order be $s'$.
-    \inlineinfo{Roland: What end, small or large end?}
+    We modify $s$ such, that at point in time, we insert disc $d^*_k$ and shift all others towards the end. Let this new stacking-order be $s'$.
 
-    Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger. 
+    Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger.
 
-    Now $d^*_k$ is chosen in $s'$, as well as in $s^*$ at position $k$.\unsure{Roland: Argumentiere hier mit Position. Das macht mEn mehr Sinn. Warte auf Eure Kommentare.} As $d^*_k$ was chosen by $s^*$, $d^*_k$ has to maxmize $\phi$. Therefore, it is bigger or equal to $d_k$, as $s$ and $s^*$ are identical except at position $k$.
+    Now $d^*_k$ is chosen in $s'$, as well as in $s^*$ at position $k$. As $d^*_k$ was chosen by $s^*$, $d^*_k$ has to maxmize $\phi$. Therefore, it is bigger or equal to $d_k$, as $s$ and $s^*$ are identical except at position $k$.
 
   \end{enumerate}
 \end{proof}
 
 \begin{remark}
-  $\phi$ may be the visible glyph boundary, the visible glyph boundary, the visible surface or the distance of...\unsure{Roland: Proof stops.}
+  $\phi$ may be the visible glyph boundary, the visible glyph boundary, the visible surface or the distance of...
 \end{remark}
 
 
@@ -279,7 +277,7 @@ measures of visual displays. In: Proceedings of the IEEE symposium on informatio
 \begin{lstlisting}[label={list:first},caption=Sample Python code -- Fibonacci sequence calculated analytically.]
 from math import *
 
-# define function 
+# define function
 def analytic_fibonacci(n):
   sqrt_5 = sqrt(5);
   p = (1 + sqrt_5) / 2;
@@ -291,7 +289,7 @@ for i in range(1,31):
   print analytic_fibonacci(i)
 \end{lstlisting}
 
-Following Listing~\ref{list:first}\ldots{} 
+Following Listing~\ref{list:first}\ldots{}
 
 Tufte proposed to measure quality based on the amount of consumed ink and purpose of the ink. He stated that the majority of the used ink in a graph must represent information about the data. Most recently Tatu et al. showed "that quality measures can simulate the selection of best views by human beings." and also compares a set of promising and established measures. In the motivated usecase, especially scatterplots using glyphs like circles or discs are of major interest, because of their advantages when plotting multidimensional data [Tatu et al.].\\
 
