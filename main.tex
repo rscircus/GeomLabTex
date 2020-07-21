@@ -133,20 +133,19 @@ In this lab we focus on depicting data in a meaningful way. Besides its quantita
 
 To investigate the quantification of visual quality mainly Tufte in 1983 in \textit{The visual display of quantitative information graphics press} and Miller et al in \textit{The Need For Metrics In Visual Information Analysis} provided fundamental work. Based on this, follow-up work and further considerations from visibility problems and sorting we develop a novel approach to visualize multidimensional data in a scatterplot which transports as much information content as possible.\\
 
-Our main resource will be the paper by Sergio Cabello at al \textit{Algorithmic Aspects of Proportional Symbol Maps}. In this paper the hardness of maximizing utility measures with regards to physically realizable drawings was discussed and another type of drawing given by a stacking order was defined. For those drawings some algorithms which we will briefly discuss were derived. Those algorithms where derived for proportional Symbol Maps which only allow us to depict a single quantity. We will try to find more general glyphs and use slightly adapted algorithms to get optimal result with regards to those glyphs and moreover multidimensional data. Hereby, our main focus will be nested circles, centered nested circles and pie charts. 
+Our main resource will be the paper by Sergio Cabello at al \textit{Algorithmic Aspects of Proportional Symbol Maps}. In this paper the hardness of maximizing utility measures with regards to physically realizable drawings was discussed and another type of drawing given by a stacking order was defined. For those drawings some algorithms which we will briefly discuss were derived. Those algorithms where derived for proportional Symbol Maps which only allow us to depict a single quantity. We will try to find more general glyphs and use slightly adapted algorithms to get optimal result with regards to those glyphs and moreover multidimensional data. Hereby, our main focus will be nested circles, centered nested circles and pie charts.
 
 \newpage
 
 % ----------------------
 \section{Problem Statement}
 % ----------------------
-Sergio Cabello at al discussed proportional Symbol Maps. For those we have $n$ circles in $R^2$ and the radius or size of the circles corresponds to some quantity which is associated to the center point of the circle. The problem is to find a drawing which retains as much of the information about the quantity and the location of the center as possible. \\
+Sergio Cabello at al discussed proportional Symbol Maps. For those we have $n$ circles/disks in $R^2$ and the radius or size of the circles corresponds to some quantity which is associated to the center point of the circle. The problem is to find a drawing which retains as much of the information about the quantity and the location of the center as possible. \\
 
-For the definition of a drawing they describe two approaches. One is given by physically realizable drawings. 
+For the definition of a drawing they describe two approaches. One is given by \textit{physically realizable drawings} and the other is \textit{stacking drawings}. As \textit{stacking drawings} are the natural perception and therefore natural restriction of a physically realizable drawing, we define the physically realizable drawing first. A drawing is physically realizable if the order in which the circles or disks -- bounded by a perimeter -- are stacked upon each other is uniquely determined at every face and no two of such orders conflict. In particular, any two or more disks with a common intersection have a unique ordering.\\
+Intutively, this can be imagined by very flexible disks, which somehow maintain their perimeter in the direction of beeing looked at. A stacking drawing is inutively the same thing with stiff disks.\\
 
-\color{blue} Hier müsste dann diese Definition noch beschrieben werden. \color{black}\\
-
-The other far simpler one is a stacking order which is given by a bijection $\phi: [n]\rightarrow [n]$. This bijection describes the order in which the circles are drawn. Circles which are drawn later cover parts over the circles which are drawn earlier. Therefore our task is to find a stacking order such that as little as possible of every circle is covered. \\
+A stacking drawings is realized by a stacking order which is given by a bijection $\phi: [n]\rightarrow [n]$. This bijection describes the order in which the circles are drawn. Circles which are drawn later cover parts over the circles which are drawn earlier. Therefore our task is to find a stacking order such that as little as possible of every circle is covered. \\
 Now we need to discuss what we mean by covering as little as possible. We want that the viewer of the map should be able to identify the size of the circles and the center point. To achieve this goal, we could try to maximize the area of the circles which is not covered, but there are cases in which that would not allow the viewer to get all of the information. The approach we will use is to maximize the visible boundary of our glyph. We can define the visible and occluded boundary for circles formally with\\
 %
 \begin{align*}
@@ -169,7 +168,7 @@ For stacking orders they give a positive result with regards to the minimum:
 \begin{theorem}
 Given n disks in the plane, a stacking order maximizing the boundary
 length of the disk that is least visible can be computed in $O(n^2 \log n)$ time.
-\end{theorem} 
+\end{theorem}
 If a polynomial algorithm for the sum of all the $U_i^{vis}$ exists remains open to debate.\\
 
 We won't try to construct an algorithm for the sum problem. Instead we will be looking at glyphs which can depict more information. The first glyph we will discuss are nested disks. Formally every glyph $G^i$ is given by a set of circles $G^i_1,...,G^i_k$ such that $r_{j+1}>r_j$ and $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested disks also center all the discs in the same point. The second type of glyphs we will use are pie charts. A pie chart is formally given by a circle $C_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,2\pi ]$.\\
@@ -189,7 +188,7 @@ The set $D$ corresponds to our set of glyphs and $\Gamma$ corresponds to a utili
 
 \begin{figure}[!t]
 \begin{lstlisting}[mathescape=true ]
-ALG(finite set $D$) 
+ALG(finite set $D$)
   $x := \text{argmax}_{d \in D} \Gamma(d, D \setminus {d})$
   return [$x$, ALG($D \setminus {x}$)]
 \end{lstlisting}
@@ -199,7 +198,7 @@ ALG(finite set $D$)
 \begin{theorem}
 For a given set $D$ and a local utility function $\Gamma$ the greedy Algorithm as described in Figure 2 returns a stacking order which maximizes\begin{align*}
 \min_{d_i \in D} \Gamma(d_i, \{d_j\ \in D | j > i\}).
-\end{align*} 
+\end{align*}
 \end{theorem}
 \begin{proof}
 \color{blue}
@@ -213,7 +212,7 @@ For centered nested disks we can easily define local utility measures. Every gly
 \begin{align*}
 \Gamma_{min}({G^i,S})=\min_j  {^{vis} G^i_j}\\
 \Gamma_{sum}({G^i,S})=\sum_{j=1}^k  {^{vis} G^i_j}
-\end{align*} 
+\end{align*}
 We may also be interested in the relative utility which is given by normalizing the size of the circles. This relative approach stops the small circles from dominating big circles. In our applications there is close to no different between the relative utility and the normal one. \\
 
 For $\Gamma_{min}$ it may happen that for all glyphs the smallest circle may be completely covered. Then the utility would be zero for all of the circles. If that happens the algorithm has an optimal solution of value zero. If that happens, we perform the greedy step again and ignore the smallest circle in all of the glyphs until we get a value bigger than zero. This heuristic gives better results than just choosing a random circle.\\
@@ -302,7 +301,7 @@ Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \ph
 Let the stacking-order $\pi: \{1,...,n\} \mapsto D$ be bijective.
 
 
-  
+
 The algorithm
 
 \begin{verbatim}
@@ -326,7 +325,7 @@ returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d'
     We modify $s$ such, that at point in time\unsure{Roland: point in 'time'? It's an order so it would be 'at position' as far as I see.}, we insert disc $d^*_k$ and shift all others towards the end. Let this new stacking-order be $s'$.
     \inlineinfo{Roland: What end, small or large end?}
 
-    Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger. 
+    Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger.
 
     Now $d^*_k$ is chosen in $s'$, as well as in $s^*$ at position $k$.\unsure{Roland: Argumentiere hier mit Position. Das macht mEn mehr Sinn. Warte auf Eure Kommentare.} As $d^*_k$ was chosen by $s^*$, $d^*_k$ has to maxmize $\phi$. Therefore, it is bigger or equal to $d_k$, as $s$ and $s^*$ are identical except at position $k$.
 
@@ -355,7 +354,7 @@ returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d'
 \begin{lstlisting}[label={list:first},caption=Sample Python code -- Fibonacci sequence calculated analytically.]
 from math import *
 
-# define function 
+# define function
 def analytic_fibonacci(n):
   sqrt_5 = sqrt(5);
   p = (1 + sqrt_5) / 2;
@@ -367,7 +366,7 @@ for i in range(1,31):
   print analytic_fibonacci(i)
 \end{lstlisting}
 
-Following Listing~\ref{list:first}\ldots{} 
+Following Listing~\ref{list:first}\ldots{}
 
 Tufte proposed to measure quality based on the amount of consumed ink and purpose of the ink. He stated that the majority of the used ink in a graph must represent information about the data. Most recently Tatu et al. showed "that quality measures can simulate the selection of best views by human beings." and also compares a set of promising and established measures. In the motivated usecase, especially scatterplots using glyphs like circles or discs are of major interest, because of their advantages when plotting multidimensional data [Tatu et al.].\\
 
