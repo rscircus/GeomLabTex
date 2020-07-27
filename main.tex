@@ -232,43 +232,68 @@ The resulting drawing guarantees that the perimeter of every circle is at least 
 
 
 
-
+% ----------------------
 \subsection{Pie charts}
-Recall a pie chart glyph is given by a disk $C_i$ and dividing lines given by a finite set $P_i= \{\alpha_1^i,...\alpha_m^i\}$. The $\alpha_j$ are given by angles in $[0,2\pi ]$. We may rotate the dividing lines one the circle, but the relative distance between all angles must stay the same. Given a rotation of the angles and a set $S$ of Glyphs which lie above the pie chart in our drawing, we can define $\Gamma_{pie}(C_i,S)$ as the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter. \\ \\
+% ----------------------
 
-We now need to investigate two things: 1. The pie chart glyphs are not a natural generalization of the disk glyphs. Therefore it is not trivial to show that maximizing the discussed utility function with respect to physically realizable drawings is NP-hard and 2. how to calculate the optimal rotation given a set over covering glyphs.
+Recall a pie chart glyph is given by a disk $C_i$ and dividing lines given by a finite set $P_i= \{\alpha_1^i,...\alpha_m^i\}$. The $\alpha_j$ are given by angles in $[0,2\pi ]$. We may rotate the dividing lines like minute or hour hands on a mechanical watch, but the relative distance between all angles must stay the same. This rotation can be described by a single angle due to the fixed relative distance of the dividing lines. Given a rotation of the angles and a set $S$ of glyphs which lie above the pie chart in our drawing, we can define $\Gamma_{pie}(C_i,S)$ as the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter. \\
+
+We now need to investigate two things: 
+
+\begin{itemize}
+  \item The pie chart glyphs are not a natural generalization of the disk glyphs. Therefore it is not trivial to show that maximizing the discussed utility function with respect to physically realizable drawings is NP-hard.
+  \item 2. How to calculate the optimal rotation given a set over covering glyphs.
+\end{itemize}
+
+\newpage
+
+% ---
 \subsubsection*{NP-hardness}
+% ---
+
 \color{blue}
 bisher nur in einem anderen Dokument von David zu finden
 \color{black}
+
+% ---
 \subsubsection*{Optimal rotations for $\Gamma_{pie}$}
-We now have given a set $S$ of covering glyphs and a fix pie chart $C_i$. We than can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that gives us the maximal minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. We can just take $\alpha_1$ as the reference line.\\
-Now we want to derive all of the positions on the circle where the reference line can be positioned such that non of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e all the intervals that guarantee that at least on dividing line is occluded.
+% ---
+
+Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that gives us the maximum of the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
+
+Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is occluded.
+
 \begin{lemma}
-Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing line $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_2,....,\beta_m$ be the counterclockwise distances from $\alpha_1$ to $\alpha_j$ and let $\mathcal{I}$ be the set system given by
+Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_2,....,\beta_m$ be the counterclockwise distances from $\alpha_1$ to $\alpha_j$ and let $\mathcal{I}$ be the set system given by
 \begin{align*}
 \mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}.
 \end{align*}
 Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ occludes at least one dividing line.
 \end{lemma}
+
 \begin{proof}
 \color{blue}
 fehlt sollte aber einfach sein (ist evtl schon vorhanden)
 \color{black}
 \end{proof}
+
 The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not occlude any dividing line. This complement may be empty since there may not be a rotation which does not occlude any line. With this observations we now can easily derive an algorithm which return a rotation which maximizes our utility.
+
 \begin{theorem}
-Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing line $\{\alpha_1,...\alpha_m\}$ also given by angles, algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
-\end{theorem} 
+Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
+\end{theorem}
+% TODO: Labels (after everything else is nice probably)
+
 \begin{proof}
 \color{blue}
 fehlt sollte aber einfach sein (ist evtl schon vorhanden)
 \color{black}
 \end{proof}
+
 \begin{figure}[!bth]
 \begin{lstlisting}[mathescape=true ]
 Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
-	calculate $\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}$	
+	calculate $\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}$
 	let $\mathcal{V}$ be the set of maximal continuous intervals in $[0, 2\pi]\setminus {\mathcal{I}}$
 	$v=[a_v,b_v]$ biggest interval in $\mathcal{V}$
 	$r=a_v+(b_v-a_v)/2$
@@ -276,10 +301,10 @@ Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
 \end{lstlisting}
 \caption{Algorithm 2}
 \end{figure}
+
 With this algorithm we can again use our general greedy algorithm for stacking orders.\\
-It may again happen that for all glyphs the local utility is zero. Then we again use some heuristic to get better results. We can just ignore one dividing line for each glyphs and try again. This we can do iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
 
-
+It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyphs and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
 
 
 \newpage
