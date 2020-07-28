@@ -150,25 +150,25 @@ A stacking drawings is realized by a stacking order which is given by a bijectio
 Now we need to discuss what we mean by covering as little as possible. We want that the viewer of the map should be able to identify the size of the circles and the center point. To achieve this goal, we could try to maximize the area of the circles which is not covered, but there are cases in which that would not allow the viewer to get all of the information. The approach we will use is to maximize the visible boundary of our glyph. We can define the visible and occluded boundary for circles formally with\\
 %
 \begin{align*}
-U_i^{vis}&=\partial C_i\textbackslash \bigcup_{\phi(j)>\phi(i)} C_{j}\\
-U_i^{occ}&=\partial C_i \cap \bigcup_{\phi(j)>\phi(i)} C_{j}.\\
+  U_i^{vis} & =\partial C_i\textbackslash \bigcup_{\phi(j)>\phi(i)} C_{j} \\
+  U_i^{occ} & =\partial C_i \cap \bigcup_{\phi(j)>\phi(i)} C_{j}.
 \end{align*}
 Some results which are given in \textit{Algorithmic Aspects of Proportional Symbol Maps} are the following
 \begin{theorem}
-It is NP-hard to decide if a given collection of congruent disks has a
-physically realizable drawing where at least some given length of the perimeter of
-each disk is visible
+  It is NP-hard to decide if a given collection of congruent disks has a
+  physically realizable drawing where at least some given length of the perimeter of
+  each disk is visible
 \end{theorem}
 This implies that trying to maximize the minimal $U_i^{vis}$ with respect to physically realizable drawings is NP-hard.
 \begin{theorem}
-It is NP-hard to decide if a given collection of disks has a physically
-realizable drawing whose total visible perimeter is at least a given value.
+  It is NP-hard to decide if a given collection of disks has a physically
+  realizable drawing whose total visible perimeter is at least a given value.
 \end{theorem}
 This implies that trying to maximize the sum over all the $U_i^{vis}$ with respect to physically realizable drawings is NP-hard.\\
 For stacking orders they give a positive result with regards to the minimum:
 \begin{theorem}
-Given n disks in the plane, a stacking order maximizing the boundary
-length of the disk that is least visible can be computed in $O(n^2 \log n)$ time.
+  Given n disks in the plane, a stacking order maximizing the boundary
+  length of the disk that is least visible can be computed in $O(n^2 \log n)$ time.
 \end{theorem}
 If a polynomial algorithm for the sum of all the $U_i^{vis}$ exists remains open to debate.\\
 
@@ -188,41 +188,44 @@ Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \Ga
 The set $D$ corresponds to our set of glyphs and $\Gamma$ corresponds to a utility function, which depends on the insertion order, i.e, the set $S$ describes all the glyphs which lie above d. Let $\phi: \{1,...,n\} \mapsto D$ be a stacking order. Then the for every glyph $d_i:=\phi(i)$ the set of glyphs above $d_i$ is given by $\{d_j\ \in D | j > i\}$.
 
 \begin{figure}[!t]
-\begin{lstlisting}[mathescape=true ]
+  \begin{lstlisting}[mathescape=true ]
 ALG(finite set $D$)
   $x := \text{argmax}_{d \in D} \Gamma(d, D \setminus {d})$
   return [$x$, ALG($D \setminus {x}$)]
-\end{lstlisting}
-\caption{The greedy algorithm}
+  \end{lstlisting}
+  \caption{The greedy algorithm}
 \end{figure}
 
 \begin{theorem}
-For a given set $D$ and a local utility function $\Gamma$ the greedy Algorithm as described in Figure 2 returns a stacking order which maximizes\begin{align*}
-\min_{d_i \in D} \Gamma(d_i, \{d_j\ \in D | j > i\}).
-\end{align*}
+  For a given set $D$ and a local utility function $\Gamma$ the greedy Algorithm as described in Figure 2 returns a stacking order which maximizes\begin{align*}
+    \min_{d_i \in D} \Gamma(d_i, \{d_j\ \in D | j > i\}).
+  \end{align*}
 \end{theorem}
 \begin{proof}
-\color{blue}
-existiert muss noch getext werden
-\color{black}
+  \color{blue}
+  existiert muss noch getext werden
+  \color{black}
 \end{proof}
 We can use this theorem for object of any kind. In particular for the glyphs we discussed before. We now only need to define some reasonable utility functions for our different glyphs and calculate them locally with reasonable run-time.
 
 \subsection{Centered nested disks}
 For centered nested disks we can easily define local utility measures. Every glyph $G$ corresponds to $k$ nested circles therefore we could just calculate the visible perimeter for the $k$ circles and then just combine them by choosing the minimum of the $k$ circles or the sum of the visible perimeter of the $k$ circles. For some set $S$ of objects above $G_i$ we then get formally:
 \begin{align*}
-\Gamma_{min}({G^i,S})=\min_j  {^{vis} G^i_j}\\
-\Gamma_{sum}({G^i,S})=\sum_{j=1}^k  {^{vis} G^i_j}
+  \Gamma_{min}({G^i,S})=\min_j  {^{vis} G^i_j} \\
+  \Gamma_{sum}({G^i,S})=\sum_{j=1}^k  {^{vis} G^i_j}
 \end{align*}
 We may also be interested in the relative utility which is given by normalizing the size of the circles. This relative approach stops the small circles from dominating big circles. In our applications there is close to no different between the relative utility and the normal one. \\
 
 For $\Gamma_{min}$ it may happen that for all glyphs the smallest circle may be completely covered. Then the utility would be zero for all of the circles. If that happens the algorithm has an optimal solution of value zero. If that happens, we perform the greedy step again and ignore the smallest circle in all of the glyphs until we get a value bigger than zero. This heuristic gives better results than just choosing a random circle.\\
 %
 \begin{remark}
-It is NP-hard to calculate physically realizable drawing where $\min\Gamma_{min}$ or $\min\Gamma_{sum}$ is maximized since disc glyphs are a special case of nested discs and both utility measures coincide and are equal to the visible circumference.
+  It is NP-hard to calculate physically realizable drawing where $\min\Gamma_{min}$ or $\min\Gamma_{sum}$ is maximized since disc glyphs are a special case of nested discs and both utility measures coincide and are equal to the visible circumference.
 \end{remark}
 %
+
+% ----------------------
 \subsection{Nested disks}
+% ----------------------
 
 For dense regions centered nested discs loose a lot of information since the small circles can easily be completely covered up. Therefore we will now derive an algorithm which guarantees, that every nested circle is at least visible. To achieve that we will allow the circles to be moved inside each other. We still want to have $r_{j+1}>r_j$ and $G^i_{j+1}\subset G^i_j$ for all $j$ but the centers can be different.\\
 
@@ -238,7 +241,7 @@ The resulting drawing guarantees that the perimeter of every circle is at least 
 
 Recall a pie chart glyph is given by a disk $C_i$ and dividing lines given by a finite set $P_i= \{\alpha_1^i,...\alpha_m^i\}$. The $\alpha_j$ are given by angles in $[0,2\pi ]$. We may rotate the dividing lines like minute or hour hands on a mechanical watch, but the relative distance between all angles must stay the same. This rotation can be described by a single angle due to the fixed relative distance of the dividing lines. Given a rotation of the angles and a set $S$ of glyphs which lie above the pie chart in our drawing, we can define $\Gamma_{pie}(C_i,S)$ as the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter. \\
 
-We now need to investigate two things: 
+We now need to investigate two things:
 
 \begin{itemize}
   \item The pie chart glyphs are not a natural generalization of the disk glyphs. Therefore it is not trivial to show that maximizing the discussed utility function with respect to physically realizable drawings is NP-hard.
@@ -264,42 +267,42 @@ Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate 
 Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is occluded.
 
 \begin{lemma}
-Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_2,....,\beta_m$ be the counterclockwise distances from $\alpha_1$ to $\alpha_j$ and let $\mathcal{I}$ be the set system given by
-\begin{align*}
-\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}.
-\end{align*}
-Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ occludes at least one dividing line.
+  Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_2,....,\beta_m$ be the counterclockwise distances from $\alpha_1$ to $\alpha_j$ and let $\mathcal{I}$ be the set system given by
+  \begin{align*}
+    \mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}.
+  \end{align*}
+  Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ occludes at least one dividing line.
 \end{lemma}
 
 \begin{proof}
-\color{blue}
-fehlt sollte aber einfach sein (ist evtl schon vorhanden)
-\color{black}
+  \color{blue}
+  fehlt sollte aber einfach sein (ist evtl schon vorhanden)
+  \color{black}
 \end{proof}
 
 The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not occlude any dividing line. This complement may be empty since there may not be a rotation which does not occlude any line. With this observations we now can easily derive an algorithm which return a rotation which maximizes our utility.
 
 \begin{theorem}
-Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
+  Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
 \end{theorem}
 % TODO: Labels (after everything else is nice probably)
 
 \begin{proof}
-\color{blue}
-fehlt sollte aber einfach sein (ist evtl schon vorhanden)
-\color{black}
+  \color{blue}
+  fehlt sollte aber einfach sein (ist evtl schon vorhanden)
+  \color{black}
 \end{proof}
 
 \begin{figure}[!bth]
-\begin{lstlisting}[mathescape=true ]
+  \begin{lstlisting}[mathescape=true ]
 Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
-	calculate $\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}$
-	let $\mathcal{V}$ be the set of maximal continuous intervals in $[0, 2\pi]\setminus {\mathcal{I}}$
-	$v=[a_v,b_v]$ biggest interval in $\mathcal{V}$
-	$r=a_v+(b_v-a_v)/2$
-	return r
-\end{lstlisting}
-\caption{Algorithm 2}
+  calculate $\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}$
+  let $\mathcal{V}$ be the set of maximal continuous intervals in $[0, 2\pi]\setminus {\mathcal{I}}$
+  $v=[a_v,b_v]$ biggest interval in $\mathcal{V}$
+  $r=a_v+(b_v-a_v)/2$
+  return r
+  \end{lstlisting}
+  \caption{Algorithm 2}
 \end{figure}
 
 With this algorithm we can again use our general greedy algorithm for stacking orders.\\
@@ -393,12 +396,12 @@ returns a stacking-order, which maximizes $min_{d \in D} \phi(d, \{d\ \in D | d'
     \item case: $s=s^*$. Done.
     \item case: $s \neq s^*$. $s \neq s^*$ implies, that there is a lowest $k \in N$, such that $s(k) \neq s^*(k)$. Let $s(k) = d_k$ and $s^* = d^*_k$. Hence, $k^* = s^{-1}(s^*(k)) = s^{-1}(d^*_k)$ is the index of $d^*_k$ with respect to $s$. It follows $k<k^*$.
 
-    We modify $s$ such, that at point in time\unsure{Roland: point in 'time'? It's an order so it would be 'at position' as far as I see.}, we insert disc $d^*_k$ and shift all others towards the end. Let this new stacking-order be $s'$.
-    \inlineinfo{Roland: What end, small or large end?}
+          We modify $s$ such, that at point in time\unsure{Roland: point in 'time'? It's an order so it would be 'at position' as far as I see.}, we insert disc $d^*_k$ and shift all others towards the end. Let this new stacking-order be $s'$.
+          \inlineinfo{Roland: What end, small or large end?}
 
-    Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger.
+          Comparing $s$ and $s'$, we find that $s'$ selects all discs later. That means, that all $\phi$-values are at least bigger.
 
-    Now $d^*_k$ is chosen in $s'$, as well as in $s^*$ at position $k$.\unsure{Roland: Argumentiere hier mit Position. Das macht mEn mehr Sinn. Warte auf Eure Kommentare.} As $d^*_k$ was chosen by $s^*$, $d^*_k$ has to maxmize $\phi$. Therefore, it is bigger or equal to $d_k$, as $s$ and $s^*$ are identical except at position $k$.
+          Now $d^*_k$ is chosen in $s'$, as well as in $s^*$ at position $k$.\unsure{Roland: Argumentiere hier mit Position. Das macht mEn mehr Sinn. Warte auf Eure Kommentare.} As $d^*_k$ was chosen by $s^*$, $d^*_k$ has to maxmize $\phi$. Therefore, it is bigger or equal to $d_k$, as $s$ and $s^*$ are identical except at position $k$.
 
   \end{enumerate}
 \end{proof}
@@ -448,7 +451,7 @@ As already mentioned in the Motivation we want to maximize visibility of the dat
 \begin{equation} \label{eq1}
   \begin{split}
     visiblity & = 1 - occlusion \\
-              & = f(data(set), visualization \, parameters)\\
+    & = f(data(set), visualization \, parameters)\\
   \end{split}
 \end{equation}
 %
