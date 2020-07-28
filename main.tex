@@ -278,7 +278,7 @@ Now we want to derive all of the positions on the circle where the reference lin
   This follows from the intervalls $I$ being occluded. An occlusion of the intervals results in the dividing line lying in this interval being also included.
 \end{proof}
 
-The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not occlude any dividing line. This complement may be empty since there may not be a rotation which does not occlude any line. With this observations we now can easily derive an algorithm which return a rotation which maximizes our utility.
+The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not occlude any dividing line. This complement may be empty since there may not be a rotation which does not occlude any line. With this observations we now can easily derive an algorithm which returns a rotation which maximizes our utility.
 
 \begin{theorem}
   Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
@@ -286,9 +286,7 @@ The complement of $\mathcal{I}$ on the circle describes all of the locations of 
 % TODO: Labels (after everything else is nice probably)
 
 \begin{proof}
-  \color{blue}
-  fehlt sollte aber einfach sein (ist evtl schon vorhanden)
-  \color{black}
+  Algorithm 2 rotates a given dividing line in such a way, that it lies exactly in the midpoint of the biggest not occluded interval $[a_v, b_v]$. The midpoint in an interval is the point which has the maximum distance from both boundaries. As the biggest not occluded interval maps to the circle's perimeter, it also maximizes the distance to the boundaries of the occluded intervals.
 \end{proof}
 
 \begin{figure}[!bth]
@@ -327,9 +325,7 @@ It may happen again that for all glyphs the local utility is zero. Again we have
 
 \newpage
 
-
 \section{Sources}
-
 
 Tufte, Edward R. "The visual display of quantitative information graphics press." Cheshire, Connecticut (1983).\\
 
@@ -346,8 +342,9 @@ Coeurjolly, D., Miguet, S., \& Tougne, L. (2004). 2D and 3D visibility in discre
 Yang-Pelaez J and Flowers WC. Information content
 measures of visual displays. In: Proceedings of the IEEE symposium on information vizualization 2000 (INFOVIS’00), 2000, pp. 99–103. Washington, DC: IEEE Computer Society.
 
-
+% ----------------------
 \end{document}
+% ----------------------
 
 \begin{enumerate}
   \item Information content covered by the data,
@@ -366,12 +363,9 @@ measures of visual displays. In: Proceedings of the IEEE symposium on informatio
   \item MaxMinMinK/relative
 \end{enumerate}
 
-
 Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \phi(d, S) \mapsto \Re_{\geq 0} $ with the property, that for every $d \in D$ $S' \subseteq S => \phi(d, S') \geq \phi(d, S)$.
 
 Let the stacking-order $\pi: \{1,...,n\} \mapsto D$ be bijective.
-
-
 
 The algorithm
 
