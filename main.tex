@@ -299,23 +299,23 @@ We now need to investigate two things:
 \newpage
 
 % ---
-\subsubsection*{NP-hardness}
+\subsection{NP-hardness}
 % ---
-\subsubsection*{Introduction}
+\subsubsection{Introduction}
 Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces, we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk, s.t. the minimum distance of any point in $p\in\bigcup P_i$ to the next occluded point on the boundary of $d_i$ is maximized.
 I.e. we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the transition-lines of the pie-chart meet the boundary are as far from being occluded as possible.
 
-\subsubsection*{NP-hardness}
+\subsubsection{NP-hardness}
 As we will see, the above problem is NP-hard if we allow any physically realizable drawings. To see that, we first fix some notation:
 We assume that $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ is given in angles, i.e. $\alpha_l\in [0, 2\pi)$. Further denote for a given realization $\Pi$, $p\in P_i: dist_\Pi(p) := $ radial distance to occluded boundary segment on $\partial d_i$.
 
-\subsubsection*{Theorem}
-It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization $\Pi$ (with rotation), s.t. the 
+\subsubsection{Theorem}
+It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization $\Pi$ (with rotation), s.t. the minimum distance of any of the distinguished points $p_i$ to the next occluded point along the perimeter of its circle is greater or equal to $k$. As a formula:
 
-\[max_{p\in\bigcup P_i} dist_\Pi(p) \geq k\].
+\[min_{p\in\bigcup P_i} dist_\Pi(p) \geq k\].
 
-\subsubsection*{Proof}
-The proof is inspired and in large parts analogous to [Cabello, Speckmann, Haverkort].
+\subsubsection{Proof}
+The proof is inspired and in large parts analogous to the first proof in [AAPSM].
 We aim to reduce the NP-hardness from $planar$-3-SAT, i.e. instances $\mathcal{I}$ of 3-SAT with the property to that graph $G(\mathcal{I})$ is planar.
 The graph $G(\mathcal{I})$ is bipartite, has a node for each variable on one side and each clause on the other. A variable node is connected to the clause iff one of it's literals appears in the clause.
 
@@ -323,7 +323,7 @@ Given a planar instance $\mathcal{I}$ of 3-SAT we need to construct an instance 
 
 All the disks presented have the same radius and we say that two disks overlap by $f$ if the overlapped fraction of the boundary has length $f$. We introduce the construction of $\mathcal{D}$.
 
-\subsubsection*{Construction}
+\subsubsection{Construction}
 \begin{figure}[h]
 \centering
 \includegraphics[width=5cm, height=5cm]{assets/np-hardness/neutral.png}
@@ -336,7 +336,7 @@ All the disks presented have the same radius and we say that two disks overlap b
 \caption{A "true" and "false" disk, similar to the neutral one above, one of the 60 degree segments is cut in half}
 \end{figure}
 
-We use the three disk types in Figures 1 and 2 to construct for each variable a so-called "gadget". A gadget is a group of neutral disks forming a circle, each overlapping the next by a fraction of 1/6. Notice that the maximum possible distance of separation points to occluded area is 15 degrees. The gadget is constructed in such a way that it can only be oriented clockwise or counter-clockwise if we want $k>0$ distance to the occluded area. Figure 3 depicts a prototype of a gadget, all the disks are of type one for now. In reality the number of disks used will be higher because the curvature cannot be this high.
+We use the three disk types in Figures 1 and 2 to construct for each variable a so-called "gadget". A gadget is a group of neutral disks forming a circle, each overlapping the next by a fraction of 1/6. Notice that the maximum possible distance of separation points to occluded area is 30 degrees. The gadget is constructed in such a way that it can only be oriented clockwise or counter-clockwise if we want $k>0$ separation between the lines to the occluded area. Figure 3 depicts a prototype of a gadget, all the disks are of type one for now. In reality the number of disks used will be higher because the curvature cannot be this high.
 
 \begin{figure}[h]
 \centering
@@ -350,8 +350,8 @@ For each occurrence of the variable $v_i$ we will, in the gadget $g_i$ substitut
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=10cm, height=5cm]{assets/np-hardness/negative.png}
-\caption{A "true" gadget with a "false" disk}
+\includegraphics[width=15cm, height=4cm]{assets/np-hardness/negative.png}
+\caption{A segment of a "true" gadget with a "false" disk in it}
 \end{figure}
 
 The above segment is of a "true" gadget as the disks are clockwise ascending (I did not figure out how to paint this yet). The "false" and "true" disks will ensure that the added segment will point outwards iff the corresponding literal in the clause is false.
@@ -403,7 +403,7 @@ These disks will be arranged in a line connecting the "true"/"false" disks in th
 
 The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right own and has to go over the clause-disk.
 
-\subsubsection*{Conclusion}
+\subsubsection{Conclusion}
 The logical properties were already explained when motivating the construction but will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between occlusion and separation points. We claim the following.
 Given a planar instance of 3-SAT $\mathcal{I}$ and the corresponding construction $\mathcal{D}$ as above, $\mathcal{I}$ is satisfiable if and only if there is a physical realization of $\mathcal{D}$ that creates a distance of at least $15\ degrees\ =  (15/360 * 2\pi)$.
 
@@ -411,11 +411,6 @@ Given a satisfiable instance we orient the gadgets according to the assignment. 
 This implies that all disks can create a distances of 15 degrees to their occluded boundary segments.
 
 Conversely, if the constructed instance has a physical realization with degrees $>= 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $>= 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.
-
-\section{Stuff left to do}
-1. Less talking, better figures and drawings.
-2. Deal with non-real-RAM (at present, centerpoints may be irrational)
-3. Deal with "wiggle-space". The precise rotation of the disks is not fixed, there is some interval of possible rotation. We need to convince ourselves that this will not enable unwanted behaviour of the pie-charts that might break the logic.
 
 % ---
 \subsubsection*{Optimal rotations for $\Gamma_{pie}$}
@@ -499,9 +494,11 @@ Urribarri, D. K., \& Castro, S. M. (2016). Prediction of data visibility in two-
 Coeurjolly, D., Miguet, S., \& Tougne, L. (2004). 2D and 3D visibility in discrete geometry: an application to discrete geodesic paths. Pattern Recognition Letters, 25(5), 561–570. doi:10.1016/j.patrec.2003.12.002\\
 
 Yang-Pelaez J and Flowers WC. Information content
-measures of visual displays. In: Proceedings of the IEEE symposium on information vizualization 2000 (INFOVIS’00), 2000, pp. 99–103. Washington, DC: IEEE Computer Society.
+measures of visual displays. In: Proceedings of the IEEE symposium on information vizualization 2000 (INFOVIS’00), 2000, pp. 99–103. Washington, DC: IEEE Computer Society.\\
 
-% ----------------------
+Sergio Cabello, Herman Haverkort, Marc van Kreveld, Bettina Speckmann. Algorithmic Aspects of Proportional Symbol Maps. In: Algorithmica (2010) 58: 543–565. Published with open access at Springerlink.com.%
+
+  ----------------------
 \end{document}
 % ----------------------
 
