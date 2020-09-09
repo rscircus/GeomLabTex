@@ -136,9 +136,11 @@ Consider the two figures depicted below. While Fig.\ref{fig:covid2020Feb} is hig
 \end{figure}
 %
 
-To investigate the quantification of visual quality mainly Tufte in 1983 in \textit{The visual display of quantitative information graphics press} and Miller et al in \textit{The Need For Metrics In Visual Information Analysis} provided fundamental work. Based on this, follow-up work and further considerations from visibility problems and sorting we develop a novel approach to visualize multidimensional data in a scatterplot which transports as much information content as possible.\\
+Fundamental work into the quantification of visual quality was done both by Tufte in his 1983 book, \textit{The visual display of quantitative information graphics press} and Miller et al. in \textit{The Need For Metrics In Visual Information Analysis}. Based on this, follow-up work and further considerations regarding visibility problems and sorting we develop a novel approach to visualize multidimensional data in a scatterplot designed to transport as much information as possible.\\
 
-Our main resource will be the paper by Sergio Cabello at al \textit{Algorithmic Aspects of Proportional Symbol Maps}. In this paper the hardness of maximizing utility measures with regards to physically realizable drawings was discussed and another type of drawing given by a stacking order was defined. For those drawings some algorithms which we will briefly discuss were derived. Those algorithms where derived for proportional Symbol Maps which only allow us to depict a single quantity. We will try to find more general glyphs and use slightly adapted algorithms to get optimal result with regards to those glyphs and moreover multidimensional data. Hereby, our main focus will be nested circles, centered nested circles and pie charts.
+Our main resource will be the paper by Sergio Cabello et al. \textit{Algorithmic Aspects of Proportional Symbol Maps}. In it, the authors discuss the difficulty of maximizing utility measures with regards to so-called "physically realizable drawings", in particular they prove this problem to be NP-hard. As a consequence, they restrict their further discussion on a distinct subset of physically realizable drawings, called "stacking orders" and derive algorithms that determine optimal stacking orders in polynomial runtime. Those algorithms are designed for datasets where each \textit{symbol} only depicts a single quantity.\\
+
+Our goal is to generalize these algorithms so that they may be applied to other types of \textit{glyphs}. We focus in particular on glyphs that visualize multiple quantities, as is needed for data relating to COVID-19, such as nested discs, centered nested discs and pie charts.
 
 \newpage
 
