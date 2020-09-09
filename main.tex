@@ -169,8 +169,7 @@ Figure \ref{fig:physicalSquares} gives an example of a physically realizable dra
 
 A stacking drawing is uniquely determined by the order (ascending) in which the glyphs are stacked on top of one another. This is the so-called \textit{stacking order} of the drawing. Formally, given a finite set $D$ of $n$ glyphs, a stacking order is a bijection $\phi: [n]\rightarrow D$. This bijection describes the order in which the glyphs are drawn. Glyphs which are drawn later may cover parts of the glyphs which are drawn earlier. Therefore our task is to find a stacking order such that as much as possible of every glyph is visible.\\
 
-
-We are yet to define what we mean when talking about a glyph being as visible as possible. Since this may depend on the type of glyph considered we will turn our attention towards circular discs for now. The other definitions will be delivered as soon as they are needed.\\
+We are yet to define what we mean when talking about a glyph being as visible as possible. Since this may depend on the type of glyph considered we will turn our attention towards circular discs for now. The other definitions will be delivered as soon as they are needed. We refer to these quantitative measure for the visual quality as \textit{global utility functions}.\\
 
 We take the perspective of a viewer looking at the map. The viewer should be able to identify the size of the circles and their center points. To achieve this goal, we could try to maximize the visible area of each circle, but there are cases in which that would not allow the viewer to get all of the information. For instance, if the perimeter is not visible at all, then neither the location of the center point nor radius can be determined exactly. The approach we will use is to maximize the visible perimeter of our discs.\\
 
@@ -182,19 +181,26 @@ For a fixed stacking order $\phi$, we will denote the disc $\phi(i)$ as $D_i$. W
   U_i^{vis} & =\partial D_i\setminus \bigcup_{j>i} D_{j} \\
   U_i^{occ} & =\partial D_i \cap \bigcup_{j>i} D_{j}.
 \end{align*}
+%
+furthermore, we denote the length of the visible perimeter as $|U^{vis}_i|$. Two global utility functions come to mind:
 
-Key results proven in \textit{Algorithmic Aspects of Proportional Symbol Maps} are the following
+\begin{align*}
+    \Gamma_{min} (D) &= \min_{i \in [n]}|U_i^{vis}|\\
+    \Gamma_{sum} (D) &= \sum_{i=1}^n|U_i^{vis}|
+\end{align*}
+
+While $\Gamma_{min}$ is focused on the least visible perimeter, $\Gamma_{sum}$ sums up the visible length of all perimeters. Key results proven in \textit{Algorithmic Aspects of Proportional Symbol Maps} are the following
 \begin{theorem}
   It is NP-hard to decide if a given collection of congruent disks has a
   physically realizable drawing where at least some given length of the perimeter of
   each disk is visible.\qed
 \end{theorem}
-This implies that trying to maximize the minimal $U_i^{vis}$ with respect to physically realizable drawings is NP-hard.
+This implies that trying to maximize the minimal $|U_i^{vis}|$ with respect to physically realizable drawings is NP-hard.
 \begin{theorem}
   It is NP-hard to decide if a given collection of disks has a physically
   realizable drawing whose total visible perimeter is at least a given value.\qed
 \end{theorem}
-This implies that trying to maximize the sum over all the $U_i^{vis}$ with respect to physically realizable drawings is NP-hard.\\
+This implies that trying to maximize the sum over all the $|U_i^{vis}|$ with respect to physically realizable drawings is NP-hard.\\
 For stacking orders they give a positive result with regards to the minimum:
 \begin{theorem}
   Given n disks in the plane, a stacking order maximizing the boundary
@@ -202,8 +208,11 @@ For stacking orders they give a positive result with regards to the minimum:
 \end{theorem}
 Whether a polynomial algorithm for the sum of all visible perimeters exists remains an open question.\\
 
-We won't attempt to construct an algorithm for the sum problem. Instead we will be looking at glyphs which can depict more information. The first glyph we will discuss are nested disks. Formally every glyph $G^i$ is given by a set of circles $G^i_1,...,G^i_k$ such that $r_{j+1}>r_j$ and $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested disks also center all the discs in the same point. The second type of glyphs we will use are pie charts. A pie chart is formally given by a circle $C_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,2\pi ]$.\\
-In the next section we will be discussing an easy general approach for maximizing special utility functions for glyph stacking order drawings and then apply it to our glyphs and some utility functions.
+We won't attempt to construct an algorithm for the sum problem and instead take a look at glyphs which are able to depict more than one piece of information.\\
+The first glyph we will discuss are nested discs. Formally, every glyph $G^i$ is given by a set of discs $G^i_1,...,G^i_k$ such that $r_{j+1}>r_j$ and $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested discs also center all the discs in the same point.\\
+The second type of glyphs we will use are pie charts. A pie chart is formally given by a disc $D_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,2\pi ]$.\\
+
+In the next section we will discuss a simple and versatile approach to determine optimal stacking orders for glyphs maximizing utility functions with specific properties for glyph stacking order drawings and then apply it to our glyphs and some utility functions.
 
 % ----------------------
 \section{Stacking order algorithms for more general Glyphs}
