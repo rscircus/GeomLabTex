@@ -147,10 +147,25 @@ Our goal is to generalize these algorithms so that they may be applied to other 
 % ----------------------
 \section{Problem Statement}
 % ----------------------
-Sergio Cabello at al discussed proportional Symbol Maps. For those we have $n$ circles/disks in $R^2$ and the radius or size of the circles corresponds to some quantity which is associated to the center point of the circle. The problem is to find a drawing which retains as much of the information about the quantity and the location of the center as possible. \\
+Cabello et al. discussed proportional Symbol Maps. Such a map consists of a finite set of $2$-dimensional figures called symbols or glyphs. Each of these glyphs has a position in $\mathbb{R}^2$ and a radius or size corresponds to some quantity given by the data it is supposed to represent. A classic example is the representation of earthquakes and their strength on the Richter-scale. Opaque discs are centered at epicenter of the earthquake, the radius corresponds to its strength. In this case, the glyphs are the discs and the associated data encoded in the radius indicates the strength. Other types of glyphs, like squares, hexagons, or pie charts are also possible and are investigated in this lab.\\
 
-For the definition of a drawing they describe two approaches. One is given by \textit{physically realizable drawings} and the other is \textit{stacking drawings}. As \textit{stacking drawings} are the natural perception and therefore natural restriction of a physically realizable drawing, we define the physically realizable drawing first. A drawing is physically realizable if the order in which the circles or disks -- bounded by a perimeter -- are stacked upon each other is uniquely determined at every face and no two of such orders conflict. In particular, any two or more disks with a common intersection have a unique ordering.\\
-Intutively, this can be imagined by very flexible disks, which somehow maintain their perimeter in the direction of beeing looked at. A stacking drawing is inutively the same thing with stiff disks.\\
+The problem is to find a drawing which retains as much of the information about the quantity and the location of the center as possible. More concretely, the raw data alone does not tell you how to deal with overlapping discs, squares or occluded pie pieces. In order to visualize the data on a map we must make several decisions, e.g. one pie occludes a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie s.t. all of its segments are visible?\\
+
+For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes, an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper.\\
+
+Intuitively, a physically realizable drawing can be imagined as having originated by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect  (potentially in a Dali-like fashion) and then taking a picture from above.\\
+Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same height for each point on the same glyph.\\
+
+%
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\linewidth]{phys_real_squares.png}
+  \caption{A physically realizable drawing of squares which is not a stacking drawing}
+  \label{fig:physicalSquares}
+\end{figure}
+%
+
+Figure \ref{fig:physicalSquares} gives an example of a physically realizable drawing which is not a stacking drawing. The squares overlap cyclically going clockwise "upwards" reminiscent of the "Penrose Stairs". This image can not occur if the squares where embedded with a fixed height as it is required for stacking drawings.\\
 
 A stacking drawings is realized by a stacking order which is given by a bijection $\phi: [n]\rightarrow [n]$. This bijection describes the order in which the circles are drawn. Circles which are drawn later cover parts over the circles which are drawn earlier. Therefore our task is to find a stacking order such that as little as possible of every circle is covered. \\
 Now we need to discuss what we mean by covering as little as possible. We want that the viewer of the map should be able to identify the size of the circles and the center point. To achieve this goal, we could try to maximize the area of the circles which is not covered, but there are cases in which that would not allow the viewer to get all of the information. The approach we will use is to maximize the visible boundary of our glyph. We can define the visible and occluded boundary for circles formally with\\
