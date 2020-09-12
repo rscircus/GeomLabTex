@@ -328,7 +328,7 @@ Our approach is quite simple. We first just look at the biggest circle of each g
 
 The resulting drawing guarantees that the perimeter of every circle is at least a little bit visible. The downside of this construction is that the drawing look a little bit strange to the viewer and its more difficult to focus the center of a glyph. \\
 
-We again use the naive approach for disks from \cite{caballo} with runtime $O(n^3)$. Since we are only interested in the largest circle the number of nestings $k$ does not influence the runtime. As described in \cite{caballo} the runtime could be improved to $O(n^2 \log n)$.
+We again use the naive approach for disks from \cite{caballo} with runtime $O(n^3)$. Since we are only interested in the largest disk the number of nestings $k$ only adds a linear term. Therefore the overall runtime is given by $O(n^3+nk)$. As described in \cite{caballo} the runtime could be improved to $O(nk+n^2 \log n)$.
 
 
 
