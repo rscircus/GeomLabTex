@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage[usenames,pdftex,dvipsnames]{xcolor}
 \usepackage{subcaption}
+\usepackage{float}
 
 % Math
 \usepackage{amsmath,amssymb,amsthm,textcomp}
@@ -143,6 +144,8 @@ Consider the two figures depicted below. While Fig.\ref{fig:covid2020Feb} is hig
 \end{figure}
 %
 
+For now, we start by defining quantitative measures, i.e. measures of data visibility that can be understood by a computer and assessed on a purely mathematical basis. A discussion on how well the developed algorithms and approaches hold up from a qualitative viewpoint will be conducted later on.\\
+
 Fundamental work into the quantification of visual quality was done both by Tufte in his 1983 book, \textit{The visual display of quantitative information graphics press} and Miller et al. in \textit{The Need For Metrics In Visual Information Analysis}. Based on this, follow-up work and further considerations regarding visibility problems and sorting we develop a novel approach to visualize multidimensional data in a scatterplot designed to transport as much information as possible.\\
 
 Our main resource will be the paper by Sergio Cabello et al. \textit{Algorithmic Aspects of Proportional Symbol Maps}. In it, the authors discuss the difficulty of maximizing utility measures with regards to so-called "physically realizable drawings", in particular they prove this problem to be NP-hard. As a consequence, they restrict their further discussion on a distinct subset of physically realizable drawings, called "stacking orders" and derive algorithms that determine optimal stacking orders in polynomial runtime. Those algorithms are designed for datasets where each \textit{symbol} only depicts a single quantity.\\
@@ -234,7 +237,7 @@ Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \Ga
 The set $D$ corresponds to our set of glyphs and $\Gamma$ corresponds to a utility function, which depends on the insertion order, i.e, the set $S$ describes all the glyphs which lie above d. Let $\phi: \{1,...,n\} \mapsto D$ be a stacking order. Then the for every glyph $d_i:=\phi(i)$ the set of glyphs above $d_i$ is given by $\{d_j\ \in D | j > i\}$.
 
 \begin{figure}[!t]
-  \begin{lstlisting}[mathescape=true ]
+  \begin{lstlisting}[mathescape=true]
 ALG(finite set $D$)
   $x := \text{argmax}_{d \in D} \Gamma(d, D \setminus {d})$
   return [$x$, ALG($D \setminus {x}$)]
@@ -462,7 +465,7 @@ This implies that all disks can create a distances of 15 degrees to their occlud
 Conversely, if the constructed instance has a physical realization with degrees $>= 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $>= 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.
 
 % ---
-\subsubsection*{Optimal rotations for $\Gamma_{pie}$}
+\subsection*{Optimal rotations for $\Gamma_{pie}$}
 % ---
 
 Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that gives us the maximum of the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
