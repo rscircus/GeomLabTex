@@ -358,18 +358,14 @@ We now need to investigate two things:
 % ---
 \subsection{NP-hardness}
 % ---
-\subsubsection{Introduction}
+\subsubsection*{Setting}
 Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces, we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk, s.t. the minimum distance of any point in $p\in\bigcup P_i$ to the next occluded point on the boundary of $d_i$ is maximized.
 I.e. we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the transition-lines of the pie-chart meet the boundary are as far from being occluded as possible.
 
-\subsubsection{NP-hardness}
-As we will see, the above problem is NP-hard if we allow any physically realizable drawings. To see that, we first fix some notation:
-We assume that $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ is given in angles, i.e. $\alpha_l\in [0, 2\pi)$. Further denote for a given realization $\Pi$, $p\in P_i: dist_\Pi(p) := $ radial distance to occluded boundary segment on $\partial d_i$.
+\subsubsection*{Theorem}
+It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation), s.t. the minimum distance of any of the distinguished points $p_i$ to the next occluded point along the perimeter of its perimeter is greater or equal to $k$. As a formula:
 
-\subsubsection{Theorem}
-It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization $\Pi$ (with rotation), s.t. the minimum distance of any of the distinguished points $p_i$ to the next occluded point along the perimeter of its circle is greater or equal to $k$. As a formula:
-
-\[min_{p\in\bigcup P_i} dist_\Pi(p) \geq k\].
+\[\min_{i\in [n]} \Gamma(D_i,\{D_j\ |\ j>i\}) \geq k\].
 
 \subsubsection{Proof}
 The proof is inspired and in large parts analogous to the first proof in [AAPSM].
