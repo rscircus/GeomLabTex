@@ -218,6 +218,9 @@ For stacking orders they give a positive result with regards to the minimum:
 \end{theorem}
 Whether a polynomial algorithm for the sum of all visible perimeters exists remains an open question.\\
 
+
+\newpage
+
 We won't attempt to construct an algorithm for the sum problem and instead take a look at glyphs which are able to depict more than one piece of information.\\
 The first glyph we will discuss are nested discs. Formally, every glyph $G^i$ is given by a set of discs $G^i_1,...,G^i_k$ such that $r_{j+1}>r_j$ and $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested discs also center all the discs in the same point.\\
 The second type of glyphs we will use are pie charts. A pie chart is formally given by a disc $D_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,2\pi ]$.\\
@@ -236,7 +239,7 @@ We can now formalize this approach for more general objects and prove that the g
 Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \Gamma(d, S) \mapsto \Re_{\geq 0} $ with the property, that for every $d \in D$ we have $S' \subseteq S => \Gamma(d, S') \geq \Gamma(d, S)$. \\
 The set $D$ corresponds to our set of glyphs and $\Gamma$ corresponds to a utility function, which depends on the insertion order, i.e, the set $S$ describes all the glyphs which lie above d. Let $\phi: \{1,...,n\} \mapsto D$ be a stacking order. Then the for every glyph $d_i:=\phi(i)$ the set of glyphs above $d_i$ is given by $\{d_j\ \in D | j > i\}$.
 
-\begin{figure}[!t]
+\begin{figure}[H]
   \begin{lstlisting}[mathescape=true]
 ALG(finite set $D$)
   $x := \text{argmax}_{d \in D} \Gamma(d, D \setminus {d})$
