@@ -367,10 +367,19 @@ It is NP-hard to decide, whether for a given set $D$ of disks with boundary poin
 
 \[\min_{i\in [n]} \Gamma(D_i,\{D_j\ |\ j>i\}) \geq k\].
 
-\subsubsection{Proof}
-The proof is inspired and in large parts analogous to the first proof in [AAPSM].
+\subsubsection*{Proof}
+The proof is inspired by and in large parts analogous to the proof of Theorem 1 \cite{cabello} concerning.
 We aim to reduce the NP-hardness from $planar$-3-SAT, i.e. instances $\mathcal{I}$ of 3-SAT with the property to that graph $G(\mathcal{I})$ is planar.
-The graph $G(\mathcal{I})$ is bipartite, has a node for each variable on one side and each clause on the other. A variable node is connected to the clause iff one of it's literals appears in the clause.
+The graph $G(\mathcal{I})$ is bipartite, has a node for each variable on one side and each clause on the other. A variable node is connected to the clause iff one of it's literals appears in the clause.\\
+
+\textbf{Example:}
+\[ \mathcal{I} = \underbrace{(x_1 \vee x_2 \vee \overline{x_3})}_{C_1} \wedge \underbrace{(x_3 \vee \overline{x_4} \vee x_5)}_{C_2} \]
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=15cm, height=10cm]{assets/np-hardness/incidence_graph.png}
+\caption{The incidence graph $G(\mathcal{I})$}
+\end{figure}
 
 Given a planar instance $\mathcal{I}$ of 3-SAT we need to construct an instance $\mathcal{D}$ of our pie-charts, s.t. $\mathcal{I}$ is satisfiable iff $\mathcal{D}$ has a physical realization with distance $\geq k$ for some suitable $k$.
 
