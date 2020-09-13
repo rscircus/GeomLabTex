@@ -231,25 +231,28 @@ In the next section we will discuss a simple and versatile approach to determine
 \section{Stacking order algorithms for more general Glyphs}
 % ----------------------
 
-We will be focusing on utility functions which follow the following formula: Maximize the local utility of the worst glyph. In the example of the disk glyphs the local utility would just be the visible perimeter. \\We can use a simple greedy algorithm to solve the problem. At each time step just calculate for all discs their visible perimeter as if they were the bottommost disk and then choose the disc $C_i$ with the largest visible perimeter and then draw it. In the next timestep we look at the set of disks without $C_i$. This is done until we have processed all disks.\\
+The function $\lambda_{min}$ from above provides an example of a global utility function for which an optimal stacking order can be computed via a simple greedy algorithm. At each time step just calculate for all discs their visible perimeter as if they were the bottommost disk, choose the disc $D_i$ with the largest visible perimeter and put it on the bottom. In the next timestep we look at the set of disks without $D_i$ and repeat the procedure. This is done until we have processed all disks.\\
 
 We can now formalize this approach for more general objects and prove that the greedy algorithm is optimal with respect to the utility.
 \\
 
-Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \Gamma(d, S) \mapsto \Re_{\geq 0} $ with the property, that for every $d \in D$ we have $S' \subseteq S => \Gamma(d, S') \geq \Gamma(d, S)$. \\
-The set $D$ corresponds to our set of glyphs and $\Gamma$ corresponds to a utility function, which depends on the insertion order, i.e, the set $S$ describes all the glyphs which lie above d. Let $\phi: \{1,...,n\} \mapsto D$ be a stacking order. Then the for every glyph $d_i:=\phi(i)$ the set of glyphs above $d_i$ is given by $\{d_j\ \in D | j > i\}$.
+Let $D$ be a finite set and for $d \in D$ and $S \subseteq D$ the function $ \Gamma(d, S) \mapsto \mathbb{R}_{\geq 0} $ with the property, that for every $d \in D$ we have $S' \subseteq S \implies \Gamma(d, S') \geq \Gamma(d, S)$. \\
+The set $D$ corresponds to our set of glyphs and $\Gamma$ corresponds to a local utility function, which depends on the insertion order, i.e, the set $S$ is thought of as the set of all glyphs which lie above $d$. Let $\phi: \{1,...,n\} \mapsto D$ be a stacking order. Then the for every glyph $d_i:=\phi(i)$ the set of glyphs above $d_i$ is given by $\{d_j\in D\ |\ j > i\}$.
 
 \begin{figure}[H]
   \begin{lstlisting}[mathescape=true]
-ALG(finite set $D$)
+GreedyStacking(finite set $D$)
   $x := \text{argmax}_{d \in D} \Gamma(d, D \setminus {d})$
   return [$x$, ALG($D \setminus {x}$)]
   \end{lstlisting}
-  \caption{The greedy algorithm}
+  \caption{The greedy stacking algorithm}
+  \label{fig:greedyalg}
 \end{figure}
 
+\newpage
+
 \begin{theorem}
-  For a given set $D$ and a local utility function $\Gamma$ the greedy Algorithm as described in Figure 2 returns a stacking order s which maximizes\begin{align*}
+  For a given set $D$ and a local utility function $\Gamma$ the greedy Algorithm as described in \ref{fig:greedyalg} returns a stacking order $s$ which maximizes\begin{align*}
     \lambda(s) = \min_{i \in \{1,\dots,n\}} \Gamma(s(i), \{s(j)\ | j > i\}).
   \end{align*}
 \end{theorem}
