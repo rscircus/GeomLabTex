@@ -319,44 +319,41 @@ For centered nested disks we can easily define local utility measures. Every gly
   \Gamma_{min}({G^i,S})=\min_j  {^{vis} G^i_j} \\
   \Gamma_{sum}({G^i,S})=\sum_{j=1}^k  {^{vis} G^i_j}
 \end{align*}
-We may also be interested in the relative utility which is given by normalizing the size of the circles. This relative approach stops the small circles from dominating big circles. In our applications there is close to no different between the relative utility and the normal one. \\
+We may also be interested in the relative utility which is given by normalizing the size of the circles. This relative approach stops the small circles from dominating big circles. In our applications there is close to no difference between the relative and absolute utility.\\
 
 For $\Gamma_{min}$ it may happen that for all glyphs the smallest circle may be completely covered. Then the utility would be zero for all of the circles. If that happens the algorithm has an optimal solution of value zero. If that happens, we perform the greedy step again and ignore the smallest circle in all of the glyphs until we get a value bigger than zero. This heuristic gives better results than just choosing a random circle.\\
 %
 \begin{remark}
 It is NP-hard to calculate physically realizable drawing where $\min\Gamma_{min}$ or $\min\Gamma_{sum}$ is maximized since disc glyphs are a special case of nested discs and both utility measures coincide and are equal to the visible circumference.
 \end{remark}
-We are manly interested in the quality of the algorithms. Therefore we use a naive algorithm to calculate the stackings with runtime $O(n^3k^2)$. The runtime could be improved to $O(n^2k \log nk)$ by adapting the data structure introduced in \cite{caballo}.
+We are primarily interested in the quality of the optimization, not the runtime of the computing algorithms. Therefore we use a naive implementation to calculate the stackings with runtime $O(n^3k^2)$. The runtime could be improved to $O(n^2k \log nk)$ by adapting the data structure introduced in \cite{caballo}.
 
 
 % ----------------------
 \subsection{Nested disks}
 % ----------------------
 
-For dense regions centered nested discs loose a lot of information since the small circles can easily be completely covered up. Therefore we will now derive an algorithm which guarantees, that every nested circle is at least visible. To achieve that we will allow the circles to be moved inside each other. We still want to have $r_{j+1}>r_j$ and $G^i_{j+1}\subset G^i_j$ for all $j$ but the centers can be different.\\
+For dense regions centered nested discs loose a lot of information since the small circles can easily be completely covered up. Therefore we will now derive an algorithm which guarantees that every nested circle is at least visible. To achieve that we will allow the circles to be moved within each other. We still want to have $G^i_{j+1}\subset G^i_j$ for all $j$ but the centers don't have to coincide.\\
 
-Our approach is quite simple. We first just look at the biggest circle of each glyph. For those we perform our greedy algorithm with the local utility given by the size of the maximal \textbf{continuous} visible perimeter. After we have done that we can take the point $p$ on the circle which is in the middle of the continuous visible perimeter piece and connect it to the center of the big circle by a line. Now every center point for a nested inner circle is uniquely defined by positioning it on that line such that the circle touches the point $p$. The final glyphs look a little bit like the \textit{Hawaiian earring} topological space.\\
+Our approach is quite simple. We first just look at the biggest circle of each glyph. For those we perform our greedy algorithm with the local utility given by the size of the maximal \textit{continuous} visible perimeter. After we have done that we can take the point $p$ on the circle which is in the middle of the longest continuous perimeter piece visible and connect it to the center of the big circle by a line. Now every center point for a nested inner circle is uniquely defined by positioning it on that line such that the circle touches the point $p$. The final glyphs look a little bit like the \textit{Hawaiian earring} topological space.\\
 
 The resulting drawing guarantees that the perimeter of every circle is at least a little bit visible. The downside of this construction is that the drawing look a little bit strange to the viewer and its more difficult to focus the center of a glyph. \\
 
 We again use the naive approach for disks from \cite{caballo} with runtime $O(n^3)$. Since we are only interested in the largest disk the number of nestings $k$ only adds a linear term. Therefore the overall runtime is given by $O(n^3+nk)$. As described in \cite{caballo} the runtime could be improved to $O(nk+n^2 \log n)$.
 
 
-
 % ----------------------
 \subsection{Pie charts}
 % ----------------------
 
-Recall a pie chart glyph is given by a disk $C_i$ and dividing lines given by a finite set $P_i= \{\alpha_1^i,...\alpha_m^i\}$. The $\alpha_j$ are given by angles in $[0,2\pi ]$. We may rotate the dividing lines like minute or hour hands on a mechanical watch, but the relative distance between all angles must stay the same. This rotation can be described by a single angle due to the fixed relative distance of the dividing lines. Given a rotation of the angles and a set $S$ of glyphs which lie above the pie chart in our drawing, we can define $\Gamma_{pie}(C_i,S)$ as the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter. \\
+Recall a pie chart glyph is given by a disk $D_i$ and dividing lines given by a finite set $P_i= \{\alpha_1^i,...\alpha_m^i\}$. The $\alpha_j$ are given by angles in $[0,2\pi ]$. We may rotate the dividing lines like minute or hour hands on a mechanical watch, but the relative distance between all angles must stay the same. This rotation can be described by a single angle due to the fixed relative distance of the dividing lines. Given a rotation of the angles and a set $S$ of glyphs which lie above the pie chart in our drawing, we can define $\Gamma_{pie}(D_i,S)$ as the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter. If the perimeter is completely visible, then this distance is defined as half the circumference or $\pi r_i$.\\
 
 We now need to investigate two things:
 
-\begin{itemize}
-  \item The pie chart glyphs are not a natural generalization of the disk glyphs. Therefore it is not trivial to show that maximizing the discussed utility function with respect to physically realizable drawings is NP-hard.
-  \item 2. How to calculate the optimal rotation given a set over covering glyphs.
-\end{itemize}
-
-\newpage
+\begin{enumerate}
+  \item Is it feasible to optimize the aforementioned utility function with respect to physically realizable drawings generally or do we need to restrict ourselves to stacking drawings? The pie chart glyphs are not a natural generalization of the disks. Therefore we cannot argue NP-hardness as easily as in the case of nested disks.
+  \item In addition to deciding which pie covers which we also have to specify a rotation for each pie. How do we calculate the optimal rotation for a given pie knowing which pies lie above it.
+\end{enumerate}
 
 % ---
 \subsection{NP-hardness}
