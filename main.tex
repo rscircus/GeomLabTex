@@ -326,7 +326,7 @@ For $\Gamma_{min}$ it may happen that for all glyphs the smallest circle may be 
 \begin{remark}
 It is NP-hard to calculate physically realizable drawing where $\min\Gamma_{min}$ or $\min\Gamma_{sum}$ is maximized since disc glyphs are a special case of nested discs and both utility measures coincide and are equal to the visible circumference.
 \end{remark}
-We are primarily interested in the quality of the optimization, not the runtime of the computing algorithms. Therefore we use a naive implementation to calculate the stackings with runtime $O(n^3k^2)$. The runtime could be improved to $O(n^2k \log nk)$ by adapting the data structure introduced in \cite{caballo}.
+We are primarily interested in the quality of the optimization, not the runtime of the computing algorithms. Therefore we use a naive implementation to calculate the stackings with runtime $O(n^3k^2)$. The runtime could be improved to $O(n^2k \log nk)$ by adapting the data structure introduced in \cite{cabello}.
 
 
 % ----------------------
@@ -339,7 +339,7 @@ Our approach is quite simple. We first just look at the biggest circle of each g
 
 The resulting drawing guarantees that the perimeter of every circle is at least a little bit visible. The downside of this construction is that the drawing look a little bit strange to the viewer and its more difficult to focus the center of a glyph. \\
 
-We again use the naive approach for disks from \cite{caballo} with runtime $O(n^3)$. Since we are only interested in the largest disk the number of nestings $k$ only adds a linear term. Therefore the overall runtime is given by $O(n^3+nk)$. As described in \cite{caballo} the runtime could be improved to $O(nk+n^2 \log n)$.
+We again use the naive approach for disks from \cite{cabello} with runtime $O(n^3)$. Since we are only interested in the largest disk the number of nestings $k$ only adds a linear term. Therefore the overall runtime is given by $O(n^3+nk)$. As described in \cite{cabello} the runtime could be improved to $O(nk+n^2 \log n)$.
 
 
 % ----------------------
@@ -510,7 +510,7 @@ Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
 
 With this algorithm we can again use our general greedy algorithm for stacking orders.\\
 
-If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. Again the data structure introduced in \cite{caballo} could be used for the pie glyphs which yields a runtime of $O(n^2k \log nk)$. This adaptation would need some work, since the pie glyphs are not immediately  compatible with the data structure.\\
+If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. Again the data structure introduced in \cite{cabello} could be used for the pie glyphs which yields a runtime of $O(n^2k \log nk)$. This adaptation would need some work, since the pie glyphs are not immediately  compatible with the data structure.\\
 
 
 It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyphs and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
@@ -552,7 +552,7 @@ It may happen again that for all glyphs the local utility is zero. Again we have
 \bibitem [7] {Yang}Yang-Pelaez J and Flowers WC. Information content
 measures of visual displays. In: Proceedings of the IEEE symposium on information vizualization 2000 (INFOVIS’00), 2000, pp. 99–103. Washington, DC: IEEE Computer Society.\\
 
-\bibitem [8] {caballo}Sergio Cabello, Herman Haverkort, Marc van Kreveld, Bettina Speckmann. Algorithmic Aspects of Proportional Symbol Maps. In: Algorithmica (2010) 58: 543–565. Published with open access at Springerlink.com.%
+\bibitem [8] {cabello}Sergio Cabello, Herman Haverkort, Marc van Kreveld, Bettina Speckmann. Algorithmic Aspects of Proportional Symbol Maps. In: Algorithmica (2010) 58: 543–565. Published with open access at Springerlink.com.%
 
 
 
