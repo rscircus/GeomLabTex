@@ -390,25 +390,30 @@ All the disks presented have the same radius and we say that two disks overlap b
 \centering
 \includegraphics[width=5cm, height=5cm]{assets/np-hardness/neutral.png}
 \caption{A "neutral" disk used as a connector within a variable ring. The angles are 60 and 120 degrees}
+\label{fig:neutral}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=10cm, height=5cm]{assets/np-hardness/true_false.png}
 \caption{A "true" and "false" disk, similar to the neutral one above, one of the 60 degree segments is cut in half}
+\label{fig:trueandfalse}
 \end{figure}
 
-We use the three disk types in Figures 1 and 2 to construct for each variable a so-called "gadget". A gadget is a group of neutral disks forming a circle, each overlapping the next by a fraction of 1/6. Notice that the maximum possible distance of separation points to occluded area is 30 degrees. The gadget is constructed in such a way that it can only be oriented clockwise or counter-clockwise if we want $k>0$ separation between the lines to the occluded area. Figure 3 depicts a prototype of a gadget, all the disks are of type one for now. In reality the number of disks used will be higher because the curvature cannot be this high.
+We use the three disk types in Figures \ref{fig:neutral} and \ref{fig:trueandfalse} to construct for each variable in the 3-SAT instance a so-called "gadget". A gadget is a group of neutral disks forming an elongated band, each overlapping the next by a fraction of 1/4 or 90 degrees. Notice that the maximum possible distance of separation points to occluded area is 15 degrees, because the segment is 120 degrees and 90 are covered. The gadget is constructed in such a way that it can only be oriented clockwise or counter-clockwise if we want $k>0$ separation between the lines to the occluded area. 
 
-\begin{figure}[h]
+Figure \ref{fig:gadget} depicts a prototype of a gadget, all the disks are of the neutral type for now. The curvature is created by connecting the disks at a 45 degree angle while still overlapping by a fraction of 1/4.
+
+\begin{figure}[H]
 \centering
 \includegraphics[width=10cm, height=5cm]{assets/np-hardness/gadget.png}
-\caption{One such gadget for each variable}
+\caption{One such gadget $G_i$ for each variable $x_i$}
+\label{fig:gadget}
 \end{figure}
 
 We will interpret a gadget being ordered ascending clockwise as the corresponding variable being "true" and otherwise "false".
 
-For each occurrence of the variable $v_i$ we will, in the gadget $g_i$ substitute a neutral gadget by either a "true" or "false" disk depicted in Figure 2. We use a "false" disk if the literal is appears negated in the clause.
+For each occurrence of the variable $x_i$ in any of the clauses we will, in the gadget $G_i$ substitute a neutral disk by either a "true" or "false" disk depicted in Figure \ref{fig:trueandfalse}. We use a "false" disk if the literal appears negated in the clause.
 
 \begin{figure}[h]
 \centering
@@ -416,17 +421,17 @@ For each occurrence of the variable $v_i$ we will, in the gadget $g_i$ substitut
 \caption{A segment of a "true" gadget with a "false" disk in it}
 \end{figure}
 
-The above segment is of a "true" gadget as the disks are clockwise ascending (I did not figure out how to paint this yet). The "false" and "true" disks will ensure that the added segment will point outwards iff the corresponding literal in the clause is false.
+The above segment is of a "true" gadget as the disks are clockwise ascending. The "false" and "true" disks will ensure that the added segment will point outwards iff the corresponding literal in the clause is false.
 
-Next we will focus on the clauses and how they will be set up. Later we will connect gadgets and clauses (possible because of planarity).
+Next we will focus on how the clauses will be set up. Later we will connect gadgets and clauses, which is why we require the instance to be planar.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=5cm, height=5cm]{assets/np-hardness/clause.png}
 \caption{One such disk for each clause}
 \end{figure}
 
-Recall that the instance is satisfiable iff each clause is fulfilled. We instanciate one disk as above for each clause. It has two separating lines exactly opposing one another. For each literal in the clause we overlap it with one of the disks show below by a fraction of 1/4 as shown in Figure 7.
+Recall that the instance is satisfiable iff each clause is fulfilled. We instantiate one disk as above for each clause. It has two separating lines exactly opposing one another. For each literal in the clause we overlap it with one of the disks show below by a fraction of 1/4 as shown in Figure \ref{fig:clauseconnection}.
 
 \begin{figure}[h]
 \centering
@@ -434,18 +439,19 @@ Recall that the instance is satisfiable iff each clause is fulfilled. We instanc
 \caption{This disk is the endpoint of the edge connecting the gadget to the clause disk}
 \end{figure}
 
-This connector disk is supposed to be above the clause-disk iff it's associated literal is "false" in the clause.
+This connector disk is supposed to be above the clause-disk iff its associated literal is "false" in the clause.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=5cm, height=5cm]{assets/np-hardness/literal_clause.png}
 \caption{The clause together with the literal connectors}
+\label{fig:clauseconnection}
 \end{figure}
 
 The clause disk is overlapped by three connector disks, each overlapping 90 degrees and leaving three 30 degree corridors. If the upper connector disk can be rotated as depicted, then it may go under the clause disk, signifying the literal is "true" in the clause. Otherwise it must go over, like the bottom left one.
-If all three connectors go over the clause, then the clause disk cannot have 15 degrees of space between the separating points and the occluded area. If, conversely, at least one of them goes under, like potentially the top one in Figure 7, then by rotating the clause disk as depicted creates 15 degrees of length between the lines and the occluded area.
+If all three connectors go over the clause, then the clause disk cannot have 15 degrees of space between the separating points and the occluded area. If, conversely, at least one of them goes under, like potentially the top one in Figure \ref{fig:clauseconnection}, then by rotating the clause disk as depicted creates 15 degrees of length between the lines and the occluded area.
 
-Now we need to bring it all together. Recall that we have gadgets that can be oriented clockwise or counterclockwise to signify a "true" or "false" assignment of the variable. The gadgets have for each variable-clause pair a special "true" or "false" disk that will point a separating line outwards iff the $literal$ is false in the clause. We also have connectors at the clause that will act as if "false" iff they go over the clause disk, which has to occur if their separating line cannot be arranged as in the top disk of Figure 7.
+Now we need to bring it all together. Recall that we have gadgets that can be oriented clockwise or counterclockwise to signify a "true" or "false" assignment of the variable. The gadgets have for each variable-clause pair a special "true" or "false" disk that will point a separating line outwards iff the $literal$ is false in the clause. We also have connectors at the clause that will act as if "false" iff they go over the clause disk, which has to occur if their separating line cannot be arranged as in the top disk of Figure \ref{fig:clauseconnection}.
 
 What we need to ensure is that the connector disk cannot be rotated like that if the literal disk in the gadget points outwards. To do this we introduce the last building block of the construction.
 
@@ -465,14 +471,17 @@ These disks will be arranged in a line connecting the "true"/"false" disks in th
 
 The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right own and has to go over the clause-disk.
 
-\subsubsection{Conclusion}
+\subsubsection*{Example}
+Example will be depicted here.
+
+\subsubsection*{Conclusion}
 The logical properties were already explained when motivating the construction but will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between occlusion and separation points. We claim the following.
 Given a planar instance of 3-SAT $\mathcal{I}$ and the corresponding construction $\mathcal{D}$ as above, $\mathcal{I}$ is satisfiable if and only if there is a physical realization of $\mathcal{D}$ that creates a distance of at least $15\ degrees\ =  (15/360 * 2\pi)$.
 
-Given a satisfiable instance we orient the gadgets according to the assignment. This will make all "false" connections point a separator outward. Within the gadgets, all disks maintain a distance of at least 15 degrees to the other disks in the gadget. The connector disks at these "false" connections will have to go under so that the outpointing separator has distance >= 0, let alone 15. The "true" connections are not forcing the outgoing connections to go under, we will place them above giving a distance of exactly 15 degrees. This connection line will be going "upwards" (next disk over the previous) until it reaches the clause connector, which now can be placed under the clause-disk enabling it to also create a distance of at least 15 degrees.
+Given a satisfiable instance we orient the gadgets according to the assignment. This will make all "false" connections point a separator outward. Within the gadgets, all disks maintain a distance of at least 15 degrees to the other disks in the gadget. The connector disks at these "false" connections will have to go under so that the outpointing separator has distance $\geq 0$, let alone 15. The "true" connections are not forcing the outgoing connections to go under, we will place them above giving a distance of exactly 15 degrees. This connection line will be going "upwards" (as viewed from gadget to clause) until it reaches the clause connector, which now can be placed under the clause-disk enabling it to also create a distance of at least 15 degrees.
 This implies that all disks can create a distances of 15 degrees to their occluded boundary segments.
 
-Conversely, if the constructed instance has a physical realization with degrees $>= 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $>= 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.
+Conversely, if the constructed instance has a physical realization with degrees $\geq 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $\geq 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.
 
 % ---
 \subsection*{Optimal rotations for $\Gamma_{pie}$}
