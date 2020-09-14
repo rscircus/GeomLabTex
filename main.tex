@@ -484,23 +484,24 @@ This implies that all disks can create a distances of 15 degrees to their occlud
 Conversely, if the constructed instance has a physical realization with degrees $\geq 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $\geq 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.\qedsymbol
 
 % ---
-\subsection*{Optimal rotations for $\Gamma_{pie}$}
+\subsection{Optimal rotations for $\Gamma_{pie}$}
 % ---
 
-Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that gives us the maximum of the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
+Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that maximizes the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
 
 Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is occluded.
 
 \begin{lemma}
-  Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_2,....,\beta_m$ be the counterclockwise distances from $\alpha_1$ up to $\alpha_m$ with $\beta_j$ being the distance between $\alpha_1$ and $\alpha_j$, and let $\mathcal{I}$ be the set system given by
+  Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_j$ be the counterclockwise angular distance from $\alpha_1$ to $\alpha_j$ for $j\in\{1,\dots,m\}$, and let $\mathcal{I}$ be the set system given by
   \begin{align*}
-    \mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}.
+    \mathcal{I}=\bigcup_{i=1}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}.
   \end{align*}
-  Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ occludes at least one dividing line.
+  Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ occludes at least one dividing line. Conversely, any rotation locating $\alpha_1$ in none of the intervals in $\mathcal{I}$ will occlude none of the lines.
 \end{lemma}
 
 \begin{proof}
-  This follows from the intervalls $I$ being occluded. An occlusion of the intervals results in the dividing line lying in this interval being also included.
+    "$\implies$": Consider a rotation $\beta$, s.t. $\alpha_1 + \beta \in \mathcal{I}$, then $\alpha_1 + \beta \in [a_j - \beta_i, b_j-\beta_i]$ for some pair $(i,j)$. Note that $\alpha_1 + \beta_i = \alpha_i \implies \alpha_1 = \alpha_i - \beta_i$. Therefore, $\alpha_i-\beta_i+\beta\in[a_j-\beta_i, b_j-\beta_i]$ and thus $\alpha_i+\beta\in[a_j, b_j]$. The line represented by $\alpha_i$ will be occluded.\\
+    "$\impliedby$": Analogously.
 \end{proof}
 
 The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not occlude any dividing line. This complement may be empty since there may not be a rotation which does not occlude any line. With this observations we now can easily derive an algorithm which returns a rotation which maximizes our utility.
@@ -520,10 +521,10 @@ Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
   calculate $\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}$
   let $\mathcal{V}$ be the set of maximal continuous intervals in $[0, 2\pi]\setminus {\mathcal{I}}$
   $v=[a_v,b_v]$ biggest interval in $\mathcal{V}$
-  $r=a_v+(b_v-a_v)/2$
+  $r=(b_v+a_v)/2$
   return r
   \end{lstlisting}
-  \caption{Algorithm 2}
+  \caption{IntervalMidpointAlgorithm}
 \end{figure}
 
 With this algorithm we can again use our general greedy algorithm for stacking orders.\\
