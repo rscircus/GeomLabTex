@@ -161,7 +161,7 @@ Cabello et al. discussed proportional Symbol Maps. Such a map consists of a fini
 
 The problem is to find a drawing which retains as much of the information about the quantity and the location (center) as possible. More precisely, the raw data alone does not tell you how to deal with overlapping disks, squares or occluded pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie occludes a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?\\
 
-For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper [TODO: reference].\\
+For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper \cite{cabello}.\\
 
 Intuitively, a physically realizable drawing can be imagined by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect (potentially in a Dali-like fashion) and then taking a picture from a birds eye view.\\
 Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same proportions for each point on the same map [TODO: corrected from glyph?].\\
@@ -329,9 +329,9 @@ For centered nested disks we can easily define local utility measures. Every gly
   \Gamma_{sum}({G^i,S})=\sum_{j=1}^k  {^{vis} G^i_j}
 \end{align*}
 
-We may also be interested in the relative utility which is given by normalizing the size of the circles [TODO]. This relative approach stops the small circles from dominating big circles. In our applications there is close to no difference between the relative and absolute utility.\\
+We may also be interested in the relative utility which is derived for a glyph by only taking the visible percentage of each nested circle into consideration. This relative approach stops the small circles from dominating big circles. In our applications there is close to no difference between the relative and absolute utility.\\
 
-For $\Gamma_{min}$ it may happen that for all glyphs the smallest circle may be completely covered. Then the utility would be zero for all of the circles. If this happens the algorithm has an optimal solution of value zero. In case of this situation, we follow the heuristic to perform the greedy step again and ignore the smallest circle in all of the glyphs until we get a value bigger than zero. This heuristic gives better results than just choosing a random circle [TODO: Why, shall we prove this?].\\
+For $\Gamma_{min}$ it may happen that for all glyphs the smallest circle may be completely covered. Then the utility would be zero for all of the circles. If this happens the algorithm has an optimal solution of value zero. In case of this situation, we follow the heuristic to perform the greedy step again and ignore the smallest circle in all of the glyphs until we get a value bigger than zero. This heuristic gives better results than just choosing a random circle, since it guarantees that at least in this time step the least amount of circles get covered.\\
 %
 \begin{remark}
 It is NP-hard to calculate physically realizable drawing where $\min\Gamma_{min}$ or $\min\Gamma_{sum}$ is maximized since disk glyphs are a special case of nested disks and both utility measures coincide and are equal to the visible circumference.
