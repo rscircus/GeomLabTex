@@ -466,8 +466,6 @@ Now we need to bring it all together. Recall that we have gadgets that can be or
 
 What we need to ensure is that the connector disk cannot be rotated like that if the literal disk in the gadget points outwards. To do this we introduce the last building block of the construction.
 
-[TODO: RS stopped reading here for now]
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=5cm, height=5cm]{assets/np-hardness/literal_connector.png}
@@ -482,14 +480,16 @@ These disks will be arranged in a line connecting the "true"/"false" disks in th
 \caption{These disks connect the gadgets to the corresponding clauses}
 \end{figure}
 
-The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right own and has to go over the clause-disk.
+The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right own and has to go over the clause-disk. [TODO: 'bottom-right own' WTF?]
 
 \subsubsection*{Example}
-Example will be depicted here.
+Example will be depicted here. [TODO]
 
 \subsubsection*{Conclusion}
-The logical properties were already explained when motivating the construction but will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between occlusion and separation points. We claim the following.
+The logical properties were already explained when motivating the construction, yet, will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between occlusion and separation points. We claim the following:
 Given a planar instance of 3-SAT $\mathcal{I}$ and the corresponding construction $\mathcal{D}$ as above, $\mathcal{I}$ is satisfiable if and only if there is a physical realization of $\mathcal{D}$ that creates a distance of at least 15 degrees $=(15/360\cdot 2\pi)$.
+
+[TODO: Why some times iff and sometimes if and only if?]
 
 Given a satisfiable instance we orient the gadgets according to the assignment. This will make all "false" connections point a separator outward. Within the gadgets, all disks maintain a distance of at least 15 degrees to the other disks in the gadget. The connector disks at these "false" connections will have to go under so that the outpointing separator has distance $\geq 0$, let alone 15. The "true" connections are not forcing the outgoing connections to go under, we will place them above giving a distance of exactly 15 degrees. This connection line will be going "upwards" (as viewed from gadget to clause) until it reaches the clause connector, which now can be placed under the clause-disk enabling it to also create a distance of at least 15 degrees.
 This implies that all disks can create a distances of 15 degrees to their occluded boundary segments.
@@ -502,7 +502,7 @@ Conversely, if the constructed instance has a physical realization with degrees 
 
 Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that maximizes the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
 
-Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is occluded.
+Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line are occluded.
 
 \begin{lemma}
   Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_j$ be the counterclockwise angular distance from $\alpha_1$ to $\alpha_j$ for $j\in\{1,\dots,m\}$, and let $\mathcal{I}$ be the set system given by
@@ -540,27 +540,30 @@ Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
   \caption{IntervalMidpointAlgorithm}
 \end{figure}
 
-With this algorithm we can again use our general greedy algorithm for stacking orders.\\
+With this algorithm we can use our general greedy algorithm for stacking orders again.\\
 
 If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. Again the data structure introduced in \cite{cabello} could be used for the pie glyphs which yields a runtime of $O(n^2k \log nk)$. This adaptation would need some work, since the pie glyphs are not immediately  compatible with the data structure.\\
 
 
-It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyphs and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
+It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyph and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
 
 \subsection{Squares}
 The last glyph we discuss are squares which are subdivided into smaller rectangles. We don't restrict ourself to axis aligned squares. Therefore the algorithms we discuss may rotate the squares to get better results with respect to the visibility.\\
-Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to  rotatable squares since the local utilities may only depend on the order, but the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before time $t$.\\
+Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to rotatable squares since the local utilities may only depend on the order. But the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before time $t$. [TODO: stage vs time step (vs step?)]\\
 For that reason we would need some new approach to get any optimal results and it may even be NP-hard to calculate a stacking with optimal rotations with respect to the visibility of the perimeter of the squares.\\
 
-Our main focus in this Lab was the visualisation of multiple features, e.g. in the case of covid-19 infected,dead and recovered. Consequently we do not try to derive optimal algorithms for the single feature case and just recycle some of our other results to get a heuristic solution for our problem with respect to squares.\\
-We now derive a data representation in the form of squares and sub-rectangles for exactly $3$ features. Our glyph will be given by a Square $S$, such that the length of the sides represents the sum of the features with respect to some scaling. Then we insert an orthogonal dividing line $l_1$ which divides the square into two rectangles such that one of the rectangles $r_1$ contains an area proportional to the largest feature. With a second line $l_2$ the other rectangle is divided into to rectangles $r_2$ and $r_3$ which each contain an area proportional to the other features. See Figure 15 for an example of such a glyph.\\
+Our main focus in this lab was the visualization of multiple features, e.g., in the case of Covid-19 infected, dead and recovered. Consequently we do not try to derive optimal algorithms for a single feature case and just recycle some of our other results to get a heuristic solution for our problem with respect to squares.\\
+
+We now derive a data representation in the form of squares and sub-rectangles for exactly $3$ features as given by the Covid-19 datasets from John Hopkins University [TODO: reference]. Our glyph will be given by a square $S$ such that the length of the sides represents the sum of the features with respect to some scaling. Then we insert an orthogonal dividing line $l_1$ which divides the square into two rectangles such that one of the rectangles $r_1$ contains an area proportional to the largest feature. With a second line $l_2$ the other rectangle is divided into to rectangles $r_2$ and $r_3$ which each contain an area proportional to the other features. See Figure 15 for an example of such a glyph.\\
+
 \begin{figure}[b]
 \centering
 \includegraphics[height=4cm]{assets/square_glyphs}
 \caption{left:square glyph, right: heuristic pie chart}
 \end{figure}
 
-In order to guarantee that the user can get all of the depicted information, he needs to see to diagonal corner points of the square and one point on the border for each line. We chose the point $p_1,p_2,p_3$ and $p_4$ which are displayed in Figure 15 for our algorithm. The local utility of a square would be the minimal distance of the points to the occluded perimeter.\\
+In order to guarantee that the user can get all of the depicted information, he needs to see to diagonal corner points of the square and one point on the border for each line. We chose the points $p_1,p_2,p_3$ and $p_4$ which are displayed in Figure 15 for our algorithm. The local utility of a square would be the minimal distance of the points to the occluded perimeter.\\
+
 We can get a good solution with the help of pie charts. For every square we construct a pie chart centered in the square. The dividing lines correspond to the points $p_i$ and the radius is given by the average distance of the points $p_i$ to the center point. Again this construction is depicted in Figure 15. Our algorithm performs the pie chart algorithm for the heuristic pies and then applies the stacking and the rotations to the squares.
 
 
