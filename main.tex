@@ -150,21 +150,21 @@ Fundamental work into the quantification of visual quality was done both by Tuft
 
 Our main resource will be the paper by Sergio Cabello et al. \textit{Algorithmic Aspects of Proportional Symbol Maps}. In it, the authors discuss the difficulty of maximizing utility measures with regards to so-called "physically realizable drawings", in particular they prove this problem to be NP-hard. As a consequence, they restrict their further discussion on a distinct subset of physically realizable drawings, called "stacking drawings" which are determined solely by a total ordering of the symbols, called the "stacking order". They then derive algorithms that determine optimal stacking orders in polynomial runtime. Those algorithms are designed for datasets where each \textit{glyph} only depicts a single quantity.\\
 
-Our goal is to generalize these algorithms so that they may be applied to other types of \textit{glyphs}. We focus in particular on glyphs that visualize multiple quantities, as is needed for data relating to COVID-19, such as nested discs, centered nested discs and pie charts.
+Our goal is to generalize these algorithms so that they may be applied to other types of \textit{glyphs}. We focus in particular on glyphs that visualize multiple quantities, as is needed for data relating to COVID-19, such as nested disks, centered nested disks and pie charts.
 
 \newpage
 
 % ----------------------
 \section{Problem Statement}
 % ----------------------
-Cabello et al. discussed proportional Symbol Maps. Such a map consists of a finite set of $2$-dimensional figures called symbols or glyphs. Each of these glyphs has a position in $\mathbb{R}^2$ and a radius or size corresponds to some quantity given by the data it is supposed to represent. A classic example is the representation of earthquakes and their strength on the Richter-scale. Opaque discs are centered at epicenter of the earthquake, the radius corresponds to its strength. In this case, the glyphs are the discs and the associated data encoded in the radius indicates the strength. Other types of glyphs, like squares, hexagons, or pie charts are also possible and are investigated in this lab.\\
+Cabello et al. discussed proportional Symbol Maps. Such a map consists of a finite set of $2$-dimensional figures called symbols or glyphs. Each of these glyphs has a position in $\mathbb{R}^2$ and a radius or size corresponding to some quantity given by the data it is supposed to represent. A classic example is the representation of earthquakes and their strength on the Richter-scale. Opaque disks are centered at the epicenter of the earthquake, while the radius corresponds to its strength. In this case, the glyphs are the disks and the associated data encoded in the radius indicates the strength. Other types of glyphs, like squares, hexagons, or pie charts are also possible and are investigated in this lab.\\
 
-The problem is to find a drawing which retains as much of the information about the quantity and the location of the center as possible. More concretely, the raw data alone does not tell you how to deal with overlapping discs, squares or occluded pie pieces. In order to visualize the data on a map we must make several decisions, e.g. one pie occludes a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie s.t. all of its segments are visible?\\
+The problem is to find a drawing which retains as much of the information about the quantity and the location (center) as possible. More precisely, the raw data alone does not tell you how to deal with overlapping disks, squares or occluded pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie occludes a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?\\
 
-For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes, an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper.\\
+For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper [TODO: reference].\\
 
-Intuitively, a physically realizable drawing can be imagined as having originated by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect  (potentially in a Dali-like fashion) and then taking a picture from above.\\
-Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same height for each point on the same glyph.\\
+Intuitively, a physically realizable drawing can be imagined by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect (potentially in a Dali-like fashion) and then taking a picture from a birds eye view.\\
+Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same proportions for each point on the same map [TODO: corrected from glyph?].\\
 
 %
 \begin{figure}[H]
@@ -177,15 +177,15 @@ Similarly, a stacking drawing is the same thing but the glyphs are rigid and can
 
 Figure \ref{fig:physicalSquares} gives an example of a physically realizable drawing which is not a stacking drawing. The squares overlap cyclically going clockwise "upwards" reminiscent of the "Penrose Stairs". This image can not occur if the squares where embedded with a fixed height as it is required for stacking drawings.\\
 
-A stacking drawing is uniquely determined by the order (ascending) in which the glyphs are stacked on top of one another. This is the so-called \textit{stacking order} of the drawing. Formally, given a finite set $D$ of $n$ glyphs, a stacking order is a bijection $\phi: [n]\rightarrow D$. This bijection describes the order in which the glyphs are drawn. Glyphs which are drawn later may cover parts of the glyphs which are drawn earlier. Therefore our task is to find a stacking order such that as much as possible of every glyph is visible.\\
+A stacking drawing is uniquely determined by the (ascending) order in which the glyphs are stacked on top of one another. This is the so-called \textit{stacking order} of the drawing. Formally, given a finite set $D$ of $n$ glyphs, a stacking order is a bijection $\phi: [n]\rightarrow D$. This bijection describes the order in which the glyphs are drawn. Glyphs which are drawn later may cover parts of the glyphs which are drawn earlier. Therefore our task is to find a stacking order such that as much as possible of every glyph is visible.\\
 
-We are yet to define what we mean when talking about a glyph being as visible as possible. Since this may depend on the type of glyph considered we will turn our attention towards circular discs for now. The other definitions will be delivered as soon as they are needed. We refer to these quantitative measure for the visual quality as \textit{global utility functions}.\\
+We are yet to define what we mean when talking about a glyph being as "much visible" as possible. Since this may depend on the type of glyph considered we will turn our attention towards circular disks for now. The other definitions will be delivered as soon as they are needed. We refer to these quantitative measure for the visual quality as \textit{global utility functions}.\\
 
-We take the perspective of a viewer looking at the map. The viewer should be able to identify the size of the circles and their center points. To achieve this goal, we could try to maximize the visible area of each circle, but there are cases in which that would not allow the viewer to get all of the information. For instance, if the perimeter is not visible at all, then neither the location of the center point nor radius can be determined exactly. The approach we will use is to maximize the visible perimeter of our discs.\\
+We take the perspective of an onlooker looking perpendicularly at the map. The viewer should be able to identify the size of the circles and their center points. To achieve this goal, we could try to maximize the visible area of each circle, but there are cases in which that would not allow the viewer to get all of the information. For instance, if the perimeter is not visible at all, then neither the location of the center point nor radius can be determined exactly. The approach we will use is to maximize the visible perimeter of our disks.\\
 
 \newpage
 
-For a fixed stacking order $\phi$, we will denote the disc $\phi(i)$ as $D_i$. We then define the visible and occluded boundary for discs formally by\\
+For a fixed stacking order $\phi$, we will denote the disk $\phi(i)$ as $D_i$. We then define the visible and occluded boundary for disks formally by\\
 %
 \begin{align*}
   U_i^{vis} & =\partial D_i\setminus \bigcup_{j>i} D_{j} \\
@@ -211,7 +211,7 @@ This implies that trying to maximize the minimal $|U_i^{vis}|$ with respect to p
   realizable drawing whose total visible perimeter is at least a given value.\qed
 \end{theorem}
 This implies that trying to maximize the sum over all the $|U_i^{vis}|$ with respect to physically realizable drawings is NP-hard.\\
-For stacking orders they give a positive result with regards to the minimum:
+For stacking orders the objective returns a positive result with regards to the minimum:
 \begin{theorem}
   Given n disks in the plane, a stacking order maximizing the boundary
   length of the disk that is least visible can be computed in $O(n^2 \log n)$ time.\qed
@@ -222,8 +222,9 @@ Whether a polynomial algorithm for the sum of all visible perimeters exists rema
 \newpage
 
 We won't attempt to construct an algorithm for the sum problem and instead take a look at glyphs which are able to depict more than one piece of information.\\
-The first glyph we will discuss are nested discs. Formally, every glyph $G^i$ is given by a set of discs $G^i_1,...,G^i_k$ such that $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested discs also center all the discs in the same point.\\
-The second type of glyphs we will use are pie charts. A pie chart is formally given by a disc $D_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,\ 2\pi]$.\\
+
+The first type of glyph we discuss are nested disks. Formally, every glyph $G^i$ is given by a set of disks $G^i_1,...,G^i_k$ such that $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested disks also center all the disks at the same point.\\
+The second type of glyphs we use are pie charts. A pie chart is formally given by a disk $D_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,\ 2\pi]$. Usually the dividing lines separate areas of different color representing different fractions of a sum.\\
 
 In the next section we will discuss a simple and versatile approach to determine optimal stacking orders for glyphs maximizing utility functions with specific properties for glyph stacking order drawings and then apply it to our glyphs and some utility functions.
 
