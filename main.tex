@@ -534,6 +534,26 @@ If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. 
 
 It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyphs and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
 
+\subsection{Squares}
+The last glyph we discuss are squares which are subdivided into smaller rectangles. We don't restrict ourself to axis aligned squares. Therefore the algorithms we discuss may rotate the squares to get better results with respect to the visibility.\\
+Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to  rotatable squares since the local utilities may only depend on the order, but the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before time $t$.\\
+For that reason we would need some new approach to get any optimal results and it may even be NP-hard to calculate a stacking with optimal rotations with respect to the visibility of the perimeter of the squares.\\ 
+
+Our main focus in this Lab was the visualisation of multiple features, e.g. in the case of covid-19 infected,dead and recovered. Consequently we do not try to derive optimal algorithms for the single feature case and just recycle some of our other results to get a heuristic solution for our problem with respect to squares.\\
+We now derive a data representation in the form of squares and sub-rectangles for exactly $3$ features. Our glyph will be given by a Square $S$, such that the length of the sides represents the sum of the features with respect to some scaling. Then we insert an orthogonal dividing line $l_1$ which divides the square into two rectangles such that one of the rectangles $r_1$ contains an area proportional to the largest feature. With a second line $l_2$ the other rectangle is divided into to rectangles $r_2$ and $r_3$ which each contain an area proportional to the other features. See Figure 15 for an example of such a glyph.\\
+\begin{figure}[b]
+\centering
+\includegraphics[height=4cm]{assets/square_glyphs}
+\caption{left:square glyph, right: heuristic pie chart}
+\end{figure}
+
+In order to guarantee that the user can get all of the depicted information, he needs to see to diagonal corner points of the square and one point on the border for each line. We chose the point $p_1,p_2,p_3$ and $p_4$ which are displayed in Figure 15 for our algorithm. The local utility of a square would be the minimal distance of the points to the occluded perimeter.\\
+We can get a good solution with the help of pie charts. For every square we construct a pie chart centered in the square. The dividing lines correspond to the points $p_i$ and the radius is given by the average distance of the points $p_i$ to the center point. Again this construction is depicted in Figure 15. Our algorithm performs the pie chart algorithm for the heuristic pies and then applies the stacking and the rotations to the squares.
+
+
+
+
+
 
 \newpage
 
