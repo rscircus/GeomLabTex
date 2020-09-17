@@ -571,15 +571,33 @@ In order to guarantee that the user can get all of the depicted information, he 
 We can get a good solution with the help of pie charts. For every square we construct a pie chart centered in the square. The dividing lines correspond to the points $p_i$ and the radius is given by the average distance of the points $p_i$ to the center point. Again this construction is depicted in Figure 15.
 \\Our algorithm performs the pie chart algorithm for the heuristic pies and then applies the stacking and the rotations to the squares.
 
-
-
-
-
-
-\newpage
-
 % ----------------------
 \section{Experimental validation}
+We will now compare our stacking algorithms, with other stacking methods which are manly used for visualization proportional symbol maps. The Lab was motivated by the visualization of the COVID-19 data. Therefore we will be using the JHU CSSE COVID-19 Data which is given in \cite{data}. The dataset is updated daily and provides data for every day since January 2020. Hence we have a plethora of data for our experiments. We will only cherry pick a view data sets, but the reader may use our application to look at the results for different dates.\\
+We will always use three features, namely the confirmed deaths, the confirmed recovered and the overall confirmed cases of a country.\\
+
+Since some country dominate the rest of the countries with regards to the number of cases, we scale logarithmically. To diversify our data sets even more we use three parameters in our data preparation: The minimum number of cases to be depicted, a maximum size $M$ of the glyphs and a scaling factor $S$. If we denote the maximal number of confirmed cases in one country by $c_{max}$, then the radius $r$ of the disc of some country with confirmed cases $c$ is given by:
+\begin{align*}
+r=M\log\frac{c S}{c_{max}}
+\end{align*}
+Because three country (US,Brasil and India) far out-scale the other countries, $c_max$ is at some point chosen wth respect to the 4th highest number of confirmed cases.\\
+
+The algorithms we will be using for comparison are the Painter algorithm, Left-to-Right and Right-to-Left:
+\begin{itemize}
+\item The Painter algorithm stacks the glyphs from large to small with respect to the largest circle of the glyph. 
+\item Left-to-Right inserts the Glyphs with respect to increasing $x$ value of the glyph's center.
+\item Right-to-Left inserts the Glyphs with respect to decreasing $x$ value of the glyph's center.
+\end{itemize}
+If we use an algorithm to get optimal rotations, we will compare our stacking to the other algorithms with random rotation and with the use of our rotation algorithm. Since most of the glyphs are inherently different we will be evaluating them independently and make a objective comparison at the end.
+\subsection*{Nested Disks}
+
+\subsection*{Pie Charts}
+
+\subsection*{Squares}
+
+
+
+
 % ----------------------
 
 %\begin{figure}[htp]
