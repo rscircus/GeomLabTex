@@ -164,7 +164,7 @@ The problem is to find a drawing which retains as much of the information about 
 For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper \cite{cabello}.\\
 
 Intuitively, a physically realizable drawing can be imagined by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect (potentially in a Dali-like fashion) and then taking a picture from a birds eye view.\\
-Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same proportions for each point on the same map [TODO: corrected from glyph?].\\
+Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same height for each point on the same glyph.\\
 
 %
 \begin{figure}[H]
@@ -211,7 +211,7 @@ This implies that trying to maximize the minimal $|U_i^{vis}|$ with respect to p
   realizable drawing whose total visible perimeter is at least a given value.\qed
 \end{theorem}
 This implies that trying to maximize the sum over all the $|U_i^{vis}|$ with respect to physically realizable drawings is NP-hard.\\
-For stacking orders the objective returns a positive result with regards to the minimum:
+For stacking orders Cabello at al. presented a positive result with regards to the minimum:
 \begin{theorem}
   Given n disks in the plane, a stacking order maximizing the boundary
   length of the disk that is least visible can be computed in $O(n^2 \log n)$ time.\qed
