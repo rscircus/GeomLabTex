@@ -371,7 +371,7 @@ Now we need to investigate two things:
 
 \subsubsection*{Setting}
 Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk such that the minimum distance of any point in $p\in\bigcup P_i$ to the next occluded point on the boundary of $d_i$ is maximized.
-I.e., we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the transition-lines of the pie-chart meet the boundary are as far from being occluded as possible. [TODO: I don't get this sentence]
+I.e., we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the dividing lines of the pie-chart meet the boundary are as far from being occluded as possible. [TODO: I don't get this sentence]
 
 \subsubsection*{Theorem}
 It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation) such that the minimum distance of any of the distinguished points $p_i$ to the next occluded point along the perimeter of its perimeter is greater or equal to $k$. Or formulated as formula:
@@ -450,7 +450,7 @@ Recall that the instance is satisfiable iff each clause is fulfilled. We instant
 \caption{This disk is the endpoint of the edge connecting the gadget to the clause disk}
 \end{figure}
 
-This connector disk is supposed to be above the clause-disk iff its associated literally as is "false" in the clause. [TODO: This sentence is confusing.]
+This connector disk is supposed to be above the clause-disk iff its associated literal is "false" in the clause. [TODO: This sentence is confusing.]
 
 \begin{figure}[h]
 \centering
@@ -502,7 +502,7 @@ Conversely, if the constructed instance has a physical realization with degrees 
 
 Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that maximizes the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
 
-Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line are occluded.
+Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is occluded.
 
 \begin{lemma}
   Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_j$ be the counterclockwise angular distance from $\alpha_1$ to $\alpha_j$ for $j\in\{1,\dots,m\}$, and let $\mathcal{I}$ be the set system given by
