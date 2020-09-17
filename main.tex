@@ -161,7 +161,7 @@ Our goal is to generalize these algorithms so that they may be applied to other 
 % ----------------------
 Cabello et al. discussed proportional Symbol Maps. Such a map consists of a finite set of $2$-dimensional figures called symbols or glyphs. Each of these glyphs has a position in $\mathbb{R}^2$ and a radius or size corresponding to some quantity given by the data it is supposed to represent. A classic example is the representation of earthquakes and their strength on the Richter-scale. Opaque disks are centered at the epicenter of the earthquake, while the radius corresponds to its strength. In this case, the glyphs are the disks and the associated data encoded in the radius indicates the strength. Other types of glyphs, like squares, hexagons, or pie charts are also possible and are investigated in this lab.\\
 
-The problem is to find a drawing which retains as much of the information about the quantity and the location (center) as possible. More precisely, the raw data alone does not tell you how to deal with overlapping disks, squares or occluded pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie occludes a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?\\
+The problem is to find a drawing which retains as much of the information about the quantity and the location (center) as possible. More precisely, the raw data alone does not tell you how to deal with overlapping disks, squares or covered pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie covers a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?\\
 
 For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper \cite{cabello}.\\
 
@@ -187,11 +187,11 @@ We take the perspective of an onlooker looking perpendicularly at the map. The v
 
 \newpage
 
-For a fixed stacking order $\phi$, we will denote the disk $\phi(i)$ as $D_i$. We then define the visible and occluded boundary for disks formally by\\
+For a fixed stacking order $\phi$, we will denote the disk $\phi(i)$ as $D_i$. We then define the visible and covered boundary for disks formally by\\
 %
 \begin{align*}
   U_i^{vis} & =\partial D_i\setminus \bigcup_{j>i} D_{j} \\
-  U_i^{occ} & =\partial D_i \cap \bigcup_{j>i} D_{j}.
+  U_i^{cov} & =\partial D_i \cap \bigcup_{j>i} D_{j}.
 \end{align*}
 %
 furthermore, we denote the length of the visible perimeter as $|U^{vis}_i|$. Two global utility functions come to mind:
@@ -372,11 +372,11 @@ Now we need to investigate two things:
 % ---
 
 \subsubsection*{Setting}
-Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk such that the minimum distance of any point in $p\in\bigcup P_i$ to the next occluded point on the boundary of $d_i$ is maximized.
-I.e., we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the dividing lines of the pie-chart meet the boundary are as far from being occluded as possible. [TODO: I don't get this sentence]
+Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk such that the minimum distance of any point in $p\in\bigcup P_i$ to the next covered point on the boundary of $d_i$ is maximized.
+I.e., we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the dividing lines of the pie-chart meet the boundary are as far from being covered as possible. [TODO: I don't get this sentence]
 
 \subsubsection*{Theorem}
-It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation) such that the minimum distance of any of the distinguished points $p_i$ to the next occluded point along the perimeter of its perimeter is greater or equal to $k$. Or formulated as formula:
+It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation) such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$. Or formulated as formula:
 
 \[\min_{i\in [n]} \Gamma(D_i,\{D_j\ |\ j>i\}) \geq k\].
 
@@ -413,7 +413,7 @@ All the disks presented have the same radius and we say that two disks overlap b
 \label{fig:trueandfalse}
 \end{figure}
 
-We use the three disk types in Figures \ref{fig:neutral} and \ref{fig:trueandfalse} to construct for each variable in the 3-SAT instance a so-called "gadget". A gadget is a group of neutral disks forming an elongated band each overlapping the next by a fraction of 1/4 or 90 degrees. Notice that the maximum possible distance of separation points to occluded area is 15 degrees, because the segment is covered at 120 degrees and 90. The gadget is constructed in such a way that it can only be oriented clockwise or counter-clockwise if we want $k>0$ separation between the lines to the occluded area.
+We use the three disk types in Figures \ref{fig:neutral} and \ref{fig:trueandfalse} to construct for each variable in the 3-SAT instance a so-called "gadget". A gadget is a group of neutral disks forming an elongated band each overlapping the next by a fraction of 1/4 or 90 degrees. Notice that the maximum possible distance of separation points to covered area is 15 degrees, because the segment is covered at 120 degrees and 90. The gadget is constructed in such a way that it can only be oriented clockwise or counter-clockwise if we want $k>0$ separation between the lines to the covered area.
 
 Figure \ref{fig:gadget} depicts a prototype of a gadget: All the disks are of the neutral type for now. The curvature is created by connecting the disks at a 45 degree angle while still overlapping by a fraction of 1/4.
 
@@ -462,7 +462,7 @@ This connector disk is supposed to be above the clause-disk iff its associated l
 \end{figure}
 
 The clause disk is overlapped by three connector disks each overlapping 90 degrees and leaving three 30 degree corridors. If the upper connector disk can be rotated as depicted then it may go under the clause disk, signifying the literal is "true" in the clause. Otherwise it must go over, like the bottom left one. [TODO: And what does this mean? "false"?]
-If all three connectors go over the clause, then the clause disk cannot have 15 degrees of space between the separating points and the occluded area. If, conversely, at least one of them goes under, like potentially the top one in Figure \ref{fig:clauseconnection} then by rotating the clause disk as depicted creates 15 degrees of length between the lines and the occluded area.
+If all three connectors go over the clause, then the clause disk cannot have 15 degrees of space between the separating points and the covered area. If, conversely, at least one of them goes under, like potentially the top one in Figure \ref{fig:clauseconnection} then by rotating the clause disk as depicted creates 15 degrees of length between the lines and the covered area.
 
 Now we need to bring it all together. Recall that we have gadgets that can be oriented clockwise or counterclockwise to signify a "true" or "false" assignment of the variable. The gadgets have for each variable-clause pair a special "true" or "false" disk that will point a separating line outwards iff the $literal$ is false in the clause. We also have connectors at the clause that will act as if "false" iff they go over the clause disk, which has to occur if their separating line cannot be arranged as in the top disk of Figure \ref{fig:clauseconnection}.
 
@@ -488,13 +488,13 @@ The top gadget is oriented as "false" and the "true" disk in the middle thus has
 Example will be depicted here. [TODO]
 
 \subsubsection*{Conclusion}
-The logical properties were already explained when motivating the construction, yet, will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between occlusion and separation points. We claim the following:
+The logical properties were already explained when motivating the construction, yet, will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between cover and separation points. We claim the following:
 Given a planar instance of 3-SAT $\mathcal{I}$ and the corresponding construction $\mathcal{D}$ as above, $\mathcal{I}$ is satisfiable if and only if there is a physical realization of $\mathcal{D}$ that creates a distance of at least 15 degrees $=(15/360\cdot 2\pi)$.
 
 [TODO: Why some times iff and sometimes if and only if?]
 
 Given a satisfiable instance we orient the gadgets according to the assignment. This will make all "false" connections point a separator outward. Within the gadgets, all disks maintain a distance of at least 15 degrees to the other disks in the gadget. The connector disks at these "false" connections will have to go under so that the outpointing separator has distance $\geq 0$, let alone 15. The "true" connections are not forcing the outgoing connections to go under, we will place them above giving a distance of exactly 15 degrees. This connection line will be going "upwards" (as viewed from gadget to clause) until it reaches the clause connector, which now can be placed under the clause-disk enabling it to also create a distance of at least 15 degrees.
-This implies that all disks can create a distances of 15 degrees to their occluded boundary segments.
+This implies that all disks can create a distances of 15 degrees to their covered boundary segments.
 
 Conversely, if the constructed instance has a physical realization with degrees $\geq 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $\geq 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.\qedsymbol
 
@@ -502,32 +502,32 @@ Conversely, if the constructed instance has a physical realization with degrees 
 \subsubsection{Optimal rotations for $\Gamma_{pie}$}
 % ---
 
-Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the occluded radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that maximizes the minimal distance of any of the $\alpha^i_j$ to the occluded intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
+Given a set $S$ of covering glyphs and a fixed pie chart $C_i$ we can calculate the covered radial intervals $I_1,...,I_k$ on the boundary circle of $C_i$. We now want to find a rotation of the dividing lines that maximizes the minimal distance of any of the $\alpha^i_j$ to the covered intervals. We can look at this rotation with respect to some reference line. Here we use $\alpha_1$ as the reference line.\\
 
-Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is occluded.
+Now we want to derive all of the positions on the circle where the reference line can be positioned such that none of the dividing lines are covered on the boundary. We will derive the complementary intervals first, i.e., all the intervals that guarantee that at least one dividing line is covered.
 
 \begin{lemma}
-  Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_j$ be the counterclockwise angular distance from $\alpha_1$ to $\alpha_j$ for $j\in\{1,\dots,m\}$, and let $\mathcal{I}$ be the set system given by
+  Given a set of covered intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, let $\beta_j$ be the counterclockwise angular distance from $\alpha_1$ to $\alpha_j$ for $j\in\{1,\dots,m\}$, and let $\mathcal{I}$ be the set system given by
   \begin{align*}
     \mathcal{I}=\bigcup_{i=1}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}.
   \end{align*}
-  Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ occludes at least one dividing line. Conversely, any rotation locating $\alpha_1$ in none of the intervals in $\mathcal{I}$ will occlude none of the lines.
+  Then any rotation which locates $\alpha_1$ in one of the intervals in $\mathcal{I}$ covers at least one dividing line. Conversely, any rotation locating $\alpha_1$ in none of the intervals in $\mathcal{I}$ will cover none of the lines.
 \end{lemma}
 
 \begin{proof}
-    "$\implies$": Consider a rotation $\beta$, s.t. $\alpha_1 + \beta \in \mathcal{I}$, then $\alpha_1 + \beta \in [a_j - \beta_i, b_j-\beta_i]$ for some pair $(i,j)$. Note that $\alpha_1 + \beta_i = \alpha_i \implies \alpha_1 = \alpha_i - \beta_i$. Therefore, $\alpha_i-\beta_i+\beta\in[a_j-\beta_i, b_j-\beta_i]$ and thus $\alpha_i+\beta\in[a_j, b_j]$. The line represented by $\alpha_i$ will be occluded.\\
+    "$\implies$": Consider a rotation $\beta$, s.t. $\alpha_1 + \beta \in \mathcal{I}$, then $\alpha_1 + \beta \in [a_j - \beta_i, b_j-\beta_i]$ for some pair $(i,j)$. Note that $\alpha_1 + \beta_i = \alpha_i \implies \alpha_1 = \alpha_i - \beta_i$. Therefore, $\alpha_i-\beta_i+\beta\in[a_j-\beta_i, b_j-\beta_i]$ and thus $\alpha_i+\beta\in[a_j, b_j]$. The line represented by $\alpha_i$ will be covered.\\
     "$\impliedby$": Analogously.
 \end{proof}
 
-The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not occlude any dividing line. This complement may be empty since there may not be a rotation which does not occlude any line. With this observations we now can easily derive an algorithm which returns a rotation which maximizes our utility.
+The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not cover any dividing line. This complement may be empty since there may not be a rotation which does not cover any line. With this observations we now can easily derive an algorithm which returns a rotation which maximizes our utility.
 
 \begin{theorem}
-  Given a set of occluded intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
+  Given a set of covered intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
 \end{theorem}
 % TODO: Labels (after everything else is nice probably)
 
 \begin{proof}
-  Algorithm 2 rotates a given dividing line in such a way, that it lies exactly in the midpoint of the biggest not occluded interval $[a_v, b_v]$. The midpoint in an interval is the point which has the maximum distance from both boundaries, $a_v$ and $b_v$. As the biggest not occluded interval maps to the circle's perimeter, it also maximizes the distance to the boundaries of the occluded intervals $\{[a_1, b_1], ..., [a_k, b_k]\}$.
+  Algorithm 2 rotates a given dividing line in such a way, that it lies exactly in the midpoint of the biggest not covered interval $[a_v, b_v]$. The midpoint in an interval is the point which has the maximum distance from both boundaries, $a_v$ and $b_v$. As the biggest not covered interval maps to the circle's perimeter, it also maximizes the distance to the boundaries of the covered intervals $\{[a_1, b_1], ..., [a_k, b_k]\}$.
 \end{proof}
 
 \begin{figure}[!bth]
@@ -566,7 +566,7 @@ We now derive a data representation in the form of squares and sub-rectangles fo
 \end{figure}
 
 
-In order to guarantee that the user can get all of the depicted information, he needs to see to diagonal corner points of the square and one point on the border for each line. We chose the points $p_1,p_2,p_3$ and $p_4$ which are displayed in Figure 15 for our algorithm. The local utility of a square would be the minimal distance of the points to the occluded perimeter.\\
+In order to guarantee that the user can get all of the depicted information, he needs to see to diagonal corner points of the square and one point on the border for each line. We chose the points $p_1,p_2,p_3$ and $p_4$ which are displayed in Figure 15 for our algorithm. The local utility of a square would be the minimal distance of the points to the covered perimeter.\\
 
 We can get a good solution with the help of pie charts. For every square we construct a pie chart centered in the square. The dividing lines correspond to the points $p_i$ and the radius is given by the average distance of the points $p_i$ to the center point. Again this construction is depicted in Figure 15.
 \\Our algorithm performs the pie chart algorithm for the heuristic pies and then applies the stacking and the rotations to the squares.
