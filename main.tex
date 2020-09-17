@@ -13,6 +13,8 @@
 \usepackage{subcaption}
 \usepackage{float}
 
+\usepackage{hyperref}
+
 % Math
 \usepackage{amsmath,amssymb,amsthm,textcomp}
 \usepackage{enumerate}
@@ -406,7 +408,7 @@ All the disks presented have the same radius and we say that two disks overlap b
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=10cm, height=5cm]{assets/np-hardness/true_false.png}
+\includegraphics[height=5cm]{assets/np-hardness/true_false.png}
 \caption{A "true" and "false" disk, similar to the neutral one above, one of the 60 degree segments is cut in half}
 \label{fig:trueandfalse}
 \end{figure}
@@ -417,7 +419,7 @@ Figure \ref{fig:gadget} depicts a prototype of a gadget: All the disks are of th
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=10cm, height=5cm]{assets/np-hardness/gadget.png}
+\includegraphics[height=5cm]{assets/np-hardness/gadget.png}
 \caption{One such gadget $G_i$ for each variable $x_i$}
 \label{fig:gadget}
 \end{figure}
@@ -428,7 +430,7 @@ For each occurrence of the variable $x_i$ in any of the clauses we will substitu
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=15cm, height=4cm]{assets/np-hardness/negative.png}
+\includegraphics[height=4cm]{assets/np-hardness/negative.png}
 \caption{A segment of a "true" gadget with a "false" disk in it}
 \end{figure}
 
@@ -438,7 +440,7 @@ Next we will focus on how the clauses will be set up. Later we will connect the 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5cm, height=5cm]{assets/np-hardness/clause.png}
+\includegraphics[height=5cm]{assets/np-hardness/clause.png}
 \caption{One such disk for each clause}
 \end{figure}
 
@@ -446,7 +448,7 @@ Recall that the instance is satisfiable iff each clause is fulfilled. We instant
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=5cm, height=5cm]{assets/np-hardness/clause_connector.png}
+\includegraphics[height=5cm]{assets/np-hardness/clause_connector.png}
 \caption{This disk is the endpoint of the edge connecting the gadget to the clause disk}
 \end{figure}
 
@@ -454,7 +456,7 @@ This connector disk is supposed to be above the clause-disk iff its associated l
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=5cm, height=5cm]{assets/np-hardness/literal_clause.png}
+\includegraphics[height=5cm]{assets/np-hardness/literal_clause.png}
 \caption{The clause together with the literal connectors}
 \label{fig:clauseconnection}
 \end{figure}
@@ -468,7 +470,7 @@ What we need to ensure is that the connector disk cannot be rotated like that if
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=5cm, height=5cm]{assets/np-hardness/literal_connector.png}
+\includegraphics[height=5cm]{assets/np-hardness/literal_connector.png}
 \caption{These disks connect the gadgets to the corresponding clauses}
 \end{figure}
 
@@ -476,7 +478,7 @@ These disks will be arranged in a line connecting the "true"/"false" disks in th
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=10cm, height=10cm]{assets/np-hardness/full.png}
+\includegraphics[height=10cm]{assets/np-hardness/full.png}
 \caption{These disks connect the gadgets to the corresponding clauses}
 \end{figure}
 
@@ -554,17 +556,20 @@ For that reason we would need some new approach to get any optimal results and i
 
 Our main focus in this lab was the visualization of multiple features, e.g., in the case of Covid-19 infected, dead and recovered. Consequently we do not try to derive optimal algorithms for a single feature case and just recycle some of our other results to get a heuristic solution for our problem with respect to squares.\\
 
-We now derive a data representation in the form of squares and sub-rectangles for exactly $3$ features as given by the Covid-19 datasets from John Hopkins University [TODO: reference]. Our glyph will be given by a square $S$ such that the length of the sides represents the sum of the features with respect to some scaling. Then we insert an orthogonal dividing line $l_1$ which divides the square into two rectangles such that one of the rectangles $r_1$ contains an area proportional to the largest feature. With a second line $l_2$ the other rectangle is divided into to rectangles $r_2$ and $r_3$ which each contain an area proportional to the other features. See Figure 15 for an example of such a glyph.\\
 
-\begin{figure}[b]
+
+We now derive a data representation in the form of squares and sub-rectangles for exactly $3$ features as given by the JHU CSSE COVID-19 Data from \cite{data}. Our glyph will be given by a square $S$ such that the length of the sides represents the sum of the features with respect to some scaling. Then we insert an orthogonal dividing line $l_1$ which divides the square into two rectangles such that one of the rectangles $r_1$ contains an area proportional to the largest feature. With a second line $l_2$ the other rectangle is divided into to rectangles $r_2$ and $r_3$ which each contain an area proportional to the other features. See Figure 15 for an example of such a glyph.\\
+\begin{figure}[t]
 \centering
-\includegraphics[height=4cm]{assets/square_glyphs}
-\caption{left:square glyph, right: heuristic pie chart}
+\includegraphics[height=5cm]{assets/square_glyphs}
+\caption{left: square glyph, right: heuristic pie chart}
 \end{figure}
+
 
 In order to guarantee that the user can get all of the depicted information, he needs to see to diagonal corner points of the square and one point on the border for each line. We chose the points $p_1,p_2,p_3$ and $p_4$ which are displayed in Figure 15 for our algorithm. The local utility of a square would be the minimal distance of the points to the occluded perimeter.\\
 
-We can get a good solution with the help of pie charts. For every square we construct a pie chart centered in the square. The dividing lines correspond to the points $p_i$ and the radius is given by the average distance of the points $p_i$ to the center point. Again this construction is depicted in Figure 15. Our algorithm performs the pie chart algorithm for the heuristic pies and then applies the stacking and the rotations to the squares.
+We can get a good solution with the help of pie charts. For every square we construct a pie chart centered in the square. The dividing lines correspond to the points $p_i$ and the radius is given by the average distance of the points $p_i$ to the center point. Again this construction is depicted in Figure 15.
+\\Our algorithm performs the pie chart algorithm for the heuristic pies and then applies the stacking and the rotations to the squares.
 
 
 
@@ -609,6 +614,8 @@ We can get a good solution with the help of pie charts. For every square we cons
 measures of visual displays. In: Proceedings of the IEEE symposium on information vizualization 2000 (INFOVIS’00), 2000, pp. 99–103. Washington, DC: IEEE Computer Society.\\
 
 \bibitem [8] {cabello}Sergio Cabello, Herman Haverkort, Marc van Kreveld, Bettina Speckmann. Algorithmic Aspects of Proportional Symbol Maps. In: Algorithmica (2010) 58: 543–565. Published with open access at Springerlink.com.%
+
+\bibitem [9]{data} Dong E, Du H, Gardner L. An interactive web-based dashboard to track COVID-19 in real time. Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1, \url{https://github.com/CSSEGISandData/COVID-19}
 
 
 
