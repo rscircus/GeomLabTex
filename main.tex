@@ -581,6 +581,12 @@ We will only cherry pick a few data sets as the data quality naturally varies, h
 
 Since some country dominate the rest of the countries with regards to the number of cases we scale logarithmically and add 1 to the data to avoid zero radii. To diversify our data sets even more we use three additional parameters in our data preparation: (1) the minimum number of cases to be depicted, (2) a maximum "size" $M$ of the glyphs in dependence of the glyph's type, and (3) a scaling factor $S$. If we denote the maximal number of confirmed cases in one country by $c_{max}$ then the radius $r$ of the disc of some country with confirmed cases $c$ is given by:
 
+\begin{figure}[t]
+\centering
+\includegraphics[height=5cm]{assets/square_glyphs}
+\caption{left: square glyph, right: heuristic pie chart}
+\end{figure}
+
 \begin{align*}
 r=M\log\frac{c S}{c_{max}}
 \end{align*}
@@ -599,26 +605,112 @@ If we use an algorithm to get optimal rotations we will compare our stacking to 
 
 \subsection*{Nested Disks}
 
+
+
+
+\begin{table}[h]
+\begin{center}
+    \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
+    \hline
+    algorithm & covered & minVis (rel) & minVis (abs) & min one Glyph & relative perc &absolute perc\\
+    \hline
+random & 44 & 0.071 (0) & 0.995 (0) & 0 & 0.658 & 0.677\\
+
+LeftToRight & 42 & 0.331 (0) & 2.189 (0) & 0 & 0.641 & 0.678\\
+
+RightToLeft & 43 & 0.324 (0) & 0.995 (0) & 0 & 0.656 & 0.693\\
+
+Painter & 16 & 0.408 (0) & 6.283 (0) & 34.991 & 0.761 & 0.718\\
+
+MinMinStacking (abs) & 16 & 0.473 (0) & 2.189 (0) & 44.467 & 0.757 & 0.724\\
+
+MinMinStacking (rel) & 18 & 0.691 (0) & 2.189 (0) & 37.327 & 0.748 & 0.725\\
+
+MinSumStacking (abs) & 18 & 0.702 (0) & 3.974 (0) & 44.467 & 0.75 & 0.721\\
+
+MinSumStacking (rel) & 18 & 0.702 (0) & 2.189 (0) & 37.327 & 0.744 & 0.723\\
+
+ \hline
+\end{tabular}
+\end{center}
+\caption{centered nested disks} 
+
+\end{table}
+\begin{figure}[h]
+\centering
+\includegraphics[height=7cm]{assets/MinMinAbsEval}
+\caption{pie Charts}
+\end{figure}
+
+\begin{table}[!h]
+\begin{center}
+    \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
+    \hline
+    algorithm & covered & minVis (rel) & minVis (abs) & min one Glyph & relative perc &absolute perc\\
+    \hline
+random & 21 & 0.025 (0) & 0.589 (0) & 0 & 0.765 & 0.714\\
+
+LeftToRight & 12 & 0.948 (0) & 2.743 (0) & 0 & 0.775 & 0.725\\
+
+RightToLeft & 13 & 0.664 (0) & 2.89 (0) & 0 & 0.783 & 0.735\\
+
+Painter & 0 & 0.585 & 6.283 & 47.758 & 0.857 & 0.759\\
+
+our Stacking & 0 & 2.342 & 6.283 & 75.034 & 0.859 & 0.77\\
+
+ \hline
+\end{tabular}
+\end{center}
+\caption{nested disks (not centered)} 
+\end{table}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[height=7cm]{assets/HawaiianEval}
+\caption{our algorithm for nested disks (not centered)}
+\end{figure}
+
+
+
 \subsection*{Pie Charts}
+
+\begin{table}[h]
+\begin{center}
+    \begin{tabular}{| l || l | l | l | l |}
+    \hline
+    algorithm & covered & minDist & minDistAvg & maxDistAvg\\
+    \hline
+	Painter+random & 105  & 0.001 (0) & 1.32 & 3.839\\
+	
+	random+heuristic & 24  & 0.0 (0) & 1.687 & 2.573\\
+
+	RightToLeft & 18  & 0.017 (0) & 1.719 & 2.685\\
+
+	Painter+ heuristic & 6  & 0.022 (0) & 1.733 & 2.648\\
+
+	our Stacking & 0 & 0.271 & 1.765 & 2.838\\
+
+ \hline
+\end{tabular}
+\end{center}
+\caption{pie charts} 
+
+\end{table}
+\begin{figure}[h]
+\centering
+\includegraphics[height=7cm]{assets/pieChartsEval}
+\caption{pie Charts}
+\end{figure}
+    
+
+
+
+
+
 
 \subsection*{Squares}
 
 
-
-
-% ----------------------
-
-%\begin{figure}[htp]
-%  \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{assets/cost_functions.png}
-%\end{figure}
-
-\begin{figure}[htp]
-  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/covid19_nested_discs.png}
-\end{figure}
-
-%\begin{figure}[htp]
-%  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/nested_discs_all.png}
-%\end{figure}
 
 \newpage
 
@@ -650,3 +742,8 @@ measures of visual displays. In: Proceedings of the IEEE symposium on informatio
   ----------------------
 \end{document}
 % ----------------------
+
+\begin{figure}[htp]
+  \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{assets/covid19_nested_discs.png}
+\end{figure}
+
