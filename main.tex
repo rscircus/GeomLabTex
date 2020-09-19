@@ -373,8 +373,7 @@ Now we need to investigate two things:
 
 \subsubsection*{Setting}
 Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk such that the minimum distance of any point in $p\in\bigcup P_i$ to the next covered point on the boundary of $d_i$ is maximized.
-I.e., we are given Pie-Charts and would like to arrange and rotate them in such a manner that the points where the dividing lines of the pie-chart meet the boundary are as far from being covered as possible. [TODO: I don't get this sentence]
-
+I.e., we are given Pie-Charts and can like to arrange them by specifying their order and orientation. We would like to find an arrangement of that sort such that all the points on the boundary that separate two pie segments are as far away from the covered intervals as possible.
 \subsubsection*{Theorem}
 It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation) such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$. Or formulated as formula:
 
@@ -383,7 +382,7 @@ It is NP-hard to decide, whether for a given set $D$ of disks with boundary poin
 \subsubsection*{Proof}
 The proof is inspired by and in large parts analogous to the proof of Theorem 1 \cite{cabello}.
 We aim to reduce the NP-hardness from $planar$-3-SAT, i.e., instances $\mathcal{I}$ of 3-SAT with the property that the graph $G(\mathcal{I})$ is planar.
-The graph $G(\mathcal{I})$ is bipartite, has a node for each variable on one side and each clause on the other. A variable node is connected to the clause iff one of it's literals appears in the clause.\\
+The graph $G(\mathcal{I})$ is bipartite, has a node for each variable on one side and each clause on the other. A variable node is connected to the clause if and only if one of it's literals appears in the clause.\\
 
 \textbf{Example:}
 \[ \mathcal{I} = \underbrace{(x_1 \vee x_2 \vee \overline{x_3})}_{C_1} \wedge \underbrace{(x_3 \vee \overline{x_4} \vee x_5)}_{C_2} \]
@@ -394,7 +393,7 @@ The graph $G(\mathcal{I})$ is bipartite, has a node for each variable on one sid
 \caption{The incidence graph $G(\mathcal{I})$}
 \end{figure}
 
-Given a planar instance $\mathcal{I}$ of 3-SAT we need to construct an instance $\mathcal{D}$ of our pie-charts such that $\mathcal{I}$ is satisfiable iff $\mathcal{D}$ has a physical realization with distance $\geq k$ for some suitable $k$.
+Given a planar instance $\mathcal{I}$ of 3-SAT we need to construct an instance $\mathcal{D}$ of our pie-charts such that $\mathcal{I}$ is satisfiable if and only if $\mathcal{D}$ has a physical realization with distance $\geq k$ for some suitable $k$.
 
 All the disks presented have the same radius and we say that two disks overlap by $f$ if the overlapped fraction of the boundary has length $f$. We introduce the construction of $\mathcal{D}$.
 
@@ -424,7 +423,7 @@ Figure \ref{fig:gadget} depicts a prototype of a gadget: All the disks are of th
 \label{fig:gadget}
 \end{figure}
 
-We will interpret a gadget in ascending clockwise order as the corresponding variable being "true" and otherwise "false". [TODO: What is the second half of the sentence about?]
+If a gadget is drawn in such a way that the disks are ascending in a clockwise order, then we will interpret this as the corresponding variable being set to "true" and otherwise as "false".
 
 For each occurrence of the variable $x_i$ in any of the clauses we will substitute a neutral disk in the gadget $G_i$ by either a "true" or "false" disk as depicted in Figure \ref{fig:trueandfalse}. We use a "false" disk if the literal appears negated in the clause.
 
@@ -434,7 +433,7 @@ For each occurrence of the variable $x_i$ in any of the clauses we will substitu
 \caption{A segment of a "true" gadget with a "false" disk in it}
 \end{figure}
 
-The above segment is of a "true" gadget as the disks are clockwise ascending. The "false" and "true" disks will ensure that the added segment will point outwards iff the corresponding literal in the clause is false.
+The above segment is of a "true" gadget as the disks are clockwise ascending. The "false" and "true" disks will ensure that the added segment will point outwards the corresponding literal in the clause is false.
 
 Next we will focus on how the clauses will be set up. Later we will connect the gadgets and the clauses, which is why we require the instance to be planar.
 
@@ -442,17 +441,19 @@ Next we will focus on how the clauses will be set up. Later we will connect the 
 \centering
 \includegraphics[height=5cm]{assets/np-hardness/clause.png}
 \caption{One such disk for each clause}
+\label{fig:clausedisk}
 \end{figure}
 
-Recall that the instance is satisfiable iff each clause is fulfilled. We instantiate one disk as above for each clause. It has two separating lines exactly opposing one another. For each literal in the clause we overlap it with one of the disks shown below by a fraction of 1/4 as shown in Figure \ref{fig:clauseconnection}. [TODO: This sentence is confusing.]
+Recall that the instance is satisfiable if and only if each clause is fulfilled. We instantiate one disk as in \ref{fig:clausedisk} for each clause. It has two separating lines exactly opposing one another. For each of the three literals in the clause we overlap this disk with one of the disks shown \ref{fig:clauseconnector} by an angle of 90 degrees as shown in Figure \ref{fig:clauseconnection}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[height=5cm]{assets/np-hardness/clause_connector.png}
 \caption{This disk is the endpoint of the edge connecting the gadget to the clause disk}
+\label{fig:clauseconnector}
 \end{figure}
 
-This connector disk is supposed to be above the clause-disk iff its associated literal is "false" in the clause. [TODO: This sentence is confusing.]
+We want to construct the arrangement of pies in such a way that the connecting disk is above the central clause disk if and only if the literal associated with the connecting disk is "false" in the clause.
 
 \begin{figure}[h]
 \centering
@@ -461,10 +462,10 @@ This connector disk is supposed to be above the clause-disk iff its associated l
 \label{fig:clauseconnection}
 \end{figure}
 
-The clause disk is overlapped by three connector disks each overlapping 90 degrees and leaving three 30 degree corridors. If the upper connector disk can be rotated as depicted then it may go under the clause disk, signifying the literal is "true" in the clause. Otherwise it must go over, like the bottom left one. [TODO: And what does this mean? "false"?]
+The clause disk is overlapped by three connector disks each overlapping 90 degrees and leaving three 30 degree corridors. If the upper connector disk can be rotated as depicted then it may go under the clause disk, signifying the literal is "true" in the clause. Otherwise it must go over, like the bottom left one, indicating it is "false".
 If all three connectors go over the clause, then the clause disk cannot have 15 degrees of space between the separating points and the covered area. If, conversely, at least one of them goes under, like potentially the top one in Figure \ref{fig:clauseconnection} then by rotating the clause disk as depicted creates 15 degrees of length between the lines and the covered area.
 
-Now we need to bring it all together. Recall that we have gadgets that can be oriented clockwise or counterclockwise to signify a "true" or "false" assignment of the variable. The gadgets have for each variable-clause pair a special "true" or "false" disk that will point a separating line outwards iff the $literal$ is false in the clause. We also have connectors at the clause that will act as if "false" iff they go over the clause disk, which has to occur if their separating line cannot be arranged as in the top disk of Figure \ref{fig:clauseconnection}.
+Now we need to bring it all together. Recall that we have gadgets that can be oriented clockwise or counterclockwise to signify a "true" or "false" assignment of the variable. The gadgets have for each variable-clause pair a special "true" or "false" disk that will point a separating line outwards if and only if the $literal$ is false in the clause. We also have connectors at the clause that will act as if "false" if and only if they go over the clause disk, which has to occur if their separating line cannot be arranged as in the top disk of Figure \ref{fig:clauseconnection}.
 
 What we need to ensure is that the connector disk cannot be rotated like that if the literal disk in the gadget points outwards. To do this we introduce the last building block of the construction.
 
@@ -482,7 +483,7 @@ These disks will be arranged in a line connecting the "true"/"false" disks in th
 \caption{These disks connect the gadgets to the corresponding clauses}
 \end{figure}
 
-The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right own and has to go over the clause-disk. [TODO: 'bottom-right own' WTF?]
+The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right one and has to go over the clause-disk.
 
 \subsubsection*{Example}
 Example will be depicted here. [TODO]
@@ -490,8 +491,6 @@ Example will be depicted here. [TODO]
 \subsubsection*{Conclusion}
 The logical properties were already explained when motivating the construction, yet, will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between cover and separation points. We claim the following:
 Given a planar instance of 3-SAT $\mathcal{I}$ and the corresponding construction $\mathcal{D}$ as above, $\mathcal{I}$ is satisfiable if and only if there is a physical realization of $\mathcal{D}$ that creates a distance of at least 15 degrees $=(15/360\cdot 2\pi)$.
-
-[TODO: Why some times iff and sometimes if and only if?]
 
 Given a satisfiable instance we orient the gadgets according to the assignment. This will make all "false" connections point a separator outward. Within the gadgets, all disks maintain a distance of at least 15 degrees to the other disks in the gadget. The connector disks at these "false" connections will have to go under so that the outpointing separator has distance $\geq 0$, let alone 15. The "true" connections are not forcing the outgoing connections to go under, we will place them above giving a distance of exactly 15 degrees. This connection line will be going "upwards" (as viewed from gadget to clause) until it reaches the clause connector, which now can be placed under the clause-disk enabling it to also create a distance of at least 15 degrees.
 This implies that all disks can create a distances of 15 degrees to their covered boundary segments.
