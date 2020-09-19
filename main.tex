@@ -581,12 +581,6 @@ We will only cherry pick a few data sets as the data quality naturally varies, h
 
 Since some country dominate the rest of the countries with regards to the number of cases we scale logarithmically and add 1 to the data to avoid zero radii. To diversify our data sets even more we use three additional parameters in our data preparation: (1) the minimum number of cases to be depicted, (2) a maximum "size" $M$ of the glyphs in dependence of the glyph's type, and (3) a scaling factor $S$. If we denote the maximal number of confirmed cases in one country by $c_{max}$ then the radius $r$ of the disc of some country with confirmed cases $c$ is given by:
 
-\begin{figure}[t]
-\centering
-\includegraphics[height=5cm]{assets/square_glyphs}
-\caption{left: square glyph, right: heuristic pie chart}
-\end{figure}
-
 \begin{align*}
 r=M\log\frac{c S}{c_{max}}
 \end{align*}
@@ -604,15 +598,11 @@ The algorithms we will be using for comparison are the Painter algorithm, Left-t
 If we use an algorithm to get optimal rotations we will compare our stacking to the other algorithms with random rotation and with the use of our rotation algorithm. Since most of the glyphs are inherently different we will be evaluating them independently and make an objective comparison at the end.
 
 \subsection*{Nested Disks}
-
-
-
-
 \begin{table}[h]
 \begin{center}
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
     \hline
-    algorithm & covered & minVis (rel) & minVis (abs) & min one Glyph & relative perc &absolute perc\\
+    algorithm & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis &absolute perc\\
     \hline
 random & 44 & 0.071 (0) & 0.995 (0) & 0 & 0.658 & 0.677\\
 
@@ -635,14 +625,22 @@ MinSumStacking (rel) & 18 & 0.702 (0) & 2.189 (0) & 37.327 & 0.744 & 0.723\\
 \end{center}
 \caption{centered nested disks\\
  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
-
 \end{table}
-\begin{figure}[h]
-\centering
-\includegraphics[height=7cm]{assets/MinMinAbsEval}
-\caption{MinMinStacking (Abs) for centered nested disks\\
- date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
+
+For the nested disks we will be using the following values for our comparison of the algorithm:
+\begin{itemize}
+\item \textit{covered} counts the number of subcircles which are completely covered.
+\item \textit{minVis (rel)} is given by the minimal relative visible circumference of any of the subcircles (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{minVis (abs)} is given by the minimal absolute visible circumference of any of the subcircles (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{min one glyph} is given by the minimal value of a glyph, where the value of a glyph is given by the sum over the visible circumference of all its subcircles.
+\item \textit{average rel vis} is the average over the visible relative circumference of all subcircles.
+\item \textit{absolute perc} is the percentage of visible circumference of all subcircles.
+\end{itemize}
+
+
+
+
+
 
 \begin{table}[!h]
 \begin{center}
@@ -667,17 +665,10 @@ our Stacking & 0 & 2.342 & 6.283 & 75.034 & 0.859 & 0.77\\
  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
 \end{table}
 
-\begin{figure}[!h]
-\centering
-\includegraphics[height=7cm]{assets/HawaiianEval}
-\caption{our algorithm for nested disks (not centered)\\
- date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
 
 
 
 \subsection*{Pie Charts}
-
 \begin{table}[h]
 \begin{center}
     \begin{tabular}{| l || l | l | l | l |}
@@ -701,23 +692,22 @@ our Stacking & 0 & 2.342 & 6.283 & 75.034 & 0.859 & 0.77\\
  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
 
 \end{table}
-\begin{figure}[h]
-\centering
-\includegraphics[height=7cm]{assets/pieChartsEval}
-\caption{pie Charts\\
- date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
+For the pie Charts we will be using the following values for our comparison of the algorithm:
+\begin{itemize}
+\item \textit{covered} counts the number of dividing lines which are completely covered.
+\item \textit{minDist} is given by the minimal value of any pie chart, where the minimal value is given by the radial distance (in $[0,2\pi]$) to the covered circumference of the dividing line which is closest to the covered circumference (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{minDistAvg} is given by the average of the values of all of the pie charts.
+\item \textit{maxDistAvg} is given by the average if we look at the largest distance instead of the minimal distance
+\end{itemize}
+
+
+
     
 
 
 
 
-
-
 \subsection*{Squares}
-
-
-
 \begin{table}[h]
 \begin{center}
     \begin{tabular}{| l || l | l | l|  }
@@ -740,10 +730,43 @@ our Stacking & 7 &  0.078 (0)& 25.232\\
  \hline
 \end{tabular}
 \end{center}
-\caption{pie charts\\
+\caption{squares\\
  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
 
 \end{table}
+\begin{itemize}
+\item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
+\item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered circumference of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{minDistAvg} is given by the average of the values of all of the squares.
+\end{itemize}
+
+
+
+
+
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[height=7cm]{assets/MinMinAbsEval}
+\caption{MinMinStacking (Abs) for centered nested disks\\
+ date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=7cm]{assets/HawaiianEval}
+\caption{our algorithm for nested disks (not centered)\\
+ date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=7cm]{assets/pieChartsEval}
+\caption{pie Charts\\
+ date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
 \begin{figure}[h]
 \centering
 \includegraphics[height=7cm]{assets/squaresEval}
@@ -754,9 +777,7 @@ our Stacking & 7 &  0.078 (0)& 25.232\\
 
 
 
-
 \newpage
-
 \begin{thebibliography}{999}
 
 \bibitem [1] {tufte}Tufte, Edward R. "The visual display of quantitative information graphics press." Cheshire, Connecticut (1983).\\
