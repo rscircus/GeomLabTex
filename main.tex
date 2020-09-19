@@ -13,6 +13,7 @@
 \usepackage{subcaption}
 \usepackage{float}
 
+% url 
 \usepackage{hyperref}
 
 % Math
@@ -550,7 +551,7 @@ It may happen again that for all glyphs the local utility is zero. Again we have
 
 \subsection{Squares}
 The last glyph we discuss are squares which are subdivided into smaller rectangles. We don't restrict ourself to axis aligned squares. Therefore the algorithms we discuss may rotate the squares to get better results with respect to the visibility.\\
-Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to rotatable squares since the local utilities may only depend on the order. But the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before time $t$. [TODO: stage vs time step (vs step?)]\\
+Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to rotatable squares since the local utilities may only depend on the order. But the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before time $t$.\\ %[TODO: stage vs time step (vs step?)]
 For that reason we would need some new approach to get any optimal results and it may even be NP-hard to calculate a stacking with optimal rotations with respect to the visibility of the perimeter of the squares.\\
 
 Our main focus in this lab was the visualization of multiple features, e.g., in the case of Covid-19 infected, dead and recovered. Consequently we do not try to derive optimal algorithms for a single feature case and just recycle some of our other results to get a heuristic solution for our problem with respect to squares.\\
@@ -584,7 +585,7 @@ Since some country dominate the rest of the countries with regards to the number
 r=M\log\frac{c S}{c_{max}}
 \end{align*}
 
-Because three country (US, Brasil and India) far out-scale other countries, $c_max$ is chosen with respect to the next largest case by country at some point in the data. Consequently $c_max$ is then set to the 4th highest number of confirmed cases in any given dataset.\\
+Because three country (US, Brasil and India) far out-scale other countries, $c_{max}$ is chosen with respect to the next largest case by country at some point in the data. Consequently $c_{max}$ is then set to the 4th highest number of confirmed cases in any given dataset.\\
 
 The algorithms we will be using for comparison are the Painter algorithm, Left-to-Right and Right-to-Left:
 
@@ -626,14 +627,14 @@ MinSumStacking (rel) & 18 & 0.702 (0) & 2.189 (0) & 37.327 & 0.744 & 0.723\\
  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
 \end{table}
 
-For the nested disks we will be using the following values for our comparison of the algorithm:
+For the nested disks we will be using the following values for our comparison of the algorithms:
 \begin{itemize}
 \item \textit{covered} counts the number of subcircles which are completely covered.
-\item \textit{minVis (rel)} is given by the minimal relative visible circumference of any of the subcircles (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
-\item \textit{minVis (abs)} is given by the minimal absolute visible circumference of any of the subcircles (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
-\item \textit{min one glyph} is given by the minimal value of a glyph, where the value of a glyph is given by the sum over the visible circumference of all its subcircles.
-\item \textit{average rel vis} is the average over the visible relative circumference of all subcircles.
-\item \textit{absolute perc} is the percentage of visible circumference of all subcircles.
+\item \textit{minVis (rel)} is given by the minimal relative visible perimeter of any of the subcircles (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{minVis (abs)} is given by the minimal absolute visible perimeter of any of the subcircles (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{min one glyph} is given by the minimal value of a glyph, where the value of a glyph is given by the sum over the visible perimeter of all its subcircles.
+\item \textit{average rel vis} is the average over the visible relative perimeter of all subcircles.
+\item \textit{absolute perc} is the percentage of visible perimeter of all subcircles.
 \end{itemize}
 
 
@@ -645,7 +646,7 @@ For the nested disks we will be using the following values for our comparison of
 \begin{center}
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
     \hline
-    algorithm & covered & minVis (rel) & minVis (abs) & min one Glyph & relative perc &absolute perc\\
+    algorithm & covered & minVis (rel) & minVis (abs) & min one Glyph & average rel vis &absolute perc\\
     \hline
 random & 21 & 0.025 (0) & 0.589 (0) & 0 & 0.765 & 0.714\\
 
@@ -691,12 +692,12 @@ our Stacking & 0 & 2.342 & 6.283 & 75.034 & 0.859 & 0.77\\
  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
 
 \end{table}
-For the pie Charts we will be using the following values for our comparison of the algorithm:
+For the pie Charts we will be using the following values for our comparison of the algorithms:
 \begin{itemize}
 \item \textit{covered} counts the number of dividing lines which are completely covered.
-\item \textit{minDist} is given by the minimal value of any pie chart, where the minimal value is given by the radial distance (in $[0,2\pi]$) to the covered circumference of the dividing line which is closest to the covered circumference (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{minDist} is given by the minimal value of any pie chart, where the minimal value is given by the radial distance (in $[0,2\pi]$) to the covered perimeter of the dividing line which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
 \item \textit{minDistAvg} is given by the average of the values of all of the pie charts.
-\item \textit{maxDistAvg} is given by the average if we look at the largest distance instead of the minimal distance
+\item \textit{maxDistAvg} is given by the average if we look at the largest distance instead of the minimal distance.
 \end{itemize}
 
 
@@ -733,9 +734,11 @@ our Stacking & 7 &  0.078 (0)& 25.232\\
  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  } 
 
 \end{table}
+
+For the squares we will be using the following values for our comparison of the algorithms:
 \begin{itemize}
 \item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
-\item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered circumference of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+\item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
 \item \textit{minDistAvg} is given by the average of the values of all of the squares.
 \end{itemize}
 
