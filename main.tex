@@ -167,12 +167,12 @@ Our goal is to generalize these algorithms so that they may be applied to other 
 % ----------------------
 Cabello et al. discussed proportional Symbol Maps. Such a map consists of a finite set of $2$-dimensional figures called symbols or glyphs. Each of these glyphs has a position in $\mathbb{R}^2$ and a radius or size corresponding to some quantity given by the data it is supposed to represent. A classic example is the representation of earthquakes and their strength on the Richter-scale. Opaque disks are centered at the epicenter of the earthquake, while the radius corresponds to its strength. In this case, the glyphs are the disks and the associated data encoded in the radius indicates the strength. Other types of glyphs, like squares, hexagons, or pie charts are also possible and are investigated in this lab.
 
-The problem is to find a drawing which retains as much of the information about the quantity and the location (center) as possible. More precisely, the raw data alone does not tell you how to deal with overlapping disks, squares or covered pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie covers a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?
+The problem is to find a drawing which retains as much of the information about the quantity and the location as possible. More precisely, the raw data alone does not tell you how to deal with overlapping glyphs like disks, squares or covered pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie covers a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?
 
 For the definition of a drawing Cabello et al. describe two approaches, \textit{physically realizable drawings} and \textit{stacking drawings}. For our purposes an intuitive definition of what is talked about will suffice. Those interested in a more detailed definition can consult the original paper \cite{cabello}.
 
-Intuitively, a physically realizable drawing can be imagined by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect (potentially in a Dali-like fashion) and then taking a picture from a birds eye view.
-Similarly, a stacking drawing is the same thing but the glyphs are rigid and can only have the same height for each point on the same glyph.
+Intuitively, a physically realizable drawing can be imagined by taking very flexible glyphs, arranging them in $\mathbb{R}^3$ such that they do not intersect (potentially in a Dali-like fashion) and then taking a picture from birds eye view.
+Similarly, a stacking drawing is the same thing with the glyphs being rigid and having the same "height" in a dimension perpendicular to the surface being looked at from birds eye view for each point on the same glyph.
 
 %
 \begin{figure}[H]
@@ -187,9 +187,9 @@ Figure \ref{fig:physicalSquares} gives an example of a physically realizable dra
 
 A stacking drawing is uniquely determined by the (ascending) order in which the glyphs are stacked on top of one another. This is the so-called \textit{stacking order} of the drawing. Formally, given a finite set $D$ of $n$ glyphs, a stacking order is a bijection $\phi: [n]\rightarrow D$. This bijection describes the order in which the glyphs are drawn. Glyphs which are drawn later may cover parts of the glyphs which are drawn earlier. Therefore our task is to find a stacking order such that as much as possible of every glyph is visible.
 
-We are yet to define what we mean when talking about a glyph being as "much visible" as possible. Since this may depend on the type of glyph considered we will turn our attention towards circular disks for now. The other definitions will be delivered as soon as they are needed. We refer to these quantitative measure for the visual quality as \textit{global utility functions}.
+We are yet to define what we mean when talking about a glyph being as "much visible" as possible. Since this may depend on the type of glyph considered we will turn our attention towards circular disks for now. The other definitions will be delivered as soon as they are needed. We refer to these quantitative measure for the visual quality as \textit{global utility function}.
 
-We take the perspective of an onlooker looking perpendicularly at the map. The viewer should be able to identify the size of the circles and their center points. To achieve this goal, we could try to maximize the visible area of each circle, but there are cases in which that would not allow the viewer to get all of the information. For instance, if the perimeter is not visible at all, then neither the location of the center point nor radius can be determined exactly. The approach we will use is to maximize the visible perimeter of our disks.
+We take the perspective of an onlooker looking perpendicularly at the map. The viewer should be able to identify the size of the circles and their center points. To achieve this goal, we could try to maximize the visible area of each circle, but there are cases in which that would not allow the viewer to get all of the information. For instance, if the perimeter is not visible at all, then neither the location of the center point nor radius can be determined exactly. The approach we will use is to maximize the visible perimeter of our glyphs being disks in the following.
 
 \newpage
 
@@ -207,7 +207,8 @@ furthermore, we denote the length of the visible perimeter as $|U^{vis}_i|$. Two
   \lambda_{sum} (D) &= \sum_{i=1}^n|U_i^{vis}|
 \end{align*}
 
-While $\lambda_{min}$ is focused on the least visible perimeter, $\lambda_{sum}$ sums up the visible length of all perimeters. Key results proven in \textit{Algorithmic Aspects of Proportional Symbol Maps} are the following
+While $\lambda_{min}$ is focused on the least visible perimeter, $\lambda_{sum}$ sums up the visible length of all perimeters. Key results proven in \textit{Algorithmic Aspects of Proportional Symbol Maps} are the following:
+
 \begin{theorem}
   It is NP-hard to decide if a given collection of congruent disks has a
   physically realizable drawing where at least some given length of the perimeter of
@@ -224,8 +225,8 @@ For stacking orders Cabello at al. presented a positive result with regards to t
   Given n disks in the plane, a stacking order maximizing the boundary
   length of the disk that is least visible can be computed in $O(n^2 \log n)$ time.\qed
 \end{theorem}
-Whether a polynomial algorithm for the sum of all visible perimeters exists remains an open question.
 
+Whether a polynomial algorithm for the sum of all visible perimeters exists remains an open question.
 
 \newpage
 
