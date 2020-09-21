@@ -165,6 +165,7 @@ Our goal is to generalize these algorithms so that they may be applied to other 
 % ----------------------
 \section{Problem Statement}
 % ----------------------
+
 Cabello et al. discussed proportional Symbol Maps. Such a map consists of a finite set of $2$-dimensional figures called symbols or glyphs. Each of these glyphs has a position in $\mathbb{R}^2$ and a radius or size corresponding to some quantity given by the data it is supposed to represent. A classic example is the representation of earthquakes and their strength on the Richter-scale. Opaque disks are centered at the epicenter of the earthquake, while the radius corresponds to its strength. In this case, the glyphs are the disks and the associated data encoded in the radius indicates the strength. Other types of glyphs, like squares, hexagons, or pie charts are also possible and are investigated in this lab.
 
 The problem is to find a drawing which retains as much of the information about the quantity and the location as possible. More precisely, the raw data alone does not tell you how to deal with overlapping glyphs like disks, squares or covered pie pieces. In order to visualize the data on a map we must make several decisions, e.g., one pie covers a pie segment of a lower pie. Should we change the order? Can we rotate the lower pie such that all of its segments are visible?
@@ -234,6 +235,7 @@ We won't attempt to construct an algorithm for the sum problem and instead take 
 
 The first type of glyph we discuss are nested disks. Formally, every glyph $G^i$ is given by a set of disks $G^i_1,...,G^i_k$ such that $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested disks also center all the disks at the same point.
 The second type of glyphs we use are pie charts. A pie chart is formally given by a disk $D_i$ and a set $\{\alpha_1^i,...\alpha_k^i\}$ of dividing lines which we can encode as angle in $[0,\ 2\pi]$. Usually the dividing lines separate areas of different color representing different fractions of a sum.
+Finally, we take a new approach and select squares as glyphs to represent data which are especially interesting as they are not axially symmmetrical like circles. Though squares are generally described by vertex sets representing corners of a square or a center and a width our approach allows a description similar to pie charts in the sense of optimality.
 
 In the next section we will discuss a simple and versatile approach to determine optimal stacking orders for glyphs maximizing utility functions with specific properties for glyph stacking order drawings and then apply it to our glyphs and some utility functions.
 
