@@ -243,7 +243,7 @@ In the next section we will discuss a simple and versatile approach to determine
 \section{Stacking order algorithms for more general Glyphs}
 % ----------------------
 
-The function $\lambda_{min}$ from above provides an example of a global utility function for which an optimal stacking order can be computed via a simple greedy algorithm. At each time step just calculate for all disks their visible perimeter as if they were the bottommost disk, choose the disk $D_i$ with the largest visible perimeter and put it on the bottom. In the next time step we look at the set of disks without $D_i$ and repeat the procedure. This is done until we have processed all disks.
+The function $\lambda_{min}$ from above provides an example of a global utility function for which an optimal stacking order can be computed via a simple greedy algorithm. At each step calculate for all disks their visible perimeter as if they were the bottommost disk, choose the disk $D_i$ with the largest visible perimeter and add it to a stacking order $\phi: [n]\rightarrow D$ which can represented as array or list computationally. In the next step we look at the set of disks without $D_i$ and repeat the procedure. This is done until we have processed all disks and thus constructed a stacking order $\phi$ from bottom up.
 
 We can now formalize this approach for more general objects and prove that the greedy algorithm is optimal with respect to the utility.
 
