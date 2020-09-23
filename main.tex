@@ -195,12 +195,12 @@ We take the perspective of an onlooker looking perpendicularly at the map. The v
 \newpage
 
 For a fixed stacking order $\phi$, we will denote the disk $\phi(i)$ as $D_i$. We then define the visible and covered boundary for disks formally by
- 
+
 \begin{align*}
   U_i^{vis} & =\partial D_i\setminus \bigcup_{j>i} D_{j} \\
   U_i^{cov} & =\partial D_i \cap \bigcup_{j>i} D_{j}.
 \end{align*}
- 
+
 furthermore, we denote the length of the visible perimeter as $|U^{vis}_i|$. Two global utility functions come to mind:
 
 \begin{align*}
@@ -587,13 +587,13 @@ We will now compare our stacking algorithms with other stacking methods which ar
 
 We will only cherry pick a few data sets as the data quality naturally varies, however, the reader may use our application to look at the results for different dates and inspect interesting data sets in detail. Further, we will always use three features, namely: (1) confirmed deaths, (2) confirmed recovered, and (3) overall confirmed cases of a country.
 
-Since some country dominate the rest of the countries with regards to the number of cases we scale logarithmically and add 1 to the data to avoid zero radii. To diversify our data sets even more we use three additional parameters in our data preparation: (1) the minimum number of cases to be depicted, (2) a maximum "size" $M$ of the glyphs in dependence of the glyph's type, and (3) a scaling factor $S$. If we denote the maximal number of confirmed cases in one country by $c_{max}$ then the radius $r$ of the disc of some country with confirmed cases $c$ is given by:
+Since some countries dominate the rest of the countries with regards to the number of cases we scale logarithmically and add 1 to the data to avoid zero radii. To diversify our data sets even more we use three additional parameters in our data preparation: (1) the minimum number of cases to be depicted, (2) a maximum "size" $M$ of the glyphs in dependence of the glyph's type, and (3) a scaling factor $S$. If we denote the maximal number of confirmed cases in one country by $c_{max}$ then the radius $r$ of the disc of some country with confirmed cases $c$ is given by:
 
 \begin{align*}
   r=M\log\frac{c S}{c_{max}}
 \end{align*}
 
-Because three country (US, Brasil and India) far out-scale other countries, $c_{max}$ is chosen with respect to the next largest case by country at some point in the data. Consequently $c_{max}$ is then set to the 4th highest number of confirmed cases in any given dataset.
+As already mentioned, especially three country (US, Brasil and India) far out-scale other countries, $c_{max}$ is chosen with respect to the next largest case by country at some point in the data. Consequently $c_{max}$ is then set to the 4th highest number of confirmed cases in any given dataset.
 
 The algorithms we will be using for comparison are the Painter algorithm, Left-to-Right and Right-to-Left:
 
