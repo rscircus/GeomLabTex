@@ -204,8 +204,8 @@ For a fixed stacking order $\phi$, we will denote the disk $\phi(i)$ as $D_i$. W
 furthermore, we denote the length of the visible perimeter as $|U^{vis}_i|$. Two global utility functions come to mind:
 
 \begin{align*}
-  \lambda_{min} (D) &= \min_{i \in [n]}|U_i^{vis}|\\
-  \lambda_{sum} (D) &= \sum_{i=1}^n|U_i^{vis}|
+  \lambda_{min} (D) & = \min_{i \in [n]}|U_i^{vis}| \\
+  \lambda_{sum} (D) & = \sum_{i=1}^n|U_i^{vis}|
 \end{align*}
 
 While $\lambda_{min}$ is focused on the least visible perimeter, $\lambda_{sum}$ sums up the visible length of all perimeters. Key results proven in \textit{Algorithmic Aspects of Proportional Symbol Maps} are the following:
@@ -279,9 +279,9 @@ GreedyStacking(finite set $D$)
 
   \[
     \tau(k) = \left\{\begin{array}{ll}
-	k-1, & \text{for } k\in [i+1,\dots,j]\\
-	j, & \text{for } k=i\\
-	k, & \text{else}\\
+      k-1, & \text{for } k\in [i+1,\dots,j] \\
+      j,   & \text{for } k=i                \\
+      k,   & \text{else}                    \\
     \end{array}\right\}
   \]
 
@@ -307,7 +307,7 @@ GreedyStacking(finite set $D$)
   \begin{equation*}
     \begin{split}
       \Gamma(s'(k'),\{s'(l), l>k'\}) &= \Gamma(s'(i),\{s'(l),\ l>i\})\\
-				     &=\Gamma(s^*(i),\{s^*(l),\ l>i\})\geq\Gamma(s(i),\{s(l),\ l>i\})
+      &=\Gamma(s^*(i),\{s^*(l),\ l>i\})\geq\Gamma(s(i),\{s(l),\ l>i\})
     \end{split}
   \end{equation*}
 
@@ -318,9 +318,9 @@ GreedyStacking(finite set $D$)
   \begin{equation*}
     \begin{split}
       \lambda(s') &=  \min_{i \in \{1,\dots,n\}} \Gamma(s'(i), \{s'(j)\ | j > i\})\\
-		  &= \Gamma(s'(k'), \{s'(j)\ |\ j > k'\}) \text{ for some }k'\\
-		  &\geq^{(1)} \Gamma(s(k), \{s(j)|\ j>k \}) \text{ for the corresponding }k\\
-		  &\geq \min_{i \in \{1,\dots,n\}} \Gamma(s(i), \{s(j)\ | j > i\}) = \lambda(s)
+      &= \Gamma(s'(k'), \{s'(j)\ |\ j > k'\}) \text{ for some }k'\\
+      &\geq^{(1)} \Gamma(s(k), \{s(j)|\ j>k \}) \text{ for the corresponding }k\\
+      &\geq \min_{i \in \{1,\dots,n\}} \Gamma(s(i), \{s(j)\ | j > i\}) = \lambda(s)
     \end{split}
   \end{equation*}
 
@@ -554,7 +554,6 @@ With this algorithm we can use our general greedy algorithm for stacking orders 
 
 If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. Again the data structure introduced in \cite{cabello} could be used for the pie glyphs which yields a runtime of $O(n^2k \log nk)$. This adaptation would need some work, since the pie glyphs are not immediately  compatible with the data structure.
 
-
 It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyph and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
 
 \subsection{Squares}
@@ -605,34 +604,36 @@ The algorithms we will be using for comparison are the Painter algorithm, Left-t
 
 If we use an algorithm to get optimal rotations we will compare our stacking to the other algorithms with random rotation and with the use of our rotation algorithm. Since most of the glyphs are inherently different we will be evaluating them independently and make an objective comparison at the end.
 
+
 \subsection*{Nested Disks}
+
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
       \hline
-      algorithm & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis &absolute perc\\
+      algorithm            & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis & absolute perc \\
       \hline
-      random & 44 & 0.071 (0) & 0.995 (0) & 0 & 0.658 & 0.677\\
+      random               & 44      & 0.071 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
 
-      LeftToRight & 42 & 0.331 (0) & 2.189 (0) & 0 & 0.641 & 0.678\\
+      LeftToRight          & 42      & 0.331 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
 
-      RightToLeft & 43 & 0.324 (0) & 0.995 (0) & 0 & 0.656 & 0.693\\
+      RightToLeft          & 43      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 
-      Painter & 16 & 0.408 (0) & 6.283 (0) & 34.991 & 0.761 & 0.718\\
+      Painter              & 16      & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718         \\
 
-      MinMinStacking (abs) & 16 & 0.473 (0) & 2.189 (0) & 44.467 & 0.757 & 0.724\\
+      MinMinStacking (abs) & 16      & 0.473 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
 
-      MinMinStacking (rel) & 18 & 0.691 (0) & 2.189 (0) & 37.327 & 0.748 & 0.725\\
+      MinMinStacking (rel) & 18      & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
-      MinSumStacking (abs) & 18 & 0.702 (0) & 3.974 (0) & 44.467 & 0.75 & 0.721\\
+      MinSumStacking (abs) & 18      & 0.702 (0)    & 3.974 (0)    & 44.467        & 0.75            & 0.721         \\
 
-      MinSumStacking (rel) & 18 & 0.702 (0) & 2.189 (0) & 37.327 & 0.744 & 0.723\\
+      MinSumStacking (rel) & 18      & 0.702 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
 
       \hline
     \end{tabular}
   \end{center}
   \caption{centered nested disks\\
-  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{table}
 
 For the nested disks we will be using the following values for our comparison of the algorithms:
@@ -645,59 +646,53 @@ For the nested disks we will be using the following values for our comparison of
   \item \textit{absolute perc} is the percentage of visible perimeter of all subcircles.
 \end{itemize}
 
-
-
-
-
-
 \begin{table}[!h]
   \begin{center}
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
       \hline
-      algorithm & covered & minVis (rel) & minVis (abs) & min one Glyph & average rel vis &absolute perc\\
+      algorithm    & covered & minVis (rel) & minVis (abs) & min one Glyph & average rel vis & absolute perc \\
       \hline
-      random & 21 & 0.025 (0) & 0.589 (0) & 0 & 0.765 & 0.714\\
+      random       & 21      & 0.025 (0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
 
-      LeftToRight & 12 & 0.948 (0) & 2.743 (0) & 0 & 0.775 & 0.725\\
+      LeftToRight  & 12      & 0.948 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
 
-      RightToLeft & 13 & 0.664 (0) & 2.89 (0) & 0 & 0.783 & 0.735\\
+      RightToLeft  & 13      & 0.664 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
 
-      Painter & 0 & 0.585 & 6.283 & 47.758 & 0.857 & 0.759\\
+      Painter      & 0       & 0.585        & 6.283        & 47.758        & 0.857           & 0.759         \\
 
-      our Stacking & 0 & 2.342 & 6.283 & 75.034 & 0.859 & 0.77\\
+      our Stacking & 0       & 2.342        & 6.283        & 75.034        & 0.859           & 0.77          \\
 
       \hline
     \end{tabular}
   \end{center}
   \caption{nested disks (not centered)\\
-  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{table}
 
 
-
-
 \subsection*{Pie Charts}
+
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{| l || l | l | l | l |}
       \hline
-      algorithm & covered & minDist & minDistAvg & maxDistAvg\\
+      algorithm          & covered & minDist   & minDistAvg & maxDistAvg \\
       \hline
-      Painter+random & 105  & 0.001 (0) & 1.32 & 3.839\\
+      Painter+random     & 105     & 0.001 (0) & 1.32       & 3.839      \\
 
-      random+heuristic & 24  & 0.0 (0) & 1.687 & 2.573\\
+      random+heuristic   & 24      & 0.0 (0)   & 1.687      & 2.573      \\
 
-      RightToLeft & 18  & 0.017 (0) & 1.719 & 2.685\\
+      RightToLeft        & 18      & 0.017 (0) & 1.719      & 2.685      \\
 
-      Painter+ heuristic & 6  & 0.022 (0) & 1.733 & 2.648\\
+      Painter+ heuristic & 6       & 0.022 (0) & 1.733      & 2.648      \\
 
-      our Stacking & 0 & 0.271 & 1.765 & 2.838\\
+      our Stacking       & 0       & 0.271     & 1.765      & 2.838      \\
 
       \hline
     \end{tabular}
   \end{center}
   \caption{pie charts\\
-  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 
 \end{table}
 For the pie Charts we will be using the following values for our comparison of the algorithms:
@@ -709,46 +704,71 @@ For the pie Charts we will be using the following values for our comparison of t
 \end{itemize}
 
 
-
-
-
-
-
-
 \subsection*{Squares}
+
 \begin{table}[h]
   \begin{center}
     \begin{tabular}{| l || l | l | l|  }
       \hline
-      algorithm & covered & minDist & minDistAvg \\
+      algorithm                           & covered & minDist   & minDistAvg \\
       \hline
 
-      random Stacking+random rotations & 35 &  0.361 (0) & 35.846\\
+      random Stacking+random rotations    & 35      & 0.361 (0) & 35.846     \\
 
-      Painter+random rotations & 17 &  0.251 (0) & 34.406\\
+      Painter+random rotations            & 17      & 0.251 (0) & 34.406     \\
 
+      random Stacking+heuristic rotations & 26      & 0.038 (0) & 34.776     \\
 
-      random Stacking+heuristic rotations & 26  & 0.038 (0)& 34.776\\
+      Painter+heuristic                   & 14      & 0.263 (0) & 32.061     \\
 
-      Painter+heuristic & 14 & 0.263 (0)& 32.061\\
-
-      our Stacking & 7 &  0.078 (0)& 25.232\\
+      our Stacking                        & 7       & 0.078 (0) & 25.232     \\
 
 
       \hline
     \end{tabular}
   \end{center}
   \caption{squares\\
-  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 
 \end{table}
 
 For the squares we will be using the following values for our comparison of the algorithms:
+
 \begin{itemize}
   \item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
   \item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
   \item \textit{minDistAvg} is given by the average of the values of all of the squares.
 \end{itemize}
+
+\newpage
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=7cm]{assets/MinMinAbsEval}
+  \caption{MinMinStacking (Abs) for centered nested disks\\
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=7cm]{assets/HawaiianEval}
+  \caption{our algorithm for nested disks (not centered)\\
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=7cm]{assets/pieChartsEval}
+  \caption{pie Charts\\
+    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=7cm]{assets/squaresEval}
+  \caption{squares\\
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
 
 
 % ----------------------
@@ -765,42 +785,12 @@ For the squares we will be using the following values for our comparison of the 
   \item Runtime is similar and in the order of $O(n^3)$, however, can be brought down to $O(n^2 \log n)$ with good choice of data structures.
 \end{itemize}
 
-
-
 \newpage
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/MinMinAbsEval}
-  \caption{MinMinStacking (Abs) for centered nested disks\\
-  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/HawaiianEval}
-  \caption{our algorithm for nested disks (not centered)\\
-  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/pieChartsEval}
-  \caption{pie Charts\\
-  date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/squaresEval}
-  \caption{squares\\
-  date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
 
 
-
-
-\newpage
+% ----------------------
 \begin{thebibliography}{999}
+% ----------------------
 
   \bibitem [1] {tufte}Tufte, Edward R. "The visual display of quantitative information graphics press." Cheshire, Connecticut (1983).
 
