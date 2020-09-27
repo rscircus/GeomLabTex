@@ -495,7 +495,19 @@ These disks will be arranged in a line connecting the "true"/"false" disks in th
 The top gadget is oriented as "false" and the "true" disk in the middle thus has a separator pointing outward. This forces the first outgoing connector, which overlaps the "true" disk by 1/12 = 30 degrees to be under it and point its own separators downwards as well. This continues until the clause-connector disk is reached which now cannot be oriented as the bottom-right one and has to go over the clause-disk.
 
 \subsubsection*{Example}
-Example will be depicted here. [TODO]
+We give an example construction for a subset of the 3-SAT instance mentioned in the beginning of this section. The coloring is added to mark important components.
+
+\[\mathcal{I'} = (x_2 \vee \overline{x_3}) \wedge (x_3)\]
+
+The gadget on the right represents variable $x_2$ and is set to "true" as it is ascending clockwise. The disk representing its occurrence in $C_1$ is marked in green as it will resolve to "true" and allows the connection to overlap is partially. The gadget on the right represents variable $x_3$ and is also set to true. It has one negated occurrence in $C_1$ and one normal occurrence in $C_2$. The negated occurrence resolves to "false" and the additional delimiter in the red disk is pointing outwards, forcing the first connecting disk to go under it.
+The dashed disks represent the other connections in a full 3-SAT instance.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=10cm]{assets/np-hardness/construction_example.png}
+  \caption{Example construction for the instance $\mathcal{I'}$}
+\end{figure}
+
 
 \subsubsection*{Conclusion}
 The logical properties were already explained when motivating the construction, yet, will be formalized here again. Notice that the disks in the clause and the gadget can create a distance of 15 degrees between cover and separation points. We claim the following:
@@ -504,8 +516,10 @@ Given a planar instance of 3-SAT $\mathcal{I}$ and the corresponding constructio
 Given a satisfiable instance we orient the gadgets according to the assignment. This will make all "false" connections point a separator outward. Within the gadgets, all disks maintain a distance of at least 15 degrees to the other disks in the gadget. The connector disks at these "false" connections will have to go under so that the outpointing separator has distance $\geq 0$, let alone 15. The "true" connections are not forcing the outgoing connections to go under, we will place them above giving a distance of exactly 15 degrees. This connection line will be going "upwards" (as viewed from gadget to clause) until it reaches the clause connector, which now can be placed under the clause-disk enabling it to also create a distance of at least 15 degrees.
 This implies that all disks can create a distances of 15 degrees to their covered boundary segments.
 
-Conversely, if the constructed instance has a physical realization with degrees $\geq 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $\geq 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.\qedsymbol
-
+Conversely, if the constructed instance has a physical realization with degrees $\geq 15$, then clearly in each clause-disk we must have a least one of the connector going below it. This is only possible with distance $\geq 15$ if the separators are directed away from the clause disk and thus forcing the rest of the connection to go "upwards" (as viewed from clause to gadget). This means that the first disk in the gadget must be under the last disk in the connecting line. This is only possible if the literal is "true" meaning the variable is "false" and the literal negated or "true" and the literal in normal form. We obtain and orientation of the gadgets that is consistent with all clauses and thus a satisfying assignment of the variables in $\mathcal{I}$.
+\begin{flushright}
+\qedsymbol
+\end{flushright}
 % ---
 \subsubsection{Optimal rotations for $\Gamma_{pie}$}
 % ---
@@ -530,12 +544,12 @@ Now we want to derive all of the positions on the circle where the reference lin
 The complement of $\mathcal{I}$ on the circle describes all of the locations of $\alpha_1$ which do not cover any dividing line. This complement may be empty since there may not be a rotation which does not cover any line. With this observations we now can easily derive an algorithm which returns a rotation which maximizes our utility.
 
 \begin{theorem}
-  Given a set of covered intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, Algorithm 2 returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
+  Given a set of covered intervals $I=\{[a_1,b_1],...[a_k,b_k]\}$ (as angles) and a set of dividing lines $\{\alpha_1,...\alpha_m\}$ also given by angles, the IntervalMidpointAlgorithm returns a rotation which maximizes the minimal radial distance of any of the $\alpha^i_j$ to the covered perimeter.
 \end{theorem}
 % TODO: Labels (after everything else is nice probably)
 
 \begin{proof}
-  Algorithm 2 rotates a given dividing line in such a way, that it lies exactly in the midpoint of the biggest not covered interval $[a_v, b_v]$. The midpoint in an interval is the point which has the maximum distance from both boundaries, $a_v$ and $b_v$. As the biggest not covered interval maps to the circle's perimeter, it also maximizes the distance to the boundaries of the covered intervals $\{[a_1, b_1], ..., [a_k, b_k]\}$.
+  The algorithm rotates a given dividing line in such a way, that it lies exactly in the midpoint of the biggest not covered interval $[a_v, b_v]$. The midpoint in an interval is the point which has the maximum distance from both boundaries, $a_v$ and $b_v$. As the biggest not covered interval maps to the circle's perimeter, it also maximizes the distance to the boundaries of the covered intervals $\{[a_1, b_1], ..., [a_k, b_k]\}$.
 \end{proof}
 
 \begin{figure}[!bth]
@@ -544,7 +558,7 @@ Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
   calculate $\mathcal{I}=I \cup \bigcup_{i=2}^m    \bigcup_{j=1}^k \{ [a_j-\beta_i,b_j-\beta_i]   \}$
   let $\mathcal{V}$ be the set of maximal continuous intervals in $[0, 2\pi]\setminus {\mathcal{I}}$
   $v=[a_v,b_v]$ biggest interval in $\mathcal{V}$
-  $r=(b_v+a_v)/2$
+  $r=a_v + (b_v-a_v)/2$
   return r
   \end{lstlisting}
   \caption{IntervalMidpointAlgorithm}
@@ -552,13 +566,34 @@ Input: $I=\{[a_1,b_1],...[a_k,b_k]\}$ $\{\alpha_1,...\alpha_m\}$)
 
 With this algorithm we can use our general greedy algorithm for stacking orders again.
 
-If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. Again the data structure introduced in \cite{cabello} could be used for the pie glyphs which yields a runtime of $O(n^2k \log nk)$. This adaptation would need some work, since the pie glyphs are not immediately  compatible with the data structure.
+If we use a naive implementation for Theorem 5 we get a runtime of $O(n^3k^2)$. As before, the data structure introduced in \cite{cabello} could be used for the pie glyphs which yields a runtime of $O(n^2k \log nk)$. This adaptation would need some work, since the pie glyphs are not immediately  compatible with the data structure.
 
 It may happen again that for all glyphs the local utility is zero. Again we have to use a heuristic to get better results. For instance, we can just ignore one dividing line for each glyph and try again. This can be done iteratively until the utility is not zero for all glyphs. For the case of exactly one dividing line the utility must be bigger than zero and therefore the heuristic guarantees a better decision than just randomly tie breaking.
 
 \subsection{Squares}
 The last glyph we discuss are squares which are subdivided into smaller rectangles. We don't restrict ourself to axis aligned squares. Therefore the algorithms we discuss may rotate the squares to get better results with respect to the visibility.
-Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to rotatable squares since the local utilities may only depend on the order. But the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before time $t$. %[TODO: stage vs time step (vs step?)]
+Cabello et al. only discussed axis aligned Squares in \cite{cabello}. There hasn't been any theoretical discussion with regards to rotatable squares and visibility as far as we know. Our greedy stacking theorem would not apply to rotatable squares since the local utilities may only depend on the order. But the rotation we perform at time step $t$ could change some of the local utilities for squares which have been drawn before step $t$. Figure \ref{fig:rotation_problems} illustrates the problem for squares and their visible perimeter. The same applies to squares with subdivisions.
+
+
+\begin{figure}[H]
+  \begin{subfigure}{0.5\textwidth}
+  \begin{centering}
+    \includegraphics[width=0.8\linewidth]{assets/circle_rotation.png}
+    \caption{Bottom circle visibility unchanged}\label{fig:circle_rotations}
+    \end{centering}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \begin{centering}
+    \includegraphics[width=0.8\linewidth]{assets/square_rotation.png}
+    \caption{Bottom square less visible}\label{fig:square_rotations}
+    \end{centering}
+  \end{subfigure}
+  \caption{Illustration of visibility changes for square rotations}
+  \label{fig:rotation_problems}
+\end{figure}
+
+
+
 For that reason we would need some new approach to get any optimal results and it may even be NP-hard to calculate a stacking with optimal rotations with respect to the visibility of the perimeter of the squares.
 
 Our main focus in this lab was the visualization of multiple features, e.g., in the case of Covid-19 infected, dead and recovered. Consequently we do not try to derive optimal algorithms for a single feature case and just recycle some of our other results to get a heuristic solution for our problem with respect to squares.
