@@ -749,7 +749,7 @@ For the pie Charts we will be using the following values for our comparison of t
 
 Our pie chart stacking is guaranteed to be optimal by the greedy stacking theorem. Only our algorithm manages to make all separation points visible for each pie glyph. The painters algorithm (using the optimal rotations subroutine) still outperforms more naive approaches having only 6 lines covered.
 
-The date for this dataset was chosen, such that the optimum is not $0$, i.e. it is possible to make all pie separation points visible. Our algorithm also performs well on other instances as can be verified in the application.
+The date for this dataset was chosen, such that the optimum is not $0$, i.e., it is possible to make all pie separation points visible. Our algorithm also performs well on other instances as can be verified in the application.
 
 
 \subsection*{Squares}
@@ -824,20 +824,13 @@ We can see that our heuristic of transforming the square mosaic into a pie chart
 \section{Conclusion \& Discussion}
 % ----------------------
 
-\begin{itemize}
-  \item Four types of glyphs were compared to each other using stacking order algorithms: (1) Centered nested disks, (2) nested disks, (3) Pie charts, and (4) squares.
-  \item It was shown that it is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation) such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$.
-  \item In a very similar manner squares as glyphs can be treated in proportional symbol maps in our approach.
-  \item Utility is hard to impossible to be compared among glyphs of different types. However,
-  \item discs can be compared to each other,
-  \item pies and squares can be compared to each other.
-  \item The pie-chart approach enables an improvement for the squares [TODO: R: Don't get it, yet].
-  \item Runtime is similar and in the order of $O(n^3)$, however, can be brought down to $O(n^2 \log n)$ with good choice of data structures.
-  \item Nevertheless, some heuristics is necessary
-  \item Glyphen are a trade-off between content and comparability
-\end{itemize}
+In this work four types of glyphs were compared to each other using a subset of physically realizable drawings called stacking order algorithms. The glyph types were: (1) Centered nested disks, (2) nested disks, (3) Pie charts, and (4) Squares.
+We introduced several new types of glyphs compared to the mainstream representation: These are (1) the allowence to freely shift inner disks in the nested disks, (2) pie charts with movable proportions and (3) squares.
+Further, we have shown that it is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization, with rotation as additional degree of freedom, such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$. In a very similar manner squares as glyphs can be treated in proportional symbol maps in our approach.
 
-Maybe we talk about the nature of the given data and relate it to the glyph. Especially considering the squares.
+We found in accordance with \cite{tufte} that utility is hard to impossible to be compared among glyphs of different types. However, disks can be compared to each other, pies and squares can also be compared to each other. Furthermore, relative coverage and relative visibility can be seen as a somewhat similar utility.
+The pie-chart approach enables an utility improvement for the squares as shown in section 3. Overall runtime is similar and in the order of $O(n^3)$, however, can be brought down to $O(n^2 \log n)$ with a good choice of data structures similar to the approach in \cite{cabello}.
+Nevertheless, some heuristics is necessary glyphen are a trade-off between content and comparability. At the bottomline it can be safely said that a greedy approach as approximation to the optimial solution is a good choice once more.
 
 \newpage
 
