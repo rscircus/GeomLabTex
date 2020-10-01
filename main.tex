@@ -383,6 +383,9 @@ Now we need to investigate two things:
 \subsubsection*{Setting}
 Given a finite set $D$ of disks $d_i$ in the plane with centers $c_i$ and positive radii $r_i$ together with a finite set $P_i = \{ \alpha_1, \dots, \alpha_{m_i}\}$ of points on the boundary of $d_i$ subdividing the disk into pie-pieces we wish to determine a physically realizable drawing of $D$ together with a rotation $\varphi_i$ for each disk such that the minimum distance of any point in $p\in\bigcup P_i$ to the next covered point on the boundary of $d_i$ is maximized.
 I.e., we are given Pie-Charts and can like to arrange them by specifying their order and orientation. We would like to find an arrangement of that sort such that all the points on the boundary that separate two pie segments are as far away from the covered intervals as possible.
+
+For the proof we assume a Real-RAM model of computation. A proof assuming only a RAM will require further elaboration on the details of the subsequently provided construction and is beyond the scope of this discussion.
+
 \subsubsection*{Theorem}
 It is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization (with rotation) such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$. Or formulated as formula:
 
