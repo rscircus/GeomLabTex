@@ -821,16 +821,16 @@ We can see that our heuristic of transforming the square mosaic into a pie chart
 
 
 % ----------------------
-\section{Conclusion \& Discussion}
+\section{Outlookk \& Conclusion}
 % ----------------------
 
 In this work four types of glyphs were compared to each other using a subset of physically realizable drawings called stacking order algorithms. The glyph types were: (1) Centered nested disks, (2) nested disks, (3) Pie charts, and (4) Squares.
 We introduced several new types of glyphs compared to the mainstream representation: These are (1) the allowence to freely shift inner disks in the nested disks, (2) pie charts with movable proportions and (3) squares.
 Further, we have shown that it is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization, with rotation as additional degree of freedom, such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$. In a very similar manner squares as glyphs can be treated in proportional symbol maps in our approach.
 
-We found in accordance with \cite{tufte} that utility is hard to impossible to be compared among glyphs of different types. However, disks can be compared to each other, pies and squares can also be compared to each other. Furthermore, relative coverage and relative visibility can be seen as a somewhat similar utility.
-The pie-chart approach enables an utility improvement for the squares as shown in section 3. Overall runtime is similar and in the order of $O(n^3)$, however, can be brought down to $O(n^2 \log n)$ with a good choice of data structures similar to the approach in \cite{cabello}.
+The pie-chart approach enables an utility improvement for the squares as shown in Section 3. Overall runtime is similar and in the order of $O(n^3)$, however, can be brought down to $O(n^2 \log n)$ with a good choice of data structures similar to the approach in \cite{cabello}.
 Nevertheless, some heuristics is necessary glyphen are a trade-off between content and comparability. At the bottomline it can be safely said that a greedy approach as approximation to the optimial solution is a good choice once more.
+We found in accordance with \cite{tufte} that utility is hard to impossible to be compared among glyphs of different types. As shown in the experiments, disks can be compared to each other as can be pies and squares with the given approach. Furthermore, the ratio between covered points and overall points/lines in the square/pie approach results in the limes of high $k$ into a relative visibility as was used in the disk case. And therefore can be seen as the same utility in this limes. However, this needs to be explored in further work.
 
 \newpage
 
