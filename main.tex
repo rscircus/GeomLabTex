@@ -681,6 +681,8 @@ For the nested disks we will be using the following values for our comparison of
   \item \textit{absolute perc} is the percentage of visible perimeter of all subcircles.
 \end{itemize}
 
+Our algorithm is designed to maximize the value found in the second column and our theorem about the greedy stacking technique implies its result is optimal. However, in this case the optimum is 0, meaning there is no stacking where no circle is covered. Thus the algorithm applies a heuristic to decide which of the remaining disks to put on the stacking. We see that it minimizes the total number of covered circles, but so does the painters algorithm. Furthermore, the painters algorithm is only marginally beat by our algorithm for relative visibility and much better for absolute visibility.
+
 \begin{table}[!h]
   \begin{center}
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
@@ -703,6 +705,10 @@ For the nested disks we will be using the following values for our comparison of
   \caption{nested disks (not centered)\\
     date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{table}
+
+In this algorithm, we stack the disks greedly again, but only care for the local utility of the biggest disk at first. Then, since the disks do not have to be centered, we nest the inner disks such that their boundaries touch in a single point. This point is the midpoint of the longest consecutively visible interval of the outer disk's boundary. We can already note a much better performance. Note that the dataset is the same as in the previous example. The increased flexibility of the glyphs makes it possible to attain a utility greater than $0$ and allows our algorithm to really harness its potential.
+
+Both our algorithm and the painters algorithm (also using the subroutine described above for the inner disks) arrange all disks such that they are visible. This is already far better than any of the more naive comparison algorithms. Our algorithm then strongly outperforms the painters algorithm on relative visibility and ties in the absolute. This is interesting since, in this case, our algorithm is not guaranteed to return an optimal stacking because our subroutine not necessarily maximizes the local utility of the non-centerd glyph.
 
 
 \subsection*{Pie Charts}
@@ -737,6 +743,10 @@ For the pie Charts we will be using the following values for our comparison of t
   \item \textit{minDistAvg} is given by the average of the values of all of the pie charts.
   \item \textit{maxDistAvg} is given by the average if we look at the largest distance instead of the minimal distance.
 \end{itemize}
+
+Our pie chart stacking is guaranteed to be optimal by the greedy stacking theorem. Only our algorithm manages to make all separation points visible for each pie glyph. The painters algorithm (using the optimal rotations subroutine) still outperforms more naive approaches having only 6 lines covered.
+
+The date for this dataset was chosen, such that the optimum is not $0$, i.e. it is possible to make all pie separation points visible. Our algorithm also performs well on other instances as can be verified in the application.
 
 
 \subsection*{Squares}
@@ -773,6 +783,8 @@ For the squares we will be using the following values for our comparison of the 
   \item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
   \item \textit{minDistAvg} is given by the average of the values of all of the squares.
 \end{itemize}
+
+We can see that our heuristic of transforming the square mosaic into a pie chart worked well. Our algorithm produces by far the least number of covered separation points. However, it is not guaranteed to be optimal and it does not beat even the naive random approaches on secondary performance indicators.
 
 \newpage
 
