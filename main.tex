@@ -192,7 +192,6 @@ We are yet to define what we mean when talking about a glyph being as "much visi
 
 We take the perspective of an onlooker looking perpendicularly at the map. The viewer should be able to identify the size of the circles and their center points. To achieve this goal, we could try to maximize the visible area of each circle, but there are cases in which that would not allow the viewer to get all of the information. For instance, if the perimeter is not visible at all, then neither the location of the center point nor radius can be determined exactly. The approach we will use is to maximize the visible perimeter of our glyphs being disks in the following.
 
-\newpage
 
 For a fixed stacking order $\phi$, we will denote the disk $\phi(i)$ as $D_i$. We then define the visible and covered boundary for disks formally by
 
@@ -229,8 +228,6 @@ For stacking orders Cabello at al. presented a positive result with regards to t
 
 Whether a polynomial algorithm for the sum of all visible perimeters exists remains an open question.
 
-\newpage
-
 We won't attempt to construct an algorithm for the sum problem and instead take a look at glyphs which are able to depict more than one piece of information.
 
 The first type of glyph we discuss are nested disks. Formally, every glyph $G^i$ is given by a set of disks $G^i_1,...,G^i_k$ such that $G^i_{j+1}\subset G^i_j$ for all $j\in \{1,...,k-1 \}$. Often times figures using nested disks also center all the disks at the same point.
@@ -261,7 +258,6 @@ GreedyStacking(finite set $D$)
   \label{fig:greedyalg}
 \end{figure}
 
-\newpage
 
 \begin{theorem}
   For a given set $D$ and a local utility function $\Gamma$ the greedy algorithm as described in \ref{fig:greedyalg} returns a stacking order $s$ which maximizes
@@ -620,7 +616,7 @@ We can get a good solution with the help of pie charts. For every square we cons
 \section{Experimental validation}
 % ----------------------
 
-We will now compare our stacking algorithms with other stacking methods which are mainly used for visualization of proportional symbol maps. The lab was motivated by the visualization of COVID-19 data. Therefore we will be using the JHU CSSE COVID-19 Data which is given in \cite{data}. The dataset is updated daily and provides data for every day since January 2020. Hence, we have a plethora\footnote{As the data is collected at several points in time under fluctuating political circumstances we have chosen the most trustworthy source. Nevertheless, by simply looking sharply at the data it is obvious that the data is to be taken with a grain of salt.} data for our experiments.
+We will now compare our stacking algorithms with other stacking methods which are mainly used for visualization of proportional symbol maps. The lab was motivated by the visualization of COVID-19 data. Therefore we will be using the JHU CSSE COVID-19 Data which is given in \cite{data}. The dataset is updated daily and provides data for every day since January 2020. Hence, we have a plethora\footnote{As the data is collected at several points in time under fluctuating political circumstances we have chosen the most trustworthy source. Nevertheless, by simply looking sharply at the data it is obvious that the data is to be taken with a grain of salt.} of data for our experiments.
 
 We will only cherry pick a few data sets as the data quality naturally varies, however, the reader may use our application to look at the results for different dates and inspect interesting data sets in detail. Further, we will always use three features, namely:  the unfortunate (1) confirmed deaths [color: black], (2) confirmed recovered [color: green], and (3) overall confirmed cases [color red] of a country.
 
@@ -684,6 +680,16 @@ For the nested disks we will be using the following values for our comparison of
   \item \textit{absolute perc} is the percentage of visible perimeter of all subcircles.
 \end{itemize}
 
+\begin{figure}[!t]
+  \centering
+  \includegraphics[height=7cm]{assets/MinMinAbsEval}
+  \caption{MinMinStacking (Abs) for centered nested disks\\
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+
+
+
 Our algorithm is designed to maximize the value found in the second column and our theorem about the greedy stacking technique implies its result is optimal. However, in this case the optimum is 0, meaning there is no stacking where no circle is covered. Thus the algorithm applies a heuristic to decide which of the remaining disks to put on the stacking. We see that it minimizes the total number of covered circles, but so does the painters algorithm. Furthermore, the painters algorithm is only marginally beat by our algorithm for relative visibility and much better for absolute visibility.
 
 \begin{table}[!h]
@@ -709,9 +715,18 @@ Our algorithm is designed to maximize the value found in the second column and o
     date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{table}
 
-In this algorithm, we stack the disks greedly again, but only care for the local utility of the biggest disk at first. Then, since the disks do not have to be centered, we nest the inner disks such that their boundaries touch in a single point. This point is the midpoint of the longest consecutively visible interval of the outer disk's boundary. We can already note a much better performance. Note that the dataset is the same as in the previous example. The increased flexibility of the glyphs makes it possible to attain a utility greater than $0$ and allows our algorithm to really harness its potential.
+\begin{figure}[!t]
+  \centering
+  \includegraphics[height=7cm]{assets/HawaiianEval}
+  \caption{our algorithm for nested disks (not centered)\\
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+In the algorithm for arbitrary nested disks, we stack the disks greedly again, but only care for the local utility of the biggest disk at first. Then, since the disks do not have to be centered, we nest the inner disks such that their boundaries touch in a single point. This point is the midpoint of the longest consecutively visible interval of the outer disk's boundary. We can already note a much better performance. Note that the dataset is the same as in the previous example. The increased flexibility of the glyphs makes it possible to attain a utility greater than $0$ and allows our algorithm to really harness its potential.
 
 Both our algorithm and the painters algorithm (also using the subroutine described above for the inner disks) arrange all disks such that they are visible. This is already far better than any of the more naive comparison algorithms. Our algorithm then strongly outperforms the painters algorithm on relative visibility and ties in the absolute. This is interesting since, in this case, our algorithm is not guaranteed to return an optimal stacking because our subroutine not necessarily maximizes the local utility of the non-centered glyph.
+
+If we compare the nested centered disks and the arbitrary nested disks we can also see that secondary utilities have increased by up to $10\%$ and the number of covered circles is guaranteed to be be $0$. The trade off is just a visual representation which is unusual for the user but does not lose any information.
 
 
 \subsection*{Pie Charts}
@@ -747,7 +762,15 @@ For the pie Charts we will be using the following values for our comparison of t
   \item \textit{maxDistAvg} is given by the average if we look at the largest distance instead of the minimal distance.
 \end{itemize}
 
-Our pie chart stacking is guaranteed to be optimal by the greedy stacking theorem. Only our algorithm manages to make all separation points visible for each pie glyph. The painters algorithm (using the optimal rotations subroutine) still outperforms more naive approaches having only 6 lines covered.
+\begin{figure}[!b]
+  \centering
+  \includegraphics[height=7cm]{assets/pieChartsEval}
+  \caption{pie Charts\\
+    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
+
+
+Our pie chart stacking is guaranteed to be optimal by the greedy stacking theorem. Only our algorithm manages to make all separation points visible for each pie glyph. The painters algorithm (using the optimal rotations subroutine) still outperforms more naive approaches having only 6 lines covered. Our algorithm is also better in the secondary utilities although the other algorithms may ''abuse`` the fact that they cover a few of the lines. 
 
 The date for this dataset was chosen, such that the optimum is not $0$, i.e., it is possible to make all pie separation points visible. Our algorithm also performs well on other instances as can be verified in the application.
 
@@ -756,20 +779,20 @@ The date for this dataset was chosen, such that the optimum is not $0$, i.e., it
 
 \begin{table}[h]
   \begin{center}
-    \begin{tabular}{| l || l | l | l|  }
+    \begin{tabular}{| l || l | l | }
       \hline
-      algorithm                           & covered & minDist   & minDistAvg \\
+      algorithm                           & covered & minDist \\  %& minDistAvg \\
       \hline
 
-      random Stacking+random rotations    & 35      & 0.361 (0) & 35.846     \\
+      random Stacking+random rotations    & 35      & 0.361 (0)\\ %& 35.846     \\
 
-      Painter+random rotations            & 17      & 0.251 (0) & 34.406     \\
+      Painter+random rotations            & 17      & 0.251 (0)\\ %& 34.406     \\
 
-      random Stacking+heuristic rotations & 26      & 0.038 (0) & 34.776     \\
+      random Stacking+heuristic rotations & 26      & 0.038 (0)\\ %& 34.776     \\
 
-      Painter+heuristic                   & 14      & 0.263 (0) & 32.061     \\
+      Painter+heuristic                   & 14      & 0.263 (0)\\ %& 32.061     \\
 
-      our Stacking                        & 7       & 0.078 (0) & 25.232     \\
+      our Stacking                        & 7       & 0.078 (0)\\ %& 25.232     \\
 
       \hline
     \end{tabular}
@@ -784,44 +807,21 @@ For the squares we will be using the following values for our comparison of the 
 \begin{itemize}
   \item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
   \item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
-  \item \textit{minDistAvg} is given by the average of the values of all of the squares.
+  %\item \textit{minDistAvg} is given by the average of the values of all of the squares.
 \end{itemize}
-
-We can see that our heuristic of transforming the square mosaic into a pie chart worked well. Our algorithm produces by far the least number of covered separation points. However, it is not guaranteed to be optimal and it does not beat even the naive random approaches on secondary performance indicators.
-
-\newpage
-
-\begin{figure}[h]
+\begin{figure}[b]
   \centering
-  \includegraphics[height=7cm]{assets/MinMinAbsEval}
-  \caption{MinMinStacking (Abs) for centered nested disks\\
-    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/HawaiianEval}
-  \caption{our algorithm for nested disks (not centered)\\
-    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/pieChartsEval}
-  \caption{pie Charts\\
-    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=7cm]{assets/squaresEval}
+  \includegraphics[height=6cm]{assets/squaresEval}
   \caption{squares\\
     date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{figure}
 
+We can see that our heuristic of transforming the square mosaic into a pie chart worked well. Our algorithm produces by far the least number of covered separation points. However, it is not guaranteed to be optimal and it does not beat even the naive random approaches on a secondary performance indicator, but the indicator is not very significant since the actual value should be 0. 
+
+
 
 % ----------------------
-\section{Outlookk \& Conclusion}
+\section{Outlook \& Conclusion}
 % ----------------------
 
 In this work four types of glyphs were compared to each other using a subset of physically realizable drawings called stacking order algorithms. The glyph types were: (1) Centered nested disks, (2) nested disks, (3) Pie charts, and (4) Squares.
@@ -829,8 +829,19 @@ We introduced several new types of glyphs compared to the mainstream representat
 Further, we have shown that it is NP-hard to decide, whether for a given set $D$ of disks with boundary points $P_i$ there is a physical realization, with rotation as additional degree of freedom, such that the minimum distance of any of the distinguished points $p_i$ to the next covered point along the perimeter of its perimeter is greater or equal to $k$. In a very similar manner squares as glyphs can be treated in proportional symbol maps in our approach.
 
 The pie-chart approach enables an utility improvement for the squares as shown in Section 3. Overall runtime is similar and in the order of $O(n^3)$, however, can be brought down to $O(n^2 \log n)$ with a good choice of data structures similar to the approach in \cite{cabello}.
-Nevertheless, some heuristics is necessary glyphen are a trade-off between content and comparability. At the bottomline it can be safely said that a greedy approach as approximation to the optimial solution is a good choice once more.
-We found in accordance with \cite{tufte} that utility is hard to impossible to be compared among glyphs of different types. As shown in the experiments, disks can be compared to each other as can be pies and squares with the given approach. Furthermore, the ratio between covered points and overall points/lines in the square/pie approach results in the limes of high $k$ into a relative visibility as was used in the disk case. And therefore can be seen as the same utility in this limes. However, this needs to be explored in further work.
+Nevertheless, some heuristics are necessary. Glyphs are a trade-off between content and comparability. At the bottomline it can be safely said that a greedy approach as approximation to the optimal solution is a good choice once more.
+We found in accordance with \cite{tufte} that utility is hard to impossible to be compared among glyphs of different types. As shown in the experiments, disks can be compared to each other as can be pies and squares with the given approach.
+
+It is important to note that the different glyphs have a focus on different aspects of the data. The nested disks allow a comparison between subdisks of different glyphs, e.g. we can easily compare the number of dead of the US to the number of confirmed cases in Germany. On the other hand the comparison of the different features in one glyph is difficult, e.g. comparing the ratio of dead and recovered for any glyph is difficult.\\
+The pie charts are the exact opposite. It is easy to make a ratio comparison for one glyph but it's hard to compare subdisks of different glyphs.\\
+If we assume linear scaling (not logarithmic) the square approach should be the best of both worlds, because they nicely depict ratios for a single glyph and the subrectangles are easily compared between different glyphs. The downside of the squares are a visualisation which is perceived rather chaotic and a far harder optimization problem since a simple greedy approach does not work. Even the hardness of calculating an optimal stacking with optimal rotations needs further investigation.
+
+
+Furthermore, the ratio between covered points and overall points/lines in the square/pie approach can be seen as a discrete version of the relative visibility which we used for the nested disks. If we go on step further we could arbitrarily add new important points. If we then take the limit, the value of the ratio should approach the relative visibility, which may allow a better comparison. However, this needs to be explored in further work.
+
+
+Furthermore, the ratio between covered points and overall points/lines in the square/pie approach results in the limes of high $k$ into a relative visibility as was used in the disk case. And therefore can be seen as the same utility in this limes. However, this needs to be explored in further work.
+
 
 \newpage
 
