@@ -7,6 +7,8 @@
 
 
 \usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
 \newcommand{\red}{\textcolor{red}}
 \newcommand{\blue}{\textcolor{blue}}
 
@@ -31,7 +33,30 @@
   \end{frame}
 
   \begin{frame}{Maps and Glyphs}
-    Introduce glyph types discussed and create transition into Algo section.
+  \begin{figure}[!b]
+    \centering
+      \begin{subfigure}[b]{0.45\linewidth}
+         \centering
+	 \includegraphics[width=0.5\linewidth]{assets/symbol_nested_circles}
+	 \caption{Coffee.}
+      \end{subfigure}
+      \begin{subfigure}[b]{0.45\linewidth}
+         \centering
+	 \includegraphics[width=0.5\linewidth]{assets/symbol_nested_elastic_circles}
+	 \caption{More coffee.}
+      \end{subfigure}\\
+      \begin{subfigure}[b]{0.45\linewidth}
+         \centering
+	 \includegraphics[width=0.5\linewidth]{assets/symbol_pie}
+         \caption{Tasty coffee.}
+      \end{subfigure}
+      \begin{subfigure}[b]{0.45\linewidth}
+         \centering
+	 \includegraphics[width=0.5\linewidth]{assets/symbol_square}
+	 \caption{Too much coffee.}
+      \end{subfigure}
+  \end{figure}
+
   \end{frame}
 
   \section{Algorithms}
@@ -57,21 +82,21 @@
   \begin{frame}{Experimental Setup}
 	\begin{itemize}
 		\item We use the John Hopkins University Covid-19 data
-		\item recovered are coloured green, deceased are coloured black and 		the infected are coloured red
+		\item recovered are coloured green, deceased are coloured black and		the infected are coloured red
 		\item logarithmic scaling dependent on two parameters:
 		\begin{align*}
 			r=M* \log \left( \frac{c_i S}{c_{max}} +1 \right)
 		\end{align*}
-		$M$ is the maximum size of a glyph, $S$ is a scaling factor and $c_{max}$ is 			the maximum number of cases
+		$M$ is the maximum size of a glyph, $S$ is a scaling factor and $c_{max}$ is			the maximum number of cases
 	\end{itemize}
 \end{frame}
-  
-  
-  
+
+
+
   \begin{frame}
 \begin{figure}[!t]
   \centering
-  \includegraphics[height=5cm]{MinMinAbsEval.png}
+  \includegraphics[height=5cm]{assets/MinMinAbsEval.png}
 \end{figure}
 
 \begin{table}
@@ -86,11 +111,11 @@
 
       RightToLeft          &{  43}      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 	\hline
-      Painter              & {  16 }     & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718    
+      Painter              & {  16 }     & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718
      \\
 
       MinMinStacking (abs) & {  16 }     & 0.473 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
-      
+
       \hline
       MinMinStacking (rel) & { 18 }     & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
@@ -107,7 +132,7 @@
 \begin{frame}
 \begin{figure}[!t]
   \centering
-  \includegraphics[height=5cm]{HawaiianEval}
+  \includegraphics[height=5cm]{assets/hawaiianEval.png}
 \end{figure}
 \begin{table}[!h]
 \begin{center}
@@ -192,11 +217,11 @@
 \begin{frame}
 \begin{figure}[!t]
   \centering
-  \includegraphics[height=4cm]{MinMinAbsEval.png}
+  \includegraphics[height=4cm]{assets/MinMinAbsEval.png}
 \end{figure}
 \begin{figure}[!t]
   \centering
-  \includegraphics[height=4cm]{HawaiianEval}
+  \includegraphics[height=4cm]{assets/hawaiianEval.png}
 \end{figure}
 
 
@@ -206,7 +231,7 @@
 
 \begin{figure}[!b]
   \centering
-  \includegraphics[height=5cm]{pieChartsEval}
+  \includegraphics[height=5cm]{assets/pieChartsEval.png}
 \end{figure}
 
 
@@ -240,7 +265,7 @@
 
 \begin{figure}[b]
   \centering
-  \includegraphics[height=5cm]{squaresEval}
+  \includegraphics[height=5cm]{assets/squaresEval.png}
 
 \end{figure}
 
@@ -275,13 +300,12 @@
 \begin{frame}
 \begin{figure}[!b]
   \centering
-  \includegraphics[height=4.2cm]{pieChartsEval}
+  \includegraphics[height=4.2cm]{assets/pieChartsEval.png}
 \end{figure}
 
 \begin{figure}[b]
   \centering
-  \includegraphics[height=4.2cm]{squaresEval}
-
+  \includegraphics[height=4.2cm]{assets/squaresEval.png}
 \end{figure}
 
 
