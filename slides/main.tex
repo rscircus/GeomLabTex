@@ -57,7 +57,7 @@
   \begin{frame}{Experimental Setup}
 	\begin{itemize}
 		\item We use the John Hopkins University Covid-19 data
-		\item recovered cases are colored green, deceased cases are colored black and 		the infected are colored red
+		\item recovered are coloured green, deceased are coloured black and 		the infected are coloured red
 		\item logarithmic scaling dependent on two parameters:
 		\begin{align*}
 			r=M* \log \left( \frac{c_i S}{c_{max}} +1 \right)
@@ -80,23 +80,23 @@
       \hline
       algorithm            & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis & absolute perc \\
       \hline
-      random               &  \blue{44}      & 0.071 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
+      random               &  {44}      & 0.071 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
 
-      LeftToRight          & \blue {42}      & 0.331 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
+      LeftToRight          &  {42}      & 0.331 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
 
-      RightToLeft          &\blue {  43}      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
+      RightToLeft          &{  43}      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 	\hline
-      Painter              &\blue {  16 }     & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718    
+      Painter              & {  16 }     & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718    
      \\
 
-      MinMinStacking (abs) &\blue {  16 }     & 0.473 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
+      MinMinStacking (abs) & {  16 }     & 0.473 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
       
       \hline
-      MinMinStacking (rel) &\blue { 18 }     & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
+      MinMinStacking (rel) & { 18 }     & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
-      MinSumStacking (abs) &\blue { 18}      & 0.702 (0)    & 3.974 (0)    & \red{44.467}        & 0.75            & 0.721         \\
+      MinSumStacking (abs) & \red{ 18}      & 0.702 (0)    & 3.974 (0)    & \red{44.467}        & 0.75            & 0.721         \\
 
-      MinSumStacking (rel) &\blue {  18 }     & 0.702 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
+      MinSumStacking (rel) &{  18 }     & 0.702 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
 
       \hline
     \end{tabular}}
@@ -122,9 +122,9 @@
 
       RightToLeft  & 13      & 0.664 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
 \hline
-      Painter      & \red 0       & 0.585        & 6.283        & 47.758        & 0.857           & 0.759         \\
+      Painter      & \red 0       & \red{0.585}        & 6.283        & 47.758        & 0.857           & 0.759         \\
 
-      our Stacking & \red 0       & 2.342        & 6.283        & 75.034        & 0.859           & 0.77          \\
+      our Stacking & \red 0       & \red{ 2.342 }       & 6.283        & 75.034        & 0.859           & 0.77          \\
 
       \hline
     \end{tabular}}
@@ -146,9 +146,9 @@
 
       RightToLeft          & 43      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 \hline
-      Painter              & 16      & 0.408 (0)    & 6.283 (0)    & 34.991        & \red {0.761}           & \red {0.718}         \\
+      Painter              &  16      & 0.408 (\red 0)    & 6.283 (0)    & 34.991        & \red {0.761}           & \red {0.718}         \\
 
-      MinMinStacking (abs) & 16      & 0.473 (0)    & 2.189 (0)    & 44.467        & \red {0.757}           & \red {0.724}         \\
+      MinMinStacking (abs) & 16      & 0.473 (\red 0)    & 2.189 (0)    & 44.467        & \red {0.757}           & \red {0.724}         \\
 \hline
       MinMinStacking (rel) & 18      & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
@@ -175,9 +175,9 @@
 
       RightToLeft  & 13      & 0.664 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
 \hline
-      Painter      &\red 0       & 0.585        & 6.283        & 47.758        & 0.857           & 0.759         \\
+      Painter      &\red 0       & 0.585        & 6.283        & 47.758        & \red{ 0.857  }         & \red{ 0.759  }       \\
 
-      our Stacking &\red 0       & 2.342        & 6.283        & 75.034        & 0.859           & 0.77          \\
+      our Stacking &\red 0       & \red{2.342}        & 6.283        & 75.034        & \red{ 0.859 }     &     \red{ 0.77 }        \\
 
       \hline
     \end{tabular}}
