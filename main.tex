@@ -735,17 +735,17 @@ If we compare the nested centered disks and the arbitrary nested disks we can al
   \begin{center}
     \begin{tabular}{| l || l | l | l | l |}
       \hline
-      algorithm          & covered & minDist   & minDistAvg & maxDistAvg \\
+      algorithm          & covered & minDist (rel)   & minDistAvg (rel) & minDistAvg (abs) \\
       \hline
-      Painter+random     & 60     & 0.002 (0) & 1.211       & 4.035      \\
+      Painter+random     & 80     & 0.0 (0) & 1.01     & 24.266    \\
 
-      random+heuristic   & 26      & 0.0 (0)   & 1.595     & 2.592      \\
+      random+heuristic   & 29      & 0.0 (0)   & 1.587     & 42.946     \\
 
-      RightToLeft        & 18      & 0.017 (0) & 1.621      & 2.685      \\
+      RightToLeft        & 18      & 0.017 (0) & 1.621      & 43.407     \\
 
-      Painter+ heuristic & 6       & 0.022 (0) & 1.706      & 2.648      \\
+      Painter+ heuristic & 5       & 0.022 (0) & 1.706      & 41.719   \\
 
-      our Stacking       & 0       & 0.271     & 1.765      & 2.838      \\
+      our Stacking       & 0       & 0.271     & 1.765      & 44.452      \\
 
       \hline
     \end{tabular}
@@ -759,7 +759,7 @@ For the pie Charts we will be using the following values for our comparison of t
   \item \textit{covered} counts the number of dividing lines which are completely covered.
   \item \textit{minDist} is given by the minimal value of any pie chart, where the minimal value is given by the radial distance (in $[0,2\pi]$) to the covered perimeter of the dividing line which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
   \item \textit{minDistAvg} is given by the average of the values of all of the pie charts.
-  \item \textit{maxDistAvg} is given by the average if we look at the largest distance instead of the minimal distance.
+  \item \textit{minDistAvg (abs)} is given by the average if we look at the absolute values, i.e radius times angle.
 \end{itemize}
 
 \begin{figure}[!b]
