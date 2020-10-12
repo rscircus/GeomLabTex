@@ -642,32 +642,33 @@ If we use an algorithm to get optimal rotations we will compare our stacking to 
 \subsection*{Nested Disks}
 
 \begin{table}[h]
-  \begin{center}
+
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
       \hline
       algorithm            & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis & absolute perc \\
       \hline
-      random               & 44      & 0.071 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
+      random               &  {44}      & 0.011 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
 
-      LeftToRight          & 42      & 0.331 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
+      LeftToRight          &  {42}      & 0.053 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
 
-      RightToLeft          & 43      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
+      RightToLeft          &{  43}      & 0.053 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 
-      Painter              & 16      & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718         \\
+      Painter              & {  16 }     & 0.064 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718
+     \\
 
-      MinMinStacking (abs) & 16      & 0.473 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
+      MinMinStacking (abs) & {  16 }     & 0.075 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
 
-      MinMinStacking (rel) & 18      & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
-      MinSumStacking (abs) & 18      & 0.702 (0)    & 3.974 (0)    & 44.467        & 0.75            & 0.721         \\
+      MinMinStacking (rel) & { 18 }     & 0.11 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
-      MinSumStacking (rel) & 18      & 0.702 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
+      MinSumStacking (abs) & 18     & 0.111 (0)    & 3.974 (0)    & {44.467}        & 0.75            & 0.721         \\
+
+      MinSumStacking (rel) &{  18 }     & 0.111 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
 
       \hline
     \end{tabular}
-  \end{center}
-  \caption{centered nested disks\\
-    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\caption{centered nested disks\\
+date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{table}
 
 For the nested disks we will be using the following values for our comparison of the algorithms:
@@ -693,26 +694,27 @@ For the nested disks we will be using the following values for our comparison of
 Our algorithm is designed to maximize the value found in the second column and our theorem about the greedy stacking technique implies its result is optimal. However, in this case the optimum is 0, meaning there is no stacking where no circle is covered. Thus the algorithm applies a heuristic to decide which of the remaining disks to put on the stacking. We see that it minimizes the total number of covered circles, but so does the painters algorithm. Furthermore, the painters algorithm is only marginally beat by our algorithm for relative visibility and much better for absolute visibility.
 
 \begin{table}[!h]
-  \begin{center}
+\begin{center}
+
     \begin{tabular}{| l || p{1.3cm} | p{1.7cm} | p{1.7cm} | p{1.5cm} | p{1.5cm} | p{1.5cm} |}
       \hline
       algorithm    & covered & minVis (rel) & minVis (abs) & min one Glyph & average rel vis & absolute perc \\
       \hline
-      random       & 21      & 0.025 (0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
+      random       & 21      & 0.001 (0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
 
-      LeftToRight  & 12      & 0.948 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
+      LeftToRight  & 12      & 0.15 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
 
-      RightToLeft  & 13      & 0.664 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
+      RightToLeft  & 13      & 0.106 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
 
-      Painter      & 0       & 0.585        & 6.283        & 47.758        & 0.857           & 0.759         \\
+      Painter      &  0       & {0.093}        & 6.283        & 47.758        & 0.857           & 0.759         \\
 
-      our Stacking & 0       & 2.342        & 6.283        & 75.034        & 0.859           & 0.77          \\
+      our Stacking &  0       & { 0.373 }       & 6.283        & 75.034        & 0.859           & 0.77          \\
 
       \hline
     \end{tabular}
   \end{center}
   \caption{nested disks (not centered)\\
-    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+    date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$ }
 \end{table}
 
 \begin{figure}[!t]
@@ -762,18 +764,19 @@ For the pie Charts we will be using the following values for our comparison of t
   \item \textit{minDistAvg (abs)} is given by the average if we look at the absolute values, i.e radius times angle.
 \end{itemize}
 
-\begin{figure}[!b]
-  \centering
-  \includegraphics[height=7cm]{assets/pieChartsEval}
-  \caption{pie Charts\\
-    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-\end{figure}
+
 
 
 Our pie chart stacking is guaranteed to be optimal by the greedy stacking theorem. Only our algorithm manages to make all separation points visible for each pie glyph. The painters algorithm (using the optimal rotations subroutine) still outperforms more naive approaches having only 6 lines covered. Our algorithm is also better in the secondary utilities although the other algorithms may ''abuse`` the fact that they cover a few of the lines.
 
 The date for this dataset was chosen, such that the optimum is not $0$, i.e., it is possible to make all pie separation points visible. Our algorithm also performs well on other instances as can be verified in the application.
 
+\begin{figure}[!h]
+  \centering
+  \includegraphics[height=7cm]{assets/pieChartsEval}
+  \caption{pie Charts\\
+    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
+\end{figure}
 
 \subsection*{Squares}
 
@@ -784,37 +787,37 @@ The date for this dataset was chosen, such that the optimum is not $0$, i.e., it
       algorithm                           & covered & minDist \\  %& minDistAvg \\
       \hline
 
-      random Stacking+random rotations    & 35      & 0.361 (0)\\ %& 35.846     \\
+      random Stacking+random rotations    & 87      & 0.235 (0)\\ %& 35.846     \\
 
-      Painter+random rotations            & 17      & 0.251 (0)\\ %& 34.406     \\
+      Painter+random rotations            & 41     & 0.58 (0)\\ %& 34.406     \\
 
-      random Stacking+heuristic rotations & 26      & 0.038 (0)\\ %& 34.776     \\
+      random Stacking+heuristic rotations & 56    & 0.027 (0)\\ %& 34.776     \\
 
-      Painter+heuristic                   & 14      & 0.263 (0)\\ %& 32.061     \\
+      Painter+heuristic                   & {19}      & 0.052 (0)\\ %& 32.061     \\
 
-      our Stacking                        & 7       & 0.078 (0)\\ %& 25.232     \\
+      our Stacking                        & {13}       & 0.052 (0)\\ %& 25.232     \\
 
       \hline
     \end{tabular}
   \end{center}
   \caption{squares\\
-    date: 22.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
-
+    date: 22.08.2020  , $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{table}
 
 For the squares we will be using the following values for our comparison of the algorithms:
 
-\begin{itemize}
-  \item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
-  \item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
-  %\item \textit{minDistAvg} is given by the average of the values of all of the squares.
-\end{itemize}
-\begin{figure}[b]
+\begin{figure}[!b]
   \centering
   \includegraphics[height=6cm]{assets/squaresEval}
   \caption{squares\\
     date: 02.08.2020  , parameters: $M=50$, $S=500$ and $\text{minimum number of cases}=5000$  }
 \end{figure}
+\begin{itemize}
+  \item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
+  \item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
+  %\item \textit{minDistAvg} is given by the average of the values of all of the squares.
+\end{itemize}
+
 
 We can see that our heuristic of transforming the square mosaic into a pie chart worked well. Our algorithm produces by far the least number of covered separation points. However, it is not guaranteed to be optimal and it does not beat even the naive random approaches on a secondary performance indicator, but the indicator is not very significant since the actual value should be 0.
 
