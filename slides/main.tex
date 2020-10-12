@@ -98,13 +98,34 @@ $$
 \end{frame}
 
 \begin{frame}{Why this lab? (2/2)}
+
+  We want to extend
 $$
-\phi: \{1,...,n\} \mapsto D
+\phi: \{1,...,n\} \mapsto D.
 $$
 
+to reach
+
 $$
-\phi: \{(1_1,1_2,1_3,...),...,(n_1, n_2, n_3,...)\} \mapsto D_i
+\phi: \{(1_1,1_2,1_3,...),...,(n_1, n_2, n_3,...)\} \mapsto D_i.
 $$
+
+\end{frame}
+
+\begin{frame}{Physically realizable drawings}
+  \begin{figure}[!b]
+    \centering
+      \includegraphics[width=0.9\linewidth]{assets/cabello_drawings.png}
+      \caption{Physically realizable vs. stacking drawings vs. impossible}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Objective functions}
+  \begin{align*}
+  U_i^{vis} & =\partial D_i\setminus \bigcup_{j>i} D_{j} \\
+  \\
+  U_i^{cov} & =\partial D_i \cap \bigcup_{j>i} D_{j}.
+  \end{align*}
 \end{frame}
 
 \section{Algorithms}
