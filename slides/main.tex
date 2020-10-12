@@ -93,11 +93,11 @@
 
 
 
-  \begin{frame}
-\begin{figure}[!t]
-  \centering
-  \includegraphics[height=5cm]{assets/MinMinAbsEval.png}
-\end{figure}
+\begin{frame}
+	\begin{figure}[!t]
+  		\centering
+  		\includegraphics[height=5cm]{assets/MinMinAbsEval.png}
+	\end{figure}
 
 \begin{table}
 \resizebox{9cm}{!}{%
@@ -105,23 +105,23 @@
       \hline
       algorithm            & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis & absolute perc \\
       \hline
-      random               &  {44}      & 0.071 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
+      random               &  {44}      & 0.011 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
 
-      LeftToRight          &  {42}      & 0.331 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
+      LeftToRight          &  {42}      & 0.053 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
 
-      RightToLeft          &{  43}      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
+      RightToLeft          &{  43}      & 0.053 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 	\hline
-      Painter              & {  16 }     & 0.408 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718
+      Painter              & {  16 }     & 0.064 (0)    & 6.283 (0)    & 34.991        & 0.761           & 0.718
      \\
 
-      MinMinStacking (abs) & {  16 }     & 0.473 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
+      MinMinStacking (abs) & {  16 }     & 0.075 (0)    & 2.189 (0)    & 44.467        & 0.757           & 0.724         \\
 
       \hline
-      MinMinStacking (rel) & { 18 }     & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
+      MinMinStacking (rel) & { 18 }     & 0.11 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
-      MinSumStacking (abs) & \red{ 18}      & 0.702 (0)    & 3.974 (0)    & \red{44.467}        & 0.75            & 0.721         \\
+      MinSumStacking (abs) & \red{ 18}      & 0.111 (0)    & 3.974 (0)    & \red{44.467}        & 0.75            & 0.721         \\
 
-      MinSumStacking (rel) &{  18 }     & 0.702 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
+      MinSumStacking (rel) &{  18 }     & 0.111 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
 
       \hline
     \end{tabular}}
@@ -141,15 +141,15 @@
       \hline
       algorithm    & covered & minVis (rel) & minVis (abs) & min one Glyph & average rel vis & absolute perc \\
       \hline
-      random       & 21      & 0.025 (0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
+      random       & 21      & 0.0001 (0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
 
-      LeftToRight  & 12      & 0.948 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
+      LeftToRight  & 12      & 0.15 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
 
-      RightToLeft  & 13      & 0.664 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
+      RightToLeft  & 13      & 0.106 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
 \hline
-      Painter      & \red 0       & \red{0.585}        & 6.283        & 47.758        & 0.857           & 0.759         \\
+      Painter      & \red 0       & \red{0.093}        & 6.283        & 47.758        & 0.857           & 0.759         \\
 
-      our Stacking & \red 0       & \red{ 2.342 }       & 6.283        & 75.034        & 0.859           & 0.77          \\
+      our Stacking & \red 0       & \red{ 0.373 }       & 6.283        & 75.034        & 0.859           & 0.77          \\
 
       \hline
     \end{tabular}}
@@ -158,6 +158,7 @@
 \end{table}
 \end{frame}
 
+
 \begin{frame}
 \begin{table}
 \resizebox{9cm}{!}{%
@@ -165,27 +166,26 @@
       \hline
       algorithm            & covered & minVis (rel) & minVis (abs) & min one glyph & average rel vis & absolute perc \\
       \hline
-      random               & 44      & 0.071 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
+      random               & 44      & 0.011 (0)    & 0.995 (0)    & 0             & 0.658           & 0.677         \\
 
-      LeftToRight          & 42      & 0.331 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
+      LeftToRight          & 42      & 0.053 (0)    & 2.189 (0)    & 0             & 0.641           & 0.678         \\
 
-      RightToLeft          & 43      & 0.324 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
+      RightToLeft          & 43      & 0.053 (0)    & 0.995 (0)    & 0             & 0.656           & 0.693         \\
 \hline
-      Painter              &  16      & 0.408 (\red 0)    & 6.283 (0)    & 34.991        & \red {0.761}           & \red {0.718}         \\
+      Painter              &  \red{16}        & 0.064 (\red 0)    & 6.283 (0)    & 34.991        & \red {0.761}           & \red {0.718}         \\
 
-      MinMinStacking (abs) & 16      & 0.473 (\red 0)    & 2.189 (0)    & 44.467        & \red {0.757}           & \red {0.724}         \\
+      MinMinStacking (abs) & \red{16}      & 0.075 (\red 0)    & 2.189 (0)    & 44.467        & \red {0.757}           & \red {0.724}         \\
 \hline
-      MinMinStacking (rel) & 18      & 0.691 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
+      MinMinStacking (rel) & 18      & 0.11 (0)    & 2.189 (0)    & 37.327        & 0.748           & 0.725         \\
 
-      MinSumStacking (abs) & 18      & 0.702 (0)    & 3.974 (0)    & 44.467        & 0.75            & 0.721         \\
+      MinSumStacking (abs) & 18      & 0.111 (0)    & 3.974 (0)    & 44.467        & 0.75            & 0.721         \\
 
-      MinSumStacking (rel) & 18      & 0.702 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
+      MinSumStacking (rel) & 18      & 0.111 (0)    & 2.189 (0)    & 37.327        & 0.744           & 0.723         \\
 
       \hline
     \end{tabular}}
 \caption{centered disks  }
 \end{table}
-
 \begin{table}[!h]
   \begin{table}[!h]
 \begin{center}
@@ -194,15 +194,15 @@
       \hline
       algorithm    & covered & minVis (rel) & minVis (abs) & min one Glyph & average rel vis & absolute perc \\
       \hline
-      random       & 21      & 0.025 (0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
+      random       & 21      & 0.0001(0)    & 0.589 (0)    & 0             & 0.765           & 0.714         \\
 
-      LeftToRight  & 12      & 0.948 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
+      LeftToRight  & 12      & 0.15 (0)    & 2.743 (0)    & 0             & 0.775           & 0.725         \\
 
-      RightToLeft  & 13      & 0.664 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
+      RightToLeft  & 13      & 0.106 (0)    & 2.89 (0)     & 0             & 0.783           & 0.735         \\
 \hline
-      Painter      &\red 0       & 0.585        & 6.283        & 47.758        & \red{ 0.857  }         & \red{ 0.759  }       \\
+      Painter      &\red 0       & 0.093        & 6.283        & 47.758        & \red{ 0.857  }         & \red{ 0.759  }       \\
 
-      our Stacking &\red 0       & \red{2.342}        & 6.283        & 75.034        & \red{ 0.859 }     &     \red{ 0.77 }        \\
+      our Stacking &\red 0       & \red{0.373}        & 6.283        & 75.034        & \red{ 0.859 }     &     \red{ 0.77 }        \\
 
       \hline
     \end{tabular}}
@@ -211,8 +211,8 @@
   date: 02.08.2020  , $M=50$, $S=500$ and $\text{MnC}=5000$ }
 \end{table}
 \end{table}
-
 \end{frame}
+
 
 \begin{frame}
 \begin{figure}[!t]
@@ -223,20 +223,14 @@
   \centering
   \includegraphics[height=4cm]{assets/hawaiianEval.png}
 \end{figure}
-
-
-
 \end{frame}
-\begin{frame}
 
+
+\begin{frame}
 \begin{figure}[!b]
   \centering
   \includegraphics[height=5cm]{assets/pieChartsEval.png}
 \end{figure}
-
-
-
-
 \begin{table}[h]
   \begin{center}\resizebox{7cm}{!}{
     \begin{tabular}{| l || l | l | l | l |}
@@ -248,7 +242,7 @@
       random+heuristic   & 29      & 0.0 (0)   & 1.587     & 42.946     \\
 
       RightToLeft        & 18      & 0.017 (0) & 1.621      & 43.407     \\
-
+	\hline
       Painter+ heuristic & \red{5 }      & 0.022 (0) & 1.706      & 41.719   \\
 
       our Stacking       & \red{0}     & 0.271     & 1.765      & 44.452      \\
@@ -262,13 +256,10 @@
 
 
 \begin{frame}
-
 \begin{figure}[b]
   \centering
   \includegraphics[height=5cm]{assets/squaresEval.png}
-
 \end{figure}
-
 \begin{table}[h]
   \begin{center}
   \resizebox{7cm}{!}{
@@ -277,25 +268,24 @@
       algorithm                           & covered & minDist \\  %& minDistAvg \\
       \hline
 
-      random Stacking+random rotations    & 35      & 0.361 (0)\\ %& 35.846     \\
+      random Stacking+random rotations    & 87      & 0.235 (0)\\ %& 35.846     \\
 
-      Painter+random rotations            & 17      & 0.251 (0)\\ %& 34.406     \\
+      Painter+random rotations            & 41     & 0.58 (0)\\ %& 34.406     \\
 
-      random Stacking+heuristic rotations & 26      & 0.038 (0)\\ %& 34.776     \\
+      random Stacking+heuristic rotations & 56    & 0.027 (0)\\ %& 34.776     \\
 \hline
-      Painter+heuristic                   & \red{14}      & 0.263 (0)\\ %& 32.061     \\
+      Painter+heuristic                   & \red{19}      & 0.052 (0)\\ %& 32.061     \\
 
-      our Stacking                        & \red 7       & 0.078 (0)\\ %& 25.232     \\
+      our Stacking                        & \red{ 13}       & 0.052 (0)\\ %& 25.232     \\
 
       \hline
     \end{tabular}}
   \end{center}
   \caption{
     date: 22.08.2020  , $M=50$, $S=500$ and $\text{MnC}=5000$  }
-
 \end{table}
-
 \end{frame}
+
 
 \begin{frame}
 \begin{figure}[!b]
@@ -307,8 +297,6 @@
   \centering
   \includegraphics[height=4.2cm]{assets/squaresEval.png}
 \end{figure}
-
-
 \end{frame}
 
 
