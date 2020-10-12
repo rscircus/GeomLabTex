@@ -64,6 +64,31 @@
 
 \end{frame}
 
+\begin{frame}{Physically realizable drawings}
+  \begin{figure}[!b]
+    \centering
+      \includegraphics[width=0.9\linewidth]{assets/cabello_drawings.png}
+      \caption{Physically realizable vs. stacking drawings vs. impossible}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Utility functions}
+\begin{align*}
+  \lambda_{min} (D) & = \min_{i \in [n]}|U_i^{vis}| \\
+  \\
+  \lambda_{sum} (D) & = \sum_{i=1}^n|U_i^{vis}|
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Why this lab?}
+
+$$
+\phi: \{1,...,n\} \mapsto D
+$$
+
+\end{frame}
+
 \begin{frame}{Maps and Glyphs}
   \begin{figure}[!b]
     \centering
@@ -89,43 +114,6 @@
     \end{subfigure}
   \end{figure}
 
-\end{frame}
-
-\begin{frame}{Why this lab? (1/2)}
-$$
-\phi: \{1,...,n\} \mapsto D
-$$
-\end{frame}
-
-\begin{frame}{Why this lab? (2/2)}
-
-  We want to extend
-$$
-\phi: \{1,...,n\} \mapsto D.
-$$
-
-to reach
-
-$$
-\phi: \{(1_1,1_2,1_3,...),...,(n_1, n_2, n_3,...)\} \mapsto D_i.
-$$
-
-\end{frame}
-
-\begin{frame}{Physically realizable drawings}
-  \begin{figure}[!b]
-    \centering
-      \includegraphics[width=0.9\linewidth]{assets/cabello_drawings.png}
-      \caption{Physically realizable vs. stacking drawings vs. impossible}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Objective functions}
-  \begin{align*}
-  U_i^{vis} & =\partial D_i\setminus \bigcup_{j>i} D_{j} \\
-  \\
-  U_i^{cov} & =\partial D_i \cap \bigcup_{j>i} D_{j}.
-  \end{align*}
 \end{frame}
 
 \section{Algorithms}
