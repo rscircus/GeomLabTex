@@ -12,6 +12,7 @@
 \usepackage{subcaption}
 \newcommand{\red}{\textcolor{red}}
 \newcommand{\blue}{\textcolor{blue}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \begin{document}
 
@@ -118,28 +119,85 @@ $$
 
 \section{Algorithms}
 
-\begin{frame}{Prior}
-  David's part. See Philip's list and or discussion.
+\begin{frame}{Visibility of general glyphs}
+    \begin{itemize}
+        \item assign local utility to each glyph
+        \item define global utility as minimum (or sum) over all local utilities
+        \item we will focus on minimum approaches
+        \item examples
+        \begin{enumerate}
+            \item visibility (yes/no)
+            \item visible area
+            \item visible boundary length absolute or relative
+            \item visibility of special points
+        \end{enumerate}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Generalized}
-  See Philip's list and or discussion.
+\begin{frame}{Greedy Stackings}
+    \textbf{Theorem:} Given as finite set $D$ of $n$ glyphs, a local utility function $\Gamma(d, S) \in \mathbb{R}_{>0}$ for $d\in D$ and $S\subseteq D$, which is anti-monotonous in $S$ and a global utility function $\lambda$ as the minimum of the local utilities, then the GreedyStacking algorithm computes an optimal stacking order.
+    
+    \pause
+    
+    \textbf{GreedyStacking(D)}\\
+    if($D\neq \emptyset$) \{\\ 
+        \tab$x=argmin_{d\in D} \Gamma(d, D\setminus d)$\\
+        \tab$yield\ x$\\
+        \tab$\textrm{\textbf{GreedyStacking}}(D\setminus x)$\\
+    \}
 \end{frame}
 
-\begin{frame}{Our approach}
-  See Philip's list and or discussion.
+\begin{frame}{GreedyStacking}
+    Give proof.
 \end{frame}
 
-\begin{frame}{Nested circles}
-  \pgfputat{\pgfxy(11.5, 3.5)}{\pgfbox[right,base]{
+\begin{frame}{Centered Nested circles}
+  \pgfputat{\pgfxy(11.5, 0)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_nested_circles.pdf}
   }}
+  \begin{itemize}
+      \item natural generalization and seen in action
+  \end{itemize}
+  \begin{figure}[h]
+    \centering
+      \includegraphics[width=0.9\linewidth]{slides/assets/nested_utility.png}
+      \caption{Minimum attained at red circle}
+  \end{figure}
+  \begin{itemize}
+      \item optimization is NP-hard for physically realizable
+      \item greedy runs in $O(n^3\cdot k^2)$
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Nested circles with additional degrees of freedom}
-  \pgfputat{\pgfxy(11.5, 3.5)}{\pgfbox[right,base]{
+\begin{frame}{Freely Nested circles}
+  \pgfputat{\pgfxy(11.5, 1.8)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_nested_elastic_circles.pdf}
   }}
+  \begin{itemize}
+      \item allow to move disks inside
+      \item same utility as above
+      \item increased freedom comes with increased complexity
+  \end{itemize}
+  Freely nested disks are to complex to go over all possible placements $\implies$ simplify to Hawaiian Earring setup.
+\end{frame}
+
+\begin{frame}{Freely Nested circles}
+  \pgfputat{\pgfxy(11.5, 0)}{\pgfbox[right,base]{
+      \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_nested_elastic_circles.pdf}
+  }}
+  
+  \begin{itemize}
+      \item all disks will be visible
+      \item the greedy algorithm does NOT imply optimality
+      \item verify into experiments
+      \item greedy with longest continuous visible segment
+  \end{itemize}
+  
+  \begin{figure}[h]
+    \centering
+      \includegraphics[width=0.9\linewidth]{slides/assets/hawaiian_utility.png}
+  \end{figure}
+  
 \end{frame}
 
 \begin{frame}{Pies}
@@ -400,3 +458,4 @@ $$
 \end{frame}
 
 \end{document}
+
