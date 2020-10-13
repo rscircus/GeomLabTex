@@ -119,19 +119,11 @@ $$
 
 \section{Algorithms}
 
-\begin{frame}{Visibility of general glyphs}
-    \begin{itemize}
+\begin{frame}{The visibility score of a drawing}
+    \begin{enumerate}
         \item assign local utility to each glyph
-        \item define global utility as minimum (or sum) over all local utilities
-        \item we will focus on minimum approaches
-        \item examples
-        \begin{enumerate}
-            \item visibility (yes/no)
-            \item visible area
-            \item visible boundary length absolute or relative
-            \item visibility of special points
-        \end{enumerate}
-    \end{itemize}
+        \item utility of the drawing (global utility) is the minimum (or sum) of the local utilities for each glyph
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}{Greedy Stackings}
@@ -140,78 +132,35 @@ $$
     \pause
     
     \textbf{GreedyStacking(D)}\\
-    if($D\neq \emptyset$) \{\\ 
+    while($D\neq \emptyset$) \{\\ 
         \tab$x=argmin_{d\in D} \Gamma(d, D\setminus d)$\\
-        \tab$yield\ x$\\
-        \tab$\textrm{\textbf{GreedyStacking}}(D\setminus x)$\\
+        \tab$print\ x$\\
+        \tab$D:=D\setminus x$\\
     \}
-\end{frame}
-
-\begin{frame}{GreedyStacking}
-    Give proof.
 \end{frame}
 
 \begin{frame}{Centered Nested circles}
   \pgfputat{\pgfxy(11.5, 0)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_nested_circles.pdf}
   }}
-  \begin{itemize}
-      \item natural generalization and seen in action
-  \end{itemize}
+  
   \begin{figure}[h]
     \centering
       \includegraphics[width=0.9\linewidth]{assets/nested_utility}
-      \caption{Minimum attained at red circle}
+      \caption{Minimum or sum of visible boundary}
   \end{figure}
-  \begin{itemize}
-      \item optimization is NP-hard for physically realizable
-      \item greedy runs in $O(n^3\cdot k^2)$
-  \end{itemize}
 \end{frame}
 
-\begin{frame}{Freely Nested circles}
-  \pgfputat{\pgfxy(11.5, 1.8)}{\pgfbox[right,base]{
-      \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_nested_elastic_circles.pdf}
-  }}
-  \begin{itemize}
-      \item allow to move disks inside
-      \item same utility as above
-      \item increased freedom comes with increased complexity
-  \end{itemize}
-  Freely nested disks are to complex to go over all possible placements $\implies$ simplify to Hawaiian Earring setup.
-\end{frame}
-
-\begin{frame}{Freely Nested circles}
+\begin{frame}{Hawaiian Nested circles}
   \pgfputat{\pgfxy(11.5, 0)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_nested_elastic_circles.pdf}
   }}
-  
-  \begin{itemize}
-      \item all disks will be visible
-      \item the greedy algorithm does NOT imply optimality
-      \item verify into experiments
-      \item greedy with longest continuous visible segment
-  \end{itemize}
   
   \begin{figure}[h]
     \centering
       \includegraphics[width=0.9\linewidth]{assets/hawaiian_utility.png}
+      \caption{Attachment point for the Hawaiian Glyph}
   \end{figure}
-  
-\end{frame}
-
-\begin{frame}{Pies}
-  \pgfputat{\pgfxy(11.5, 0)}{\pgfbox[right,base]{
-      \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_pie.pdf}
-  }}
-  
-  Seen in practise
-  
-  Allow individual rotations
-  
-  We want the separating lines to be clearly visible
-  
-  Local utility given by the distance of the separating boundary points to the covered area
   
 \end{frame}
 
@@ -220,7 +169,6 @@ $$
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_pie.pdf}
   }}
   
-  Local pie utility given by
   \begin{figure}[h]
     \centering
       \includegraphics[width=0.5\linewidth]{assets/piecharts_utility.png}
@@ -240,35 +188,33 @@ $$
 \end{frame}
 
 \begin{frame}{Pie NP-hardness}
-  \pgfputat{\pgfxy(11.5, 0)}{\pgfbox[right,base]{
+  \pgfputat{\pgfxy(11.5, 1.5)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_pie.pdf}
   }}
   \textbf{Theorem:} It is NP-hard to decide whether for a given set of pie glyphs there is a physically realizable drawing with global utility greater or equal to some value $k$.
   
   \textbf{Corollary:} If we find an algorithm that computes an optimal physically realizable drawing in polynomial time, then $P=NP$.
-  \pause
-  \textbf{Proof:} The proof will be sketched briefly.
   
-  We reduce this question from $planar$-3SAT. It is known to be NP-complete to decide whether a given 3SAT instance has a satisfying assignment.
-  
-  We construct a set of pies that have a sufficiently good drawing if and only if the 3SAT instance is satisfiable.
+  \textbf{Proof:} Reduction from $planar$-3SAT.
 \end{frame}
 
-\begin{frame}{Pie Questions}
-  \pgfputat{\pgfxy(11.5, 1.8)}{\pgfbox[right,base]{
+\begin{frame}{Pie Rotations}
+  \pgfputat{\pgfxy(11.5, 1)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_pie.pdf}
   }}
-    Two questions arise naturally in the discussion of pies
-    \begin{enumerate}
-        \item Can we compute the optimal drawing even among physically realizable drawings?
-        \item How can we rotate the pies such that their local utility is optimal?
-    \end{enumerate}
+  Vielleicht ein Bild von Philip.
 \end{frame}
 
 \begin{frame}{Squares}
   \pgfputat{\pgfxy(11.5, 3.5)}{\pgfbox[right,base]{
       \includegraphics[width=1.2cm,height=1.2cm,keepaspectratio]{assets/symbol_square.pdf}
   }}
+  
+  \begin{figure}[h]
+    \centering
+      \includegraphics[width=0.9\linewidth]{slides/assets/square_bloat.png}
+      \caption{mosaic square and associated pie glyph}
+  \end{figure}
 \end{frame}
 
 \section{Experimental results}
