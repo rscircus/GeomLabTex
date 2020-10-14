@@ -109,7 +109,7 @@ $$
     \begin{subfigure}[b]{0.45\linewidth}
       \centering
       \includegraphics[width=0.5\linewidth]{assets/symbol_nested_elastic_circles}
-      \caption{hawaiian nested disks}
+      \caption{arbitrary nested disks}
     \end{subfigure}\\
     \begin{subfigure}[b]{0.45\linewidth}
       \centering
@@ -141,7 +141,7 @@ $$
     
     \textbf{GreedyStacking(D)}\\
     while($D\neq \emptyset$) \{\\ 
-        \tab$x=argmin_{d\in D} \Gamma(d, D\setminus d)$\\
+        \tab$x=argmax_{d\in D} \Gamma(d, D\setminus d)$\\
         \tab$print\ x$\\
         \tab$D:=D\setminus x$\\
     \}
