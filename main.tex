@@ -623,7 +623,7 @@ We will only cherry pick a few data sets as the data quality naturally varies, h
 Since some countries dominate the rest of the countries with regards to the number of cases we scale logarithmically and add 1 to the data to avoid zero radii. To diversify our data sets even more we use three additional parameters in our data preparation: (1) the minimum number of cases to be depicted, (2) a maximum "size" $M$ of the glyphs in dependence of the glyph's type, and (3) a scaling factor $S$. If we denote the maximal number of confirmed cases in one country by $c_{max}$ then the radius $r$ of the disc of some country with confirmed cases $c$ is given by:
 
 \begin{align*}
-  r=M\log\frac{c S}{c_{max} + 1}
+  r=M\log( \frac{c S}{c_{max}} + 1)
 \end{align*}
 
 As already mentioned, especially three country (US, Brasil and India) far out-scale other countries, $c_{max}$ is chosen with respect to the next largest case by country at some point in the data. Consequently $c_{max}$ is then set to the 4th highest number of confirmed cases in any given dataset.
