@@ -782,20 +782,20 @@ The date for this dataset was chosen, such that the optimum is not $0$, i.e., it
 
 \begin{table}[h]
   \begin{center}
-    \begin{tabular}{| l || l | l | }
+    \begin{tabular}{| l || l | l | l |}
       \hline
-      algorithm                           & covered & minDist \\  %& minDistAvg \\
+      algorithm                           & covered & minDist & minDistAvg \\
       \hline
 
-      random Stacking+random rotations    & 87      & 0.235 (0)\\ %& 35.846     \\
+      random Stacking+random rotations    & 43      & 0.349 (0) & 34.232     \\
 
-      Painter+random rotations            & 41     & 0.58 (0)\\ %& 34.406     \\
+      Painter+random rotations            & 30     & 0.043 (0) & 31.422     \\
 
-      random Stacking+heuristic rotations & 56    & 0.027 (0)\\ %& 34.776     \\
+      random Stacking+heuristic rotations & 26    & 0.033 (0) & 29.914     \\
 
-      Painter+heuristic                   & {19}      & 0.052 (0)\\ %& 32.061     \\
+      Painter+heuristic                   & {19}      & 0.052 (0) & 25.913     \\
 
-      our Stacking                        & {13}       & 0.052 (0)\\ %& 25.232     \\
+      our Stacking                        & {13}       & 0.052 (0) & 20.262     \\
 
       \hline
     \end{tabular}
@@ -815,7 +815,7 @@ For the squares we will be using the following values for our comparison of the 
 \begin{itemize}
   \item \textit{covered} counts the number of special points ($p_1,...,p_4$) which are completely covered.
   \item \textit{minDist} is given by the minimal value of any square, where the minimal value is given by the distance on the edge of the square to the covered perimeter of the special point which is closest to the covered perimeter (if some are completely covered its indicated by a 0 in brackets and the first value not equal to zero is used).
-  %\item \textit{minDistAvg} is given by the average of the values of all of the squares.
+  \item \textit{minDistAvg} is given by the average of the values of all of the squares.
 \end{itemize}
 
 
